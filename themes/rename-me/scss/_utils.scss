@@ -1,0 +1,87 @@
+// Utilities and mixins
+// ------------------------------------------------------------------------------------------
+
+// THIS IS TO STOP USER EDITABLE AREAS GETTING OUT OF CONTROL
+// .GROUP (SEE BELOW) IS PREFERABLE IF YOU CAN TRUST YOUR EDITORS
+// ------------------------------------------------------------------------------------------
+
+.typography {
+	overflow: hidden;
+}
+
+// OCCASIONALLY HANDY CLASS FOR FORCING STUFF TO HIDE
+// ------------------------------------------------------------------------------------------
+
+.h {
+	display: none !important;
+}
+
+// CLEARFIX -- ASSIGN CLASS TO ELEMENT TO SELF CLEAR CHILDREN
+// ------------------------------------------------------------------------------------------
+
+.group {
+	&:before, &:after {
+    	content: '';
+    	display: table;
+	}
+	&:after { clear: both; }
+    zoom: 1; // IE 6/7
+}
+
+// ROUNDED CORNERS ($radious)
+// ------------------------------------------------------------------------------------------
+@mixin rounded($r: 5px)
+{
+	-moz-border-radius: $r;
+	-webkit-border-radius: $r;
+	border-radius: $r;
+}
+
+// PARTIALLY ROUNDED CORNERS ($top-left, $top-right, $bottom-right, $bottom-left)
+// ------------------------------------------------------------------------------------------
+@mixin rounded-partial($tl, $tr, $br, $bl)
+{
+	-webkit-border-top-left-radius: $tl;
+	-webkit-border-top-right-radius: $tr;
+	-webkit-border-bottom-right-radius: $br;
+	-webkit-border-bottom-left-radius: $bl;
+	-moz-border-top-left-radius: $tl;
+	-moz-border-top-right-radius: $tr;
+	-moz-border-bottom-right-radius: $br;
+	-moz-border-bottom-left-radius: $bl;
+	border-top-left-radius: $tl;
+	border-top-right-radius: $tr;
+	border-bottom-right-radius: $br;
+	border-bottom-left-radius: $bl;
+}
+
+// BOX SHADOW ($x offset, $y offset, $blur, $spread, $color)
+// ------------------------------------------------------------------------------------------
+@mixin box-shadow($x,$y,$b,$s,$color){
+	-moz-box-shadow: $x $y $b $s $color;
+	-webkit-box-shadow: $x $y $b $s $color;
+	box-shadow: $x $y $b $s $color;
+}
+
+// TRANSITIONS
+// ------------------------------------------------------------------------------------------
+@mixin transition($transition) {
+	-webkit-transition: $transition;
+	-moz-transition: $transition;
+	-o-transition: $transition;
+	transition: $transition;
+}
+
+@mixin transition-delay($transition-delay) {
+	-webkit-transition-delay: $transition-delay;
+	-moz-transition-delay: $transition-delay;
+	-o-transition-delay: $transition-delay;
+	transition-delay: $transition-delay;
+}
+
+@mixin transition-duration($transition-duration) {
+	-webkit-transition-duration: $transition-duration;
+	-moz-transition-duration: $transition-duration;
+	-o-transition-duration: $transition-duration;
+	transition-duration: $transition-duration;
+}

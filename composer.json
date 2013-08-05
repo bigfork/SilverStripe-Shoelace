@@ -1,0 +1,9 @@
+{
+    "require": {
+       "silverstripe/framework": "3.0.5",
+       "silverstripe/cms": "3.0.5",
+       "kinglozzer/yepnopesilverstripe": "dev-master",
+       "silverstripe/googlesitemaps": "1.1.*@dev",
+       "silverstripe-labs/googleanalytics": "1.1.*@dev"
+    }
+}

@@ -1,0 +1,20 @@
+/* Website styles
+*/
+
+// IMPORTS
+// ----------------------------------------------------------------------------------
+
+@import '_reset';
+@import '_normalize';
+@import '_variables';
+@import '_typography';
+@import '_utils';
+
+// MAKE YOUR WEBSITE LOOK NICE HERE
+// ----------------------------------------------------------------------------------
+
+body
+{
+	background: $white;
+	color: $black;
+}
