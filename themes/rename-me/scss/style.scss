@@ -3,17 +3,14 @@
  * By Bigfork
 */
 
-// IMPORTS
-// ----------------------------------------------------------------------------------
-
 @import '_reset';
 @import '_normalize';
 @import '_variables';
 @import '_typography';
 @import '_utils';
 
-// MAKE YOUR WEBSITE LOOK NICE HERE
-// ----------------------------------------------------------------------------------
+/* Layout
+---------------------------------------------------------------------------------- */
 
 * {
 	@include box-sizing(border-box);
@@ -22,4 +19,13 @@
 body {
 	background: $white;
 	color: $black;
+}
+
+/* IE Hacks
+---------------------------------------------------------------------------------- */
+
+.lte-ie7 {
+	* {
+		-ms-behavior: url('/polyfill/box-sizing/boxsizing.htc');
+	}
 }

@@ -35,7 +35,6 @@
 	-moz-box-sizing: $s;
 	-webkit-box-sizing: $s;
 	box-sizing: $s;
-	*behavior: url('/polyfill/box-sizing/boxsizing.htc');
 }
 
 // RGBA COLOURS with fallback ($r, $g, $b, $a)
