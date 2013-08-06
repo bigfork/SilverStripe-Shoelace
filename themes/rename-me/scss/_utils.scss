@@ -46,8 +46,7 @@
 
 // ROUNDED CORNERS ($radius)
 // ------------------------------------------------------------------------------------------
-@mixin rounded($r: 5px)
-{
+@mixin rounded($r: 5px){
 	-moz-border-radius: $r;
 	-webkit-border-radius: $r;
 	border-radius: $r;
@@ -55,8 +54,7 @@
 
 // PARTIALLY ROUNDED CORNERS ($top-left, $top-right, $bottom-right, $bottom-left)
 // ------------------------------------------------------------------------------------------
-@mixin rounded-partial($tl, $tr, $br, $bl)
-{
+@mixin rounded-partial($tl, $tr, $br, $bl){
 	-webkit-border-top-left-radius: $tl;
 	-webkit-border-top-right-radius: $tr;
 	-webkit-border-bottom-right-radius: $br;
@@ -81,21 +79,21 @@
 
 // TRANSITIONS
 // ------------------------------------------------------------------------------------------
-@mixin transition($transition) {
+@mixin transition($transition){
 	-webkit-transition: $transition;
 	-moz-transition: $transition;
 	-o-transition: $transition;
 	transition: $transition;
 }
 
-@mixin transition-delay($transition-delay) {
+@mixin transition-delay($transition-delay){
 	-webkit-transition-delay: $transition-delay;
 	-moz-transition-delay: $transition-delay;
 	-o-transition-delay: $transition-delay;
 	transition-delay: $transition-delay;
 }
 
-@mixin transition-duration($transition-duration) {
+@mixin transition-duration($transition-duration){
 	-webkit-transition-duration: $transition-duration;
 	-moz-transition-duration: $transition-duration;
 	-o-transition-duration: $transition-duration;
