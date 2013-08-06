@@ -21,14 +21,31 @@
 
 .group {
 	&:before, &:after {
-    	content: '';
-    	display: table;
+		content: '';
+		display: table;
 	}
 	&:after { clear: both; }
-    zoom: 1; // IE 6/7
+	zoom: 1; // IE 6/7
 }
 
-// ROUNDED CORNERS ($radious)
+// BOX SIZING ($box-sizing)
+// ------------------------------------------------------------------------------------------
+@mixin box-sizing($s)
+{
+	-moz-box-sizing: $s;
+	-webkit-box-sizing: $s;
+	box-sizing: $s;
+	*behavior: url('/polyfill/box-sizing/boxsizing.htc');
+}
+
+// RGBA COLOURS with fallback ($r, $g, $b, $a)
+// ------------------------------------------------------------------------------------------
+@mixin rgba($r, $g, $b, $a, $type: 'background-color'){
+	#{$type}: rgb($r, $g, $b);
+	#{$type}: rgba($r, $g, $b, $a);
+}
+
+// ROUNDED CORNERS ($radius)
 // ------------------------------------------------------------------------------------------
 @mixin rounded($r: 5px)
 {
