@@ -1,4 +1,6 @@
-/* Website styles
+/*!
+ * Website
+ * By Bigfork
 */
 
 // IMPORTS
@@ -12,6 +14,10 @@
 
 // MAKE YOUR WEBSITE LOOK NICE HERE
 // ----------------------------------------------------------------------------------
+
+* {
+	@include box-sizing(border-box);
+}
 
 body
 {
