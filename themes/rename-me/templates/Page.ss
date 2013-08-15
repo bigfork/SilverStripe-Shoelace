@@ -9,9 +9,16 @@
 	<meta charset="utf-8" />
 	<% if MetaDescription %><meta name="description" content="$MetaDescription" /><% end_if %>
 	$MetaTags(false)
-	<% require themedCSS(style) %>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 	<link rel="shortcut icon" href="{$BaseURL}favicon.ico" />
-	<!--[if lt IE 9]><script type="text/javascript" src="$ThemeDir/js/modernizr.min.js"></script><![endif]-->
+	<link rel="stylesheet" type="text/css" href="{$BaseHref}{$ThemeDir}/css/style.css" />
+	<!--[if lt IE 9]>
+	<script type="text/javascript" src="$ThemeDir/js/modernizr.min.js"></script>
+	<script type="text/javascript" src="$ThemeDir/js/respond.min.js"></script>
+	<![endif]-->
+	<script type="text/javascript">
+	var el = document.getElementsByTagName('html')[0]; el.className = el.className + ' js';
+	</script>
 </head>
 <body class="$ClassName">
 

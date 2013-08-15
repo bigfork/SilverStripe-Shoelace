@@ -27,8 +27,8 @@ class Page_Controller extends ContentController {
 		parent::init();
 
 		$requirements = array(
-			'https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js',
-			'themes/nflc/js/application.min.js'
+			'https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js',
+			'/themes/' . SSViewer::current_theme() . '/js/application.min.js'
 		);
 		Yepnope::set_write_js_to_body(false);
 		Yepnope::add_files($requirements, null, 'function(){ init(); }' );
