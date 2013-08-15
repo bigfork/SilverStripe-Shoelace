@@ -26,6 +26,6 @@ body {
 
 .lte-ie7 {
 	* {
-		-ms-behavior: url('/polyfill/box-sizing/boxsizing.htc');
+		*behavior: url('/polyfill/box-sizing/boxsizing.htc');
 	}
 }
