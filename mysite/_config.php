@@ -1,6 +1,6 @@
 <?php
 // optionally use a different database on dev
-if (preg_match('/(\.local|\.dev|\.proxylocal|192\.168)$/', $_SERVER['HTTP_HOST'])) {
+if (preg_match('/(\.local|\.dev|\.proxylocal\.com|)$/', $_SERVER['HTTP_HOST'])) {
 	define('SS_DATABASE_SERVER', 'localhost');
 } else {
 	define('SS_DATABASE_SERVER', 'localhost');
