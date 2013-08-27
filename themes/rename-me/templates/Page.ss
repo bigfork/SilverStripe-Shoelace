@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<!--[if lte IE 7]>		<html lang="$ContentLocale" class="nojs lte-ie9 lte-ie8 lte-ie7"> <![endif]-->
-<!--[if lte IE 8]>		<html lang="$ContentLocale" class="nojs lte-ie9 lte-ie8"> <![endif]-->
-<!--[if IE 9]>			<html lang="$ContentLocale" class="nojs lte-ie9"> <![endif]-->
-<!--[if gt IE 9]><!-->	<html lang="$ContentLocale" class="nojs"> <!--<![endif]-->
+<!--[if lte IE 7]>		<html lang="$ContentLocale" class="lte-ie9 lte-ie8 lte-ie7"> <![endif]-->
+<!--[if lte IE 8]>		<html lang="$ContentLocale" class="lte-ie9 lte-ie8"> <![endif]-->
+<!--[if IE 9]>			<html lang="$ContentLocale" class="lte-ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->	<html lang="$ContentLocale"> <!--<![endif]-->
 <head>
 	<% base_tag %>
 	<title><% if MetaTitle %>$MetaTitle.XML<% else %>$Title.XML<% end_if %> &raquo; $SiteConfig.Title</title>
