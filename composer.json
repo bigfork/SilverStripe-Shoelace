@@ -1,12 +1,19 @@
 {
     "require": {
-       "silverstripe/framework": "3.0.5",
-       "silverstripe/cms": "3.0.5",
-       "kinglozzer/yepnopesilverstripe": "dev-master",
-       "silverstripe/googlesitemaps": "1.1.*@dev"
+        "silverstripe/framework": "3.0.5",
+        "silverstripe/cms": "3.0.5",
+        "kinglozzer/yepnopesilverstripe": "dev-master",
+        "silverstripe/googlesitemaps": "1.1.*@dev"
+    },
+    "autoload": {
+        "psr-0": {
+            "util\\Installer\\Install": ""
+        }
     },
     "scripts": {
-		"post-install-cmd": "bash ./util/npm_install.sh",
-		"post-update-cmd": "bash ./util/npm_install.sh"
-	}
+        "post-install-cmd": [
+            "util\\Installer\\Install::postInstall"
+        ],
+        "post-update-cmd": "util\\Installer\\Install::postUpdate"
+    }
 }
