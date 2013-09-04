@@ -14,11 +14,8 @@ class Install {
 	public static function postInstall(Event $event) {
 		if ( ! stristr(__DIR__, 'Devsites')) exit;
 
-		$io = $event->getIO();
-
-		if ($projectName = $io->ask('Please specify a theme directory name: ')) {
-			self::performRename($projectName);
-		}
+		include('mysite/_project_settings.php');
+		self::performRename($theme);
 
 		self::installNpm();
 
