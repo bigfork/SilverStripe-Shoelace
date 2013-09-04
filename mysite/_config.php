@@ -1,21 +1,18 @@
 <?php
+include('_project_settings.php');
+
 // optionally use a different database on dev
 if (preg_match('/(\.local|\.dev|\.proxylocal\.com)$/', $_SERVER['HTTP_HOST'])) {
-	define('SS_DATABASE_SERVER', 'localhost');
+	define('SS_DATABASE_SERVER', $localhost);
 } else {
 	define('SS_DATABASE_SERVER', 'localhost');
 }
 
-// project name
-global $project;
-$project = 'mysite';
-
-// database name
-global $database;
-$database = '';
-
 // load config from environment
-require_once("conf/ConfigureFromEnv.php");
+require_once('conf/ConfigureFromEnv.php');
+
+// set the theme
+SSViewer::set_theme($database);
 
 // Set the site locale
 i18n::set_locale('en_GB');
