@@ -4,5 +4,9 @@
        "silverstripe/cms": "3.0.5",
        "kinglozzer/yepnopesilverstripe": "dev-master",
        "silverstripe/googlesitemaps": "1.1.*@dev"
-    }
+    },
+    "scripts": {
+		"post-install-cmd": "bash npm_install.sh",
+		"post-update-cmd": "bash npm_install.sh"
+	}
 }

@@ -4,3 +4,5 @@ googlesitemaps/
 googleanalytics/
 vendor/
 yepnopesilverstripe/
+node_modules/
+.sass_cache/
