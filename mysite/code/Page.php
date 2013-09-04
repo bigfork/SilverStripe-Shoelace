@@ -1,7 +1,7 @@
 <?php
 class Page extends SiteTree {
 
-	public static $db = array(
+	private static $db = array(
 
 	);
 
@@ -20,7 +20,7 @@ class Page extends SiteTree {
 }
 class Page_Controller extends ContentController {
 
-	public static $allowed_actions = array (
+	private static $allowed_actions = array (
 	);
 
 	public function init() {
