@@ -20,6 +20,16 @@
 	zoom: 1; // IE 6/7
 }
 
+// IMAGE REPLACEMENT
+// ------------------------------------------------------------------------------------------
+
+.replace {
+	display: block;
+	overflow: hidden;
+	text-indent: 150%;
+	white-space: nowrap;
+}
+
 // BOX SIZING ($box-sizing)
 // ------------------------------------------------------------------------------------------
 @mixin box-sizing($s)
