@@ -4,5 +4,3 @@
  */
 
 var x;
-var p;
-var o;
