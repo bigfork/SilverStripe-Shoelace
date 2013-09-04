@@ -6,7 +6,7 @@
        "silverstripe/googlesitemaps": "1.1.*@dev"
     },
     "scripts": {
-		"post-install-cmd": "bash npm_install.sh",
-		"post-update-cmd": "bash npm_install.sh"
+		"post-install-cmd": "bash ./util/npm_install.sh",
+		"post-update-cmd": "bash ./util/npm_install.sh"
 	}
 }
