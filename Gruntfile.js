@@ -11,21 +11,15 @@ module.exports = function(grunt) {
 				},
 				force: true
 			},
-			all: ['themes/*/js/src/app.js']
+			all: ['themes/<%= pkg.name %>/js/src/app.js']
 		},
 
 		// concatenate and uglify javascript
 		uglify: {
 			dist: {
-				files: grunt.file.expandMapping(
-					'themes/*/js/src/app.js',
-					'themes/*/js/app.min.js',
-					{
-						rename: function(destBase, destPath) {
-							return destPath.replace(/\/js\/src\/app\.js$/, "/js/app.min.js");
-						}
-					}
-				)
+				files: {
+					'themes/<%= pkg.name %>/js/app.min.js' : ['themes/<%= pkg.name %>/js/src/app.js']
+				}
 			}
 		},
 
@@ -36,32 +30,39 @@ module.exports = function(grunt) {
 				options: {
 					style: 'compact'
 				},
-				files: grunt.file.expandMapping(
-					[
-						'themes/*/scss/style.scss',
-						'themes/*/scss/editor.scss'
-					],
-					'themes/*/css/style.css',
-					{
-						rename: function(destBase, destPath) {
-							return destPath.replace(/\/scss\/(\w+)\.scss$/, "/css/$1.css");
-						}
-					}
-				)
+				files: {
+					'themes/<%= pkg.name %>/css/style.css' : 'themes/<%= pkg.name %>/scss/style.scss',
+					'themes/<%= pkg.name %>/css/editor.scss' : 'themes/<%= pkg.name %>/scss/editor.scss'
+				}
 			}
 		},
 
-		// watch tasks for uglify and scss
+		// watch tasks
 		watch: {
-			js: {
-				files: 'themes/*/js/src/app.js',
+			uglify: {
+				files: 'themes/<%= pkg.name %>/js/src/app.js',
 				tasks: ['jshint', 'uglify']
 			},
 			sass: {
-				files: 'themes/*/scss/*.scss',
+				files: 'themes/<%= pkg.name %>/scss/*.scss',
 				tasks: ['sass']
+			},
+			notify: {
+				files: ['<%= watch.uglify.files %>', '<%= watch.sass.files %>'],
+				tasks: ['notify']
 			}
+		},
+
+		// notifications
+		notify: {
+			watch: {
+				options: {
+					title: 'Grunt',
+					message: 'Tasks complete',
+				}
+			},
 		}
+
 	});
 
 	// Plugins
@@ -70,8 +71,6 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-sass');
 	grunt.loadNpmTasks('grunt-notify');
-
-	grunt.task.run('notify_hooks');
 
 	// Task(s).
 	grunt.registerTask('default', ['jshint', 'uglify', 'sass']);
