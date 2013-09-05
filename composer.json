@@ -3,7 +3,7 @@
         "silverstripe/framework": "3.1.0-rc1",
         "silverstripe/cms": "3.1.0-rc1",
         "kinglozzer/yepnopesilverstripe": "dev-master",
-        "silverstripe/googlesitemaps": "1.1.*@dev"
+        "silverstripe/googlesitemaps": "dev-master"
     },
     "autoload": {
         "psr-0": {
