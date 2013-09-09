@@ -1,15 +1,10 @@
 <?php
+
 class Page extends SiteTree {
 
-	private static $db = array(
-
-	);
-
-	public function getCMSFields(){
-		$fields = parent::getCMSFields();
-		return $fields;
-	}
-
+	/**
+	 * @return FieldList $fields
+	 */
 	public function getSettingsFields() {
 		$fields = parent::getSettingsFields();
 		// Hide ShowInSearch checkbox if we don't have a search
@@ -18,17 +13,18 @@ class Page extends SiteTree {
 	}
 
 }
+
 class Page_Controller extends ContentController {
 
-	private static $allowed_actions = array (
-	);
-
+	/**
+	 * @return void
+	 */
 	public function init() {
 		parent::init();
 
 		$requirements = array(
 			'https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js',
-			'/themes/' . SSViewer::current_theme() . '/js/application.min.js'
+			'/themes/' . SSViewer::current_theme() . '/js/app.min.js'
 		);
 		Yepnope::set_write_js_to_body(false);
 		Yepnope::add_files($requirements, null, 'function(){ init(); }' );
