@@ -2,8 +2,9 @@
     "require": {
         "silverstripe/framework": "3.1.0-rc1",
         "silverstripe/cms": "3.1.0-rc1",
+        "silverstripe/googlesitemaps": "dev-master",
         "kinglozzer/yepnopesilverstripe": "dev-master",
-        "silverstripe/googlesitemaps": "dev-master"
+        "feejin/silverstripe-securitytemplates": "dev-master"
     },
     "autoload": {
         "psr-0": {
