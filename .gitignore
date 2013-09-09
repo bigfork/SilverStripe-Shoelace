@@ -2,6 +2,7 @@ cms/
 framework/
 googlesitemaps/
 googleanalytics/
+securitytemplates/
 vendor/
 yepnopesilverstripe/
 node_modules/
