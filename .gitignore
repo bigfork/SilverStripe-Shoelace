@@ -6,4 +6,4 @@ securitytemplates/
 vendor/
 yepnopesilverstripe/
 node_modules/
-.sass_cache/
+/.sass-cache/
