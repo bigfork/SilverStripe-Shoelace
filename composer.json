@@ -4,6 +4,8 @@
         "silverstripe/cms": "3.1.0-rc1",
         "silverstripe/googlesitemaps": "dev-master",
         "kinglozzer/yepnopesilverstripe": "dev-master",
+        "kinglozzer/bfgoogleanalytics": "dev-master",
+        "kinglozzer/metatitle": "dev-master",
         "feejin/silverstripe-securitytemplates": "dev-master"
     },
     "autoload": {

@@ -1,9 +1,10 @@
+/.sass-cache/
+bfgoogleanalytics/
 cms/
 framework/
 googlesitemaps/
-googleanalytics/
+metatitle/
+node_modules/
 securitytemplates/
 vendor/
 yepnopesilverstripe/
-node_modules/
-/.sass-cache/
