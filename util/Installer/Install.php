@@ -24,12 +24,11 @@ class Install {
 
 				self::performRename($theme, $dbHost, $dbName);
 			}
-
-			if ($io->ask('Would you like to set up a vhost? (y/n): ') == 'y') {
-				$hostName = $io->ask('Please specify the host name: ');
-
-				self::setupVhost($hostName);
-			}
+		}
+		
+		if ($io->ask('Would you like to set up a vhost? (y/n): ') == 'y') {
+			$hostName = $io->ask('Please specify the host name: ');
+			self::setupVhost($hostName);
 		}
 
 		self::installNpm();
@@ -110,6 +109,7 @@ class Install {
 <VirtualHost *:80>
     DocumentRoot "$folderPath"
     ServerName $hostName
+    ServerAlias $hostName.t.proxylocal.com
 </VirtualHost>
 XML;
 
