@@ -15,7 +15,7 @@ class Install {
 		if ( ! stristr(__DIR__, 'Devsites')) exit;
 		$base = __DIR__ . '/../../';
 
-		// If the theme has already been renamed, exit
+		// If the theme has already been renamed, assume setup complete
 		if (file_exists($base . 'themes/default')) {
 			$io = $event->getIO();
 			if ($theme = $io->ask('Please specify the theme name: ')) {
@@ -23,6 +23,12 @@ class Install {
 				$dbName = $io->ask('Please specify the database name: ');
 
 				self::performRename($theme, $dbHost, $dbName);
+			}
+
+			if ($io->ask('Would you like to set up a vhost? (y/n): ') == 'y') {
+				$hostName = $io->ask('Please specify the host name: ');
+
+				self::setupVhost($hostName);
 			}
 		}
 
@@ -87,6 +93,27 @@ class Install {
 
 		$yaml = \Spyc::YAMLDump($config);
 		file_put_contents($yamlPath, $yaml);
+	}
+
+	/**
+	 * @param string $hostNAme
+	 * @return void
+	 */
+	public static function setupVhost($hostName) {
+		$current = __DIR__;
+		chdir(__DIR__ . '/../../');
+		$fileName = '/private/etc/apache2/sites-enabled/' . basename(getcwd()) . '.conf';
+		$folderPath = getcwd();
+		chdir($current);
+
+		$data = <<<XML
+<VirtualHost *:80>
+    DocumentRoot "$folderPath"
+    ServerName $hostName
+</VirtualHost>
+XML;
+
+		file_put_contents($fileName, $data);
 	}
 
 }
