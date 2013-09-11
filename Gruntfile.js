@@ -32,7 +32,7 @@ module.exports = function(grunt) {
 				},
 				files: {
 					'themes/<%= pkg.name %>/css/style.css' : 'themes/<%= pkg.name %>/scss/style.scss',
-					'themes/<%= pkg.name %>/css/editor.scss' : 'themes/<%= pkg.name %>/scss/editor.scss'
+					'themes/<%= pkg.name %>/css/editor.css' : 'themes/<%= pkg.name %>/scss/editor.scss'
 				}
 			}
 		},
