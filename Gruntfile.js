@@ -26,7 +26,6 @@ module.exports = function(grunt) {
 		// compile scss into css
 		sass: {
 			dist: {
-				destination: process.env.DEST,
 				options: {
 					style: 'compact'
 				},
