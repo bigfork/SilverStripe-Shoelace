@@ -14,6 +14,7 @@
 
 * {
 	@include box-sizing(border-box);
+	*behavior: url('/polyfill/box-sizing/boxsizing.htc');
 }
 
 body {
