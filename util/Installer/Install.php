@@ -23,9 +23,10 @@ class Install {
 				$dbName = $io->ask('Please specify the database name: ');
 
 				self::performRename($theme, $dbHost, $dbName);
+				self::removeReadme();
 			}
 		}
-		
+
 		if ($io->ask('Would you like to set up a vhost? (y/n): ') == 'y') {
 			$hostName = $io->ask('Please specify the host name: ');
 			self::setupVhost($hostName);
@@ -41,7 +42,7 @@ class Install {
 	 */
 	public static function postUpdate(Event $event) {
 		if ( ! stristr(__DIR__, 'Devsites')) exit;
-		
+
 		self::installNpm();
 		exit;
 	}
@@ -55,7 +56,7 @@ class Install {
 	}
 
 	/**
-	 * Rename the 'default' theme folder and package name in package.json. Also 
+	 * Rename the 'default' theme folder and package name in package.json. Also
 	 * updates mysite/_config/config.yml
 	 * @param string $theme
 	 * @param string|null $dbHost
@@ -82,7 +83,7 @@ class Install {
 		$contents['name'] = $theme;
 		$json = json_encode($contents);
 		file_put_contents($base . 'package.json', $json);
-		
+
 		// Update YAML config
 		$config['SSViewer']['current_theme'] = $theme;
 		if ($dbHost || $dbName) {
@@ -114,6 +115,18 @@ class Install {
 XML;
 
 		file_put_contents($fileName, $data);
+	}
+
+	/**
+	 * @return void
+	 */
+	public static function removeReadme() {
+		$current = __DIR__;
+		chdir(__DIR__ . '/../../');
+		if (file_exists('README.md')){
+			unlink('README.md');
+		}
+		chdir($current);
 	}
 
 }
