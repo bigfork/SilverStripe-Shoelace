@@ -109,7 +109,7 @@ class Install {
 		$data = <<<XML
 <VirtualHost *:80>
     DocumentRoot "$folderPath"
-    ServerName $hostName
+    ServerName $hostName.dev
     ServerAlias $hostName.t.proxylocal.com
 </VirtualHost>
 XML;
