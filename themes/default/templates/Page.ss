@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<!--[if lte IE 7]>		<html lang="$ContentLocale" class="lte-ie9 lte-ie8 lte-ie7"> <![endif]-->
-<!--[if lte IE 8]>		<html lang="$ContentLocale" class="lte-ie9 lte-ie8"> <![endif]-->
-<!--[if IE 9]>			<html lang="$ContentLocale" class="lte-ie9"> <![endif]-->
-<!--[if gt IE 9]><!-->	<html lang="$ContentLocale"> <!--<![endif]-->
+<!--[if lte IE 7]>		<html lang="$ContentLocale" class="nojs lte-ie9 lte-ie8 lte-ie7"> <![endif]-->
+<!--[if lte IE 8]>		<html lang="$ContentLocale" class="nojs lte-ie9 lte-ie8"> <![endif]-->
+<!--[if IE 9]>			<html lang="$ContentLocale" class="nojs lte-ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->	<html lang="$ContentLocale" class="nojs"> <!--<![endif]-->
 <head>
 	<% base_tag %>
 	<title><% if MetaTitle %>$MetaTitle.XML<% else %>$Title.XML<% end_if %> &raquo; $SiteConfig.Title</title>
@@ -19,7 +19,7 @@
 	<!--[if IE 8]><script type="text/javascript" src="$ThemeDir/js/respond.min.js"></script><![endif]-->
 
 	<script type="text/javascript">
-	var el = document.getElementsByTagName('html')[0]; el.className = el.className + ' js';
+	var el = document.getElementsByTagName('html')[0]; el.className = el.className.replace(/nojs/g, '');
 	</script>
 </head>
 <body class="$ClassName">
