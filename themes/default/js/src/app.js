@@ -5,4 +5,4 @@
 
 var init = function(){
 	return;
-}
+};
