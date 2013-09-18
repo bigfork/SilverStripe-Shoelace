@@ -115,7 +115,6 @@ class Install {
 XML;
 
 		file_put_contents($fileName, $data);
-		echo shell_exec('sudo apachectl restart');
 	}
 
 	/**
