@@ -14,10 +14,10 @@ class Install {
 	public static function postInstall(Event $event) {
 		if ( ! stristr(__DIR__, 'Devsites')) exit;
 		$base = __DIR__ . '/../../';
+		$io = $event->getIO();
 
 		// If the theme has already been renamed, assume setup complete
 		if (file_exists($base . 'themes/default')) {
-			$io = $event->getIO();
 			if ($theme = $io->ask('Please specify the theme name: ')) {
 				$dbHost = $io->ask('Please specify the database host: ');
 				$dbName = $io->ask('Please specify the database name: ');
@@ -28,7 +28,7 @@ class Install {
 		}
 
 		if ($io->ask('Would you like to set up a vhost? (y/n): ') == 'y') {
-			$hostName = $io->ask('Please specify the host name: ');
+			$hostName = $io->ask('Please specify the host name (excluding \'.dev\'): ');
 			self::setupVhost($hostName);
 		}
 
