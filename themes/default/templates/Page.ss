@@ -22,7 +22,7 @@
 	var el = document.getElementsByTagName('html')[0]; el.className = el.className.replace(/nojs/g, '');
 	</script>
 </head>
-<body class="$ClassName">
+<body class="$ClassName.LowerCase">
 
 <% include Nav %>
 
