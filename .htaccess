@@ -34,6 +34,7 @@ ErrorDocument 500 /assets/error-500.html
 	RedirectMatch 403 /vendor(/|$)
 	RedirectMatch 403 /composer\.(json|lock)
 	RedirectMatch 403 /.git(/|$)
+	RedirectMatch 403 /.gitignore
 	RedirectMatch 403 /silverstripe\.log
 	RedirectMatch 403 /util(/|$)
 </IfModule>
