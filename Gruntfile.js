@@ -1,5 +1,7 @@
 module.exports = function(grunt) {
 
+	require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
+
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 
@@ -23,6 +25,33 @@ module.exports = function(grunt) {
 			}
 		},
 
+		// css optimisation
+		cssc: {
+			dist: {
+				options: {
+					consolidateViaDeclarations: true,
+					consolidateViaSelectors:    true,
+					consolidateMediaQueries:    true
+				},
+				files: {
+					'themes/<%= pkg.name %>/css/style.css' : 'themes/<%= pkg.name %>/css/style.css',
+					'themes/<%= pkg.name %>/css/editor.css' : 'themes/<%= pkg.name %>/css/editor.css',
+					'themes/<%= pkg.name %>/css/ie7.css' : 'themes/<%= pkg.name %>/css/ie7.css'
+				}
+			}
+		},
+
+		// compress css above and beyond sass
+		cssmin: {
+			dist: {
+				files : {
+					'themes/<%= pkg.name %>/css/style.css' : 'themes/<%= pkg.name %>/css/style.css',
+					'themes/<%= pkg.name %>/css/editor.css' : 'themes/<%= pkg.name %>/css/editor.css',
+					'themes/<%= pkg.name %>/css/ie7.css' : 'themes/<%= pkg.name %>/css/ie7.css'
+				}
+			}
+		},
+
 		// compile scss into css
 		sass: {
 			dist: {
@@ -41,11 +70,11 @@ module.exports = function(grunt) {
 		watch: {
 			uglify: {
 				files: 'themes/<%= pkg.name %>/js/src/app.js',
-				tasks: ['jshint', 'uglify']
+				tasks: ['js']
 			},
 			sass: {
 				files: 'themes/<%= pkg.name %>/scss/*.scss',
-				tasks: ['sass']
+				tasks: ['css']
 			},
 			notify: {
 				files: ['<%= watch.uglify.files %>', '<%= watch.sass.files %>'],
@@ -65,14 +94,8 @@ module.exports = function(grunt) {
 
 	});
 
-	// Plugins
-	grunt.loadNpmTasks('grunt-contrib-watch');
-	grunt.loadNpmTasks('grunt-contrib-jshint');
-	grunt.loadNpmTasks('grunt-contrib-uglify');
-	grunt.loadNpmTasks('grunt-contrib-sass');
-	grunt.loadNpmTasks('grunt-notify');
-
 	// Task(s).
-	grunt.registerTask('default', ['jshint', 'uglify', 'sass']);
-
+	grunt.registerTask('js',  ['jshint', 'uglify', 'cssmin']);
+	grunt.registerTask('css',  ['sass', 'cssc', 'cssmin']);
+	grunt.registerTask('default', ['js', 'css']);
 };
