@@ -41,17 +41,6 @@ module.exports = function(grunt) {
 			}
 		},
 
-		// compress css above and beyond sass
-		cssmin: {
-			dist: {
-				files : {
-					'themes/<%= pkg.name %>/css/style.css' : 'themes/<%= pkg.name %>/css/style.css',
-					'themes/<%= pkg.name %>/css/editor.css' : 'themes/<%= pkg.name %>/css/editor.css',
-					'themes/<%= pkg.name %>/css/ie7.css' : 'themes/<%= pkg.name %>/css/ie7.css'
-				}
-			}
-		},
-
 		// compile scss into css
 		sass: {
 			dist: {
@@ -95,7 +84,7 @@ module.exports = function(grunt) {
 	});
 
 	// Task(s).
-	grunt.registerTask('js',  ['jshint', 'uglify', 'cssmin']);
-	grunt.registerTask('css',  ['sass', 'cssc', 'cssmin']);
+	grunt.registerTask('js',  ['jshint', 'uglify']);
+	grunt.registerTask('css',  ['sass', 'cssc']);
 	grunt.registerTask('default', ['js', 'css']);
 };
