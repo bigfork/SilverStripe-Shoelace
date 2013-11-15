@@ -65,10 +65,9 @@ Options -Indexes
     SetEnv HTTP_MOD_REWRITE On
     RewriteEngine On
 
-    #RewriteCond %{HTTPS} !=on
-    #RewriteCond %{HTTP_HOST} !^www\..+$ [NC]
     #RewriteCond %{HTTP_HOST} !^.*\.(dev|proxylocal\.com)$ [NC]
-    #RewriteRule ^ http://www.%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+    #RewriteCond %{HTTP_HOST} !^www\.bigfork\.co\.uk$ [NC]
+    #RewriteRule ^(.*)$ http://www.bigfork.co.uk/$1 [R=301,L]
 
     RewriteBase '/'
     RewriteCond %{REQUEST_URI} ^(.*)$
