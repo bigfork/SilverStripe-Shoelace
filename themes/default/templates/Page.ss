@@ -10,6 +10,10 @@
 	<% if MetaDescription %><meta name="description" content="$MetaDescription" /><% end_if %>
 	$MetaTags(false)
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+	<link href="//www.google-analytics.com" rel="dns-prefetch" />
+    <link href="//ajax.googleapis.com" rel="dns-prefetch" />
+
 	<link rel="shortcut icon" href="{$BaseURL}favicon.ico" />
 
 	<!--[if lt IE 8]><link rel="stylesheet" type="text/css" href="{$BaseHref}{$ThemeDir}/css/ie7.css" /><![endif]-->
