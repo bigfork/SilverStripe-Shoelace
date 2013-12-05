@@ -25,27 +25,11 @@ module.exports = function(grunt) {
 			}
 		},
 
-		// css optimisation
-		cssc: {
-			dist: {
-				options: {
-					consolidateViaDeclarations: true,
-					consolidateViaSelectors:    true,
-					consolidateMediaQueries:    true
-				},
-				files: {
-					'themes/<%= pkg.name %>/css/style.css' : 'themes/<%= pkg.name %>/css/style.css',
-					'themes/<%= pkg.name %>/css/editor.css' : 'themes/<%= pkg.name %>/css/editor.css',
-					'themes/<%= pkg.name %>/css/ie7.css' : 'themes/<%= pkg.name %>/css/ie7.css'
-				}
-			}
-		},
-
 		// compile scss into css
 		sass: {
 			dist: {
 				options: {
-					style: 'compact'
+					style: 'compressed'
 				},
 				files: {
 					'themes/<%= pkg.name %>/css/style.css' : 'themes/<%= pkg.name %>/scss/style.scss',
@@ -85,6 +69,6 @@ module.exports = function(grunt) {
 
 	// Task(s).
 	grunt.registerTask('js',  ['jshint', 'uglify']);
-	grunt.registerTask('css',  ['sass', 'cssc']);
+	grunt.registerTask('css',  ['sass');
 	grunt.registerTask('default', ['js', 'css']);
 };
