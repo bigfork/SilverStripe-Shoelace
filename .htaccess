@@ -70,10 +70,6 @@ Options -Indexes
     #RewriteCond %{HTTP_HOST} !^www\.actualdomain\.com$ [NC]
     #RewriteRule ^(.*)$ http://www.actualdomain.com/$1 [R=301,L]
 
-    # Maintenance mode - redirects non dev / megafork domains
-    #RewriteCond %{HTTP_HOST} !^.*\.(dev|megafork\.co\.uk)$ [NC]
-    #RewriteRule !^.*maintenance/$ /maintenance/ [R=302,L]
-
     RewriteBase '/'
     RewriteCond %{REQUEST_URI} ^(.*)$
     RewriteCond %{REQUEST_FILENAME} !-f
