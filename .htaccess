@@ -66,13 +66,19 @@ Options -Indexes
     RewriteEngine On
 
     # Force www.actualdomain.com with 301 redirects
-    #RewriteCond %{HTTP_HOST} !^.*\.(dev|proxylocal\.com)$ [NC]
-    #RewriteCond %{HTTP_HOST} !^www\.actualdomain\.com$ [NC]
-    #RewriteRule ^(.*)$ http://www.actualdomain.com/$1 [R=301,L]
+    # RewriteCond %{HTTP_HOST} !^.*\.(dev|proxylocal\.com)$ [NC]
+    # RewriteCond %{HTTP_HOST} !^www\.actualdomain\.com$ [NC]
+    # RewriteRule ^(.*)$ http://www.actualdomain.com/$1 [R=301,L]
 
+    # Maintenance mode - redirects non dev / megafork domains
+    # RewriteCond %{HTTP_HOST} !^.*\.(dev|megafork\.co\.uk)$ [NC]
+    # RewriteRule !^.*maintenance/$ /maintenance/ [R=302,L]
+
+    # SilverStripe rewrites - includes optional maintenance rule for the above
     RewriteBase '/'
     RewriteCond %{REQUEST_URI} ^(.*)$
     RewriteCond %{REQUEST_FILENAME} !-f
+    # RewriteCond %{REQUEST_FILENAME} !^.*maintenance/?$
     RewriteRule .* framework/main.php?url=%1&%{QUERY_STRING} [L]
 </IfModule>
 
