@@ -39,13 +39,6 @@
 	box-sizing: $s;
 }
 
-// RGBA COLOURS with fallback ($r, $g, $b, $a)
-// ------------------------------------------------------------------------------------------
-@mixin rgba($r, $g, $b, $a, $type: 'background-color'){
-	#{$type}: rgb($r, $g, $b);
-	#{$type}: rgba($r, $g, $b, $a);
-}
-
 // ROUNDED CORNERS ($radius)
 // ------------------------------------------------------------------------------------------
 @mixin rounded($r: 5px){
