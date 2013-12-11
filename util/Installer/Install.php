@@ -19,7 +19,7 @@ class Install {
 		// If the theme has already been renamed, assume setup complete
 		if (file_exists($base . 'themes/default')) {
 			if ($theme = $io->ask('Please specify the theme name: ')) {
-				$description = $io->ask('Please specify the project description');
+				$description = $io->ask('Please specify the project description: ');
 				$dbHost = $io->ask('Please specify the database host: ');
 				$dbName = $io->ask('Please specify the database name: ');
 
