@@ -16,8 +16,21 @@ module.exports = function(grunt) {
 			all: ['themes/<%= pkg.name %>/js/src/app.js']
 		},
 
+		// banner tag
+		tag: {
+			banner: '/*!\n' +
+				' * <%= pkg.description %>\n' +
+				' * @author <%= pkg.author %>\n' +
+				' * (c) <%= pkg.author %> ' + new Date().getFullYear() + '.\n' +
+				' */\n'
+		},
+
 		// concatenate and uglify javascript
 		uglify: {
+			options: {
+				preserveComments: false,
+				banner: '<%= tag.banner %>'
+			},
 			dist: {
 				files: {
 					'themes/<%= pkg.name %>/js/app.min.js' : ['themes/<%= pkg.name %>/js/src/app.js']
@@ -29,7 +42,8 @@ module.exports = function(grunt) {
 		sass: {
 			dist: {
 				options: {
-					style: 'compressed'
+					style: 'compressed',
+					banner: '<%= tag.banner %>'
 				},
 				files: {
 					'themes/<%= pkg.name %>/css/style.css' : 'themes/<%= pkg.name %>/scss/style.scss',
@@ -69,6 +83,6 @@ module.exports = function(grunt) {
 
 	// Task(s).
 	grunt.registerTask('js',  ['jshint', 'uglify']);
-	grunt.registerTask('css',  ['sass');
+	grunt.registerTask('css',  ['sass']);
 	grunt.registerTask('default', ['js', 'css']);
 };
