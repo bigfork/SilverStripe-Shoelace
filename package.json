@@ -10,7 +10,7 @@
     "grunt-notify": "*",
     "matchdep": "*"
   },
-  "description": "Grunt tasks",
+  "description": "Default",
   "main": "Gruntfile.js",
   "author": "Bigfork"
 }

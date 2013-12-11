@@ -19,10 +19,11 @@ class Install {
 		// If the theme has already been renamed, assume setup complete
 		if (file_exists($base . 'themes/default')) {
 			if ($theme = $io->ask('Please specify the theme name: ')) {
+				$description = $io->ask('Please specify the project description');
 				$dbHost = $io->ask('Please specify the database host: ');
 				$dbName = $io->ask('Please specify the database name: ');
 
-				self::performRename($theme, $dbHost, $dbName);
+				self::performRename($theme, $description, $dbHost, $dbName);
 				self::removeReadme();
 			}
 		}
@@ -56,14 +57,15 @@ class Install {
 	}
 
 	/**
-	 * Rename the 'default' theme folder and package name in package.json. Also
-	 * updates mysite/_config/config.yml
+	 * Rename the 'default' theme folder, package name and package description in package.json.
+	 * Also updates mysite/_config/config.yml
 	 * @param string $theme
+	 * @param string $description
 	 * @param string|null $dbHost
 	 * @param string|null $dbName
 	 * @return void
 	 */
-	public static function performRename($theme, $dbHost = null, $dbName = null) {
+	public static function performRename($theme, $description, $dbHost = null, $dbName = null) {
 		if ( ! stristr(__DIR__, 'Devsites')) exit;
 
 		$base = __DIR__ . '/../../';
@@ -81,6 +83,7 @@ class Install {
 		$json = file_get_contents($base . 'package.json');
 		$contents = json_decode($json, true);
 		$contents['name'] = $theme;
+		$contents['description'] = $description;
 		$json = json_encode($contents);
 		file_put_contents($base . 'package.json', $json);
 
