@@ -74,6 +74,7 @@ Options -Indexes
 
     # Maintenance mode - redirects non dev / megafork domains
     # RewriteCond %{HTTP_HOST} !^.*\.(dev|megafork\.co\.uk)$ [NC]
+    # RewriteCond %{REQUEST_URI} !(\.css|\.js|\.png|\.jpg|\.gif|robots\.txt)$ [NC]
     # RewriteRule !^.*maintenance/$ /maintenance/ [R=302,L]
 
     # SilverStripe rewrites - includes optional maintenance rule for the above
