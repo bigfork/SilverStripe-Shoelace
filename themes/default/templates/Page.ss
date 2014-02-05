@@ -23,7 +23,7 @@
 	<!--[if IE 8]><script type="text/javascript" src="$ThemeDir/js/respond.min.js"></script><![endif]-->
 
 	<script type="text/javascript">
-	(function(H){H.className=H.className.replace(/\bnojs\b/,'')})(document.documentElement)
+	(function(H){H.className=H.className.replace(/\\bnojs\\b/,'')})(document.documentElement)
 	</script>
 </head>
 <body class="$ClassName.LowerCase">
