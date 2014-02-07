@@ -22,8 +22,9 @@ class Install {
 				$description = $io->ask('Please specify the project description: ');
 				$dbHost = $io->ask('Please specify the database host: ');
 				$dbName = $io->ask('Please specify the database name: ');
+				$tpApiKey = $io->ask('TinyPNG API Key: ');
 
-				self::performRename($theme, $description, $dbHost, $dbName);
+				self::performRename($theme, $description, $dbHost, $dbName, $tpApiKey);
 				self::removeReadme();
 			}
 		}
@@ -65,7 +66,7 @@ class Install {
 	 * @param string|null $dbName
 	 * @return void
 	 */
-	public static function performRename($theme, $description, $dbHost = null, $dbName = null) {
+	public static function performRename($theme, $description, $dbHost = null, $dbName = null, $tpApiKey = null) {
 		if ( ! stristr(__DIR__, 'Devsites')) exit;
 
 		$base = __DIR__ . '/../../';
@@ -84,6 +85,7 @@ class Install {
 		$contents = json_decode($json, true);
 		$contents['name'] = $theme;
 		$contents['description'] = $description;
+		$contents['tinypngapikey'] = $tpApiKey;
 		$json = json_encode($contents);
 		file_put_contents($base . 'package.json', $json);
 
