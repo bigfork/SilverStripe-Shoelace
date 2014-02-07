@@ -5,6 +5,22 @@ module.exports = function(grunt) {
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 
+		// compress pngs
+		tinypng: {
+			options: {
+				apiKey: '<%= pkg.tinypngapikey %>',
+				summarize: true,
+				showProgress: true,
+				stopOnImageError: true
+			},
+			compress: {
+				expand: true,
+				cwd:  'themes/<%= pkg.name %>/images/src/',
+				src:  '**/*.png',
+				dest: 'themes/<%= pkg.name %>/images/'
+			}
+		},
+
 		// lint javascript
 		jshint: {
 			options: {
@@ -84,5 +100,6 @@ module.exports = function(grunt) {
 	// Task(s).
 	grunt.registerTask('js',  ['jshint', 'uglify']);
 	grunt.registerTask('css',  ['sass']);
+	grunt.registerTask('png',  ['tinypng']);
 	grunt.registerTask('default', ['js', 'css']);
 };

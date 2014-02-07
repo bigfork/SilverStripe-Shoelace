@@ -6,11 +6,13 @@
     "grunt-contrib-sass": "*",
     "grunt-contrib-uglify": "*",
     "grunt-contrib-jshint": "*",
-    "grunt-contrib-watch":  "*",
+    "grunt-contrib-watch": "*",
+    "grunt-tinypng": "*",
     "grunt-notify": "*",
     "matchdep": "*"
   },
   "description": "Default",
   "main": "Gruntfile.js",
-  "author": "Bigfork"
+  "author": "Bigfork",
+  "tinypngapikey": ""
 }
