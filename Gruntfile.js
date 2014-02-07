@@ -8,16 +8,16 @@ module.exports = function(grunt) {
 		// compress pngs
 		tinypng: {
 			options: {
-				apiKey: '',
+				apiKey: '<%= pkg.tinypngapikey %>',
 				summarize: true,
 				showProgress: true,
 				stopOnImageError: true
 			},
 			compress: {
 				expand: true,
-				src:  'themes/<%= pkg.name %>/images/src/*.png',
-				dest: 'themes/<%= pkg.name %>/images/',
-				ext:  '.png'
+				cwd:  'themes/<%= pkg.name %>/images/src/',
+				src:  '**/*.png',
+				dest: 'themes/<%= pkg.name %>/images/'
 			}
 		},
 
