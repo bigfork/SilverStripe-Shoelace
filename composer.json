@@ -6,6 +6,7 @@
         "kinglozzer/yepnopesilverstripe": "dev-master",
         "kinglozzer/bfgoogleanalytics": "dev-master",
         "kinglozzer/metatitle": "dev-master",
+        "kinglozzer/htmleditornoalignment": "dev-master",
         "feejin/silverstripe-securitytemplates": "dev-master"
     },
     "autoload": {

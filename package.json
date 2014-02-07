@@ -6,7 +6,8 @@
     "grunt-contrib-sass": "*",
     "grunt-contrib-uglify": "*",
     "grunt-contrib-jshint": "*",
-    "grunt-contrib-watch":  "*",
+    "grunt-contrib-watch": "*",
+    "grunt-tinypng": "*",
     "grunt-notify": "*",
     "matchdep": "*"
   },
