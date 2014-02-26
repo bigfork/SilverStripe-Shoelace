@@ -11,7 +11,11 @@
 	@include box-sizing(border-box);
 }
 
-body {
-	background: $white;
-	color: $black;
+@import '_320';
+
+/* Breakpoints
+---------------------------------------------------------------------------------- */
+
+@media screen and (min-width: 480px) {
+	@import '_480';
 }

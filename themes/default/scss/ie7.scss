@@ -12,7 +12,9 @@
 	*behavior: url('/polyfill/box-sizing/boxsizing.htc');
 }
 
-body {
-	background: $white;
-	color: $black;
-}
+/* Import required files without media queries
+---------------------------------------------------------------------------------- */
+
+@import '_320';
+@import '_480';
+
