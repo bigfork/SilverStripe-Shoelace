@@ -34,63 +34,14 @@
 // ------------------------------------------------------------------------------------------
 @mixin box-sizing($s)
 {
-	-moz-box-sizing: $s;
-	-webkit-box-sizing: $s;
 	box-sizing: $s;
-}
-
-// ROUNDED CORNERS ($radius)
-// ------------------------------------------------------------------------------------------
-@mixin rounded($r: 5px){
-	-moz-border-radius: $r;
-	-webkit-border-radius: $r;
-	border-radius: $r;
 }
 
 // PARTIALLY ROUNDED CORNERS ($top-left, $top-right, $bottom-right, $bottom-left)
 // ------------------------------------------------------------------------------------------
 @mixin rounded-partial($tl, $tr, $br, $bl){
-	-webkit-border-top-left-radius: $tl;
-	-webkit-border-top-right-radius: $tr;
-	-webkit-border-bottom-right-radius: $br;
-	-webkit-border-bottom-left-radius: $bl;
-	-moz-border-top-left-radius: $tl;
-	-moz-border-top-right-radius: $tr;
-	-moz-border-bottom-right-radius: $br;
-	-moz-border-bottom-left-radius: $bl;
 	border-top-left-radius: $tl;
 	border-top-right-radius: $tr;
 	border-bottom-right-radius: $br;
 	border-bottom-left-radius: $bl;
-}
-
-// BOX SHADOW ($x offset, $y offset, $blur, $spread, $color)
-// ------------------------------------------------------------------------------------------
-@mixin box-shadow($x,$y,$b,$s,$color){
-	-moz-box-shadow: $x $y $b $s $color;
-	-webkit-box-shadow: $x $y $b $s $color;
-	box-shadow: $x $y $b $s $color;
-}
-
-// TRANSITIONS
-// ------------------------------------------------------------------------------------------
-@mixin transition($transition){
-	-webkit-transition: $transition;
-	-moz-transition: $transition;
-	-o-transition: $transition;
-	transition: $transition;
-}
-
-@mixin transition-delay($transition-delay){
-	-webkit-transition-delay: $transition-delay;
-	-moz-transition-delay: $transition-delay;
-	-o-transition-delay: $transition-delay;
-	transition-delay: $transition-delay;
-}
-
-@mixin transition-duration($transition-duration){
-	-webkit-transition-duration: $transition-duration;
-	-moz-transition-duration: $transition-duration;
-	-o-transition-duration: $transition-duration;
-	transition-duration: $transition-duration;
 }

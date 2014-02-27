@@ -69,6 +69,20 @@ module.exports = function(grunt) {
 			}
 		},
 
+		// add vendor prefixes
+		autoprefixer: {
+            dist: {
+				options: {
+					browsers: ['last 2 versions', 'ie 8', 'ie 9']
+				},
+				files: {
+                    'themes/<%= pkg.name %>/css/style.css' : 'themes/<%= pkg.name %>/css/style.css',
+                    'themes/<%= pkg.name %>/css/editor.css' : 'themes/<%= pkg.name %>/css/editor.css',
+                    'themes/<%= pkg.name %>/css/ie7.css' : 'themes/<%= pkg.name %>/scss/ie7.css'
+                }
+            }
+        },
+
 		// watch tasks
 		watch: {
 			uglify: {
@@ -99,7 +113,7 @@ module.exports = function(grunt) {
 
 	// Task(s).
 	grunt.registerTask('js',  ['jshint', 'uglify']);
-	grunt.registerTask('css',  ['sass']);
+	grunt.registerTask('css',  ['sass','autoprefixer']);
 	grunt.registerTask('png',  ['tinypng']);
 	grunt.registerTask('default', ['js', 'css']);
 };

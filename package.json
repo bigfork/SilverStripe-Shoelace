@@ -7,6 +7,7 @@
     "grunt-contrib-uglify": "*",
     "grunt-contrib-jshint": "*",
     "grunt-contrib-watch": "*",
+    "grunt-autoprefixer": "*",
     "grunt-tinypng": "*",
     "grunt-notify": "*",
     "matchdep": "*"
