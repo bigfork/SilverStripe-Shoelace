@@ -1,16 +1,14 @@
-// Utilities and mixins
-// ------------------------------------------------------------------------------------------
+/* Utilities and Mixins
+---------------------------------------------------------------------------------- */
 
-// OCCASIONALLY HANDY CLASS FOR FORCING STUFF TO HIDE
-// ------------------------------------------------------------------------------------------
-
+/* Ocassinally handly class for forcing stuff to hide
+---------------------------------------------------------------------------------- */
 .h {
 	display: none !important;
 }
 
-// CLEARFIX -- ASSIGN CLASS TO ELEMENT TO SELF CLEAR CHILDREN
-// ------------------------------------------------------------------------------------------
-
+/* Clearfix - Assign class to element to self clear children
+---------------------------------------------------------------------------------- */
 .group {
 	&:before, &:after {
 		content: '';
@@ -20,9 +18,8 @@
 	zoom: 1; // IE 6/7
 }
 
-// IMAGE REPLACEMENT
-// ------------------------------------------------------------------------------------------
-
+/* Utility class for replacing text with a background-image
+---------------------------------------------------------------------------------- */
 .replace {
 	display: block;
 	overflow: hidden;
@@ -30,15 +27,14 @@
 	white-space: nowrap;
 }
 
-// BOX SIZING ($box-sizing)
-// ------------------------------------------------------------------------------------------
-@mixin box-sizing($s)
-{
+/* Box sizing
+---------------------------------------------------------------------------------- */
+@mixin box-sizing($s) {
 	box-sizing: $s;
 }
 
-// PARTIALLY ROUNDED CORNERS ($top-left, $top-right, $bottom-right, $bottom-left)
-// ------------------------------------------------------------------------------------------
+/* Partially rounded corners - ($top-left, $top-right, $bottom-right, $bottom-left)
+---------------------------------------------------------------------------------- */
 @mixin rounded-partial($tl, $tr, $br, $bl){
 	border-top-left-radius: $tl;
 	border-top-right-radius: $tr;
