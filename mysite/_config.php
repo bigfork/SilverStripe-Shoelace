@@ -22,7 +22,7 @@ Security::setDefaultAdmin('admin','password');
 // Secure test site with a CMS username & password (environment type must be "test")
 // if(Director::isTest()) BasicAuth::protect_entire_site();
 
-// Send debut errors via email
+// Send debug errors via email
 // if(Director::isLive()) Debug::send_errors_to("your@email.com");
 
 // TinyMCE Config
