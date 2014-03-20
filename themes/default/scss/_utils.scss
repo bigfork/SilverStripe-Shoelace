@@ -27,12 +27,6 @@
 	white-space: nowrap;
 }
 
-/* Box sizing
----------------------------------------------------------------------------------- */
-@mixin box-sizing($s) {
-	box-sizing: $s;
-}
-
 /* Partially rounded corners - ($top-left, $top-right, $bottom-right, $bottom-left)
 ---------------------------------------------------------------------------------- */
 @mixin rounded-partial($tl, $tr, $br, $bl){
