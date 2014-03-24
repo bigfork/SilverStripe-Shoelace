@@ -1,4 +1,4 @@
-/* Utilities and Mixins
+/* Utility Classes
 ---------------------------------------------------------------------------------- */
 
 /* Occasionally handly class for forcing stuff to hide
@@ -25,13 +25,4 @@
 	overflow: hidden;
 	text-indent: 150%;
 	white-space: nowrap;
-}
-
-/* Partially rounded corners - ($top-left, $top-right, $bottom-right, $bottom-left)
----------------------------------------------------------------------------------- */
-@mixin rounded-partial($tl, $tr, $br, $bl){
-	border-top-left-radius: $tl;
-	border-top-right-radius: $tr;
-	border-bottom-right-radius: $br;
-	border-bottom-left-radius: $bl;
 }
