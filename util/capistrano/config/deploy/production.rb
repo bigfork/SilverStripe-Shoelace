@@ -1,0 +1,1 @@
+set :deploy_to,   "/home/www/vhosts/live/#{fetch(:application)}/live"
