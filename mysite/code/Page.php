@@ -22,7 +22,7 @@ class Page_Controller extends ContentController {
 	public function init() {
 		parent::init();
 
-		$themeDir = Director::baseURL() . 'themes/' . SSViewer::current_theme();
+		$themeDir = Director::baseURL() . 'themes/' . Config::inst()->get('SSViewer', 'theme');
 		$requirements = array(
 			'//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js',
 			$themeDir . '/js/app.min.js'
