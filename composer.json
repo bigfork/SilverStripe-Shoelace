@@ -7,7 +7,7 @@
         "kinglozzer/bfgoogleanalytics": "1.0.*",
         "kinglozzer/metatitle": "1.0.*",
         "kinglozzer/htmleditornoalignment": "1.0.*",
-        "feejin/silverstripe-securitytemplates": "dev-master"
+        "feejin/silverstripe-securitytemplates": "1.0.*"
     },
     "autoload": {
         "psr-0": {
