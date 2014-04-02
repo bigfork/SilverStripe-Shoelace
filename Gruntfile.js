@@ -71,17 +71,17 @@ module.exports = function(grunt) {
 
 		// add vendor prefixes
 		autoprefixer: {
-            dist: {
+			dist: {
 				options: {
 					browsers: ['last 2 versions', 'ie 8', 'ie 9']
 				},
 				files: {
-                    'themes/<%= pkg.name %>/css/style.css' : 'themes/<%= pkg.name %>/css/style.css',
-                    'themes/<%= pkg.name %>/css/editor.css' : 'themes/<%= pkg.name %>/css/editor.css',
-                    'themes/<%= pkg.name %>/css/ie7.css' : 'themes/<%= pkg.name %>/scss/ie7.css'
-                }
-            }
-        },
+					'themes/<%= pkg.name %>/css/style.css' : 'themes/<%= pkg.name %>/css/style.css',
+					'themes/<%= pkg.name %>/css/editor.css' : 'themes/<%= pkg.name %>/css/editor.css',
+					'themes/<%= pkg.name %>/css/ie7.css' : 'themes/<%= pkg.name %>/css/ie7.css'
+				}
+			}
+		},
 
 		// watch tasks
 		watch: {
