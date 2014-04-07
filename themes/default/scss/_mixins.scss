@@ -6,7 +6,7 @@
 
 @mixin rem-fontsize($size){
 	font-size: $size + 0px;
-	font-size: $size / 10rem;
+	font-size: ($size / 10)rem;
 }
 
 /* Partially rounded corners - ($top-left, $top-right, $bottom-right, $bottom-left)
