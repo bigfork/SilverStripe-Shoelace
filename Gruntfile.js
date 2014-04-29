@@ -69,6 +69,19 @@ module.exports = function(grunt) {
 			}
 		},
 
+		// scss lint
+		scsslint: {
+			files: [
+				'themes/<%= pkg.name %>/scss/*.scss'
+			],
+			options: {
+				exclude: [
+					'themes/<%= pkg.name %>/scss/_reset.scss',
+					'themes/<%= pkg.name %>/scss/_normalize.scss'
+				]
+			}
+		},
+
 		// add vendor prefixes
 		autoprefixer: {
 			dist: {
@@ -113,7 +126,7 @@ module.exports = function(grunt) {
 
 	// Task(s).
 	grunt.registerTask('js',  ['jshint', 'uglify']);
-	grunt.registerTask('css',  ['sass','autoprefixer']);
+	grunt.registerTask('css',  ['scsslint', 'sass', 'autoprefixer']);
 	grunt.registerTask('png',  ['tinypng']);
 	grunt.registerTask('default', ['js', 'css']);
 };

@@ -21,51 +21,72 @@ body {
 /* The following is used by both style.scss (front-end) and editor.scss (CMS)
 ---------------------------------------------------------------------------------- */
 .typography {
-	@include rem-fontsize(13);
 	line-height: 1.5;
+	@include rem-fontsize(13);
 
 	p {
 		margin-bottom: 1em;
 	}
+
 	strong {
 		font-weight: bold;
 	}
+
 	em {
 		font-style: italic;
 	}
-	h1, .h1 {
 
+	h1,
+	.h1 {
+		font-size: 200%;
 	}
-	h2, .h2 {
 
+	h2,
+	.h2 {
+		font-size: 150%;
 	}
-	h3, .h3 {
 
+	h3,
+	.h3 {
+		font-size: 120%;
 	}
-	h4, .h4 {
-	}
+
 	ul {
+		margin: 0 0 1em; padding: 0 0 0 1.5em;
 		list-style-type: disc;
-		margin: 0 0 1em; padding: 0 0 0 1.5em;
 	}
+
 	ol {
-		list-style-type: decimal;
 		margin: 0 0 1em; padding: 0 0 0 1.5em;
+		list-style-type: decimal;
 	}
+
 	blockquote {
-		font-style: italic;
 		margin: 0 0 1em;
+		font-style: italic;
+
 		p {
 			margin: 0;
 		}
+
 		cite {
 			display: block;
 			font-style: normal; font-weight: bold;
 		}
 	}
+
 	a {
-		&:link, &:visited { color: $black; text-decoration: none; }
-		&:hover, &:active { color: $black; text-decoration: underline; }
+		&:link,
+		&:visited {
+			color: $black;
+			text-decoration: none;
+		}
+
+		&:hover,
+		&:active {
+			color: $black;
+			text-decoration: underline;
+		}
 	}
 
 /* TinyMCE alignment
@@ -74,9 +95,11 @@ body {
 	.left {
 		text-align: left;
 	}
+
 	.center {
 		text-align: center;
 	}
+
 	.right {
 		text-align: right;
 	}
@@ -89,18 +112,21 @@ body {
 			float: left;
 			margin: 0 1em 0 0;
 		}
+
 		&.right {
 			float: right;
 			margin: 0 0 0 1em;
 		}
+
 		&.leftAlone {
 			float: left;
 			margin-right: 100%;
 		}
+
 		&.center {
+			display: block;
 			float: none;
 			margin: 0 auto;
-			display: block;
 		}
 	}
 }

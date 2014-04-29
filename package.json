@@ -9,6 +9,7 @@
     "grunt-contrib-watch": "*",
     "grunt-autoprefixer": "*",
     "grunt-tinypng": "*",
+    "grunt-scss-lint": "*",
     "grunt-notify": "*",
     "matchdep": "*"
   },

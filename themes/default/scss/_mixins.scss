@@ -4,14 +4,14 @@
 /* REM sizing
 ---------------------------------------------------------------------------------- */
 
-@mixin rem-fontsize($size){
-	font-size: $size + 0px;
+@mixin rem-fontsize($size) {
+	font-size: $size * 1px;
 	font-size: ($size / 10)rem;
 }
 
 /* Partially rounded corners - ($top-left, $top-right, $bottom-right, $bottom-left)
 ---------------------------------------------------------------------------------- */
-@mixin rounded-partial($tl, $tr, $br, $bl){
+@mixin rounded-partial($tl, $tr, $br, $bl) {
 	border-top-left-radius: $tl;
 	border-top-right-radius: $tr;
 	border-bottom-right-radius: $br;
