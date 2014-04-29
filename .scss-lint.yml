@@ -57,7 +57,7 @@ linters:
 
   PropertySortOrder:
     enabled: true
-    order: ['position', 'top', 'right', 'bottom', 'left', 'display', 'overflow', 'float', 'width', 'height', 'margin', 'padding']
+    order: ['position', 'top', 'right', 'bottom', 'left', 'display', 'overflow', 'float', 'clear', 'width', 'height', 'margin', 'padding']
 
   PropertySpelling:
     enabled: true
