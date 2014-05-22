@@ -8,7 +8,10 @@ if ( ! preg_match('/(\.local|\.dev|\.proxylocal\.com)$/', $_SERVER['HTTP_HOST'])
 	define('SS_DATABASE_SERVER', $config->get('Database', 'host'));
 }
 
-define('SS_DATABASE_NAME', $config->get('Database', 'name'));
+// use database name from config.yml unless defined in environment
+if ( ! defined('SS_DATABASE_NAME')){
+	define('SS_DATABASE_NAME', $config->get('Database', 'name'));
+}
 
 // load config from environment
 require_once 'conf/ConfigureFromEnv.php';
