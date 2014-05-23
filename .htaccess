@@ -78,7 +78,7 @@ Options -Indexes
 
     # Check we're on the correct host and not requesting an asset
     RewriteCond %{HTTP_HOST} !^.*\.(dev|devdomain\.co\.uk)$ [NC]
-    RewriteCond %{REQUEST_URI} !(\.css|\.js|\.png|\.jpg|\.gif|robots\.txt)$ [NC]
+    RewriteCond %{REQUEST_URI} !(\.css|\.js|\.png|\.jpg|\.gif|\.htc|robots\.txt)$ [NC]
 
     # Check the request isn't already a rewrite or a SilverStripe dev / admin request
     RewriteCond %{REQUEST_URI} !framework\/main\.php$ [NC]
