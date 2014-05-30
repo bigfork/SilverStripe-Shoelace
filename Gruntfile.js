@@ -104,7 +104,7 @@ module.exports = function(grunt) {
 			},
 			sass: {
 				files: 'themes/<%= pkg.name %>/scss/*.scss',
-				tasks: ['css']
+				tasks: ['sass']
 			},
 			notify: {
 				files: ['<%= watch.uglify.files %>', '<%= watch.sass.files %>'],
