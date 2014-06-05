@@ -11,7 +11,9 @@ module.exports = function(grunt) {
 				apiKey: '<%= pkg.tinypngapikey %>',
 				summarize: true,
 				showProgress: true,
-				stopOnImageError: true
+				stopOnImageError: true,
+				checkSigs: true,
+				sigFile: 'themes/<%= pkg.name %>/images/.tinypng-sigs'
 			},
 			compress: {
 				expand: true,
