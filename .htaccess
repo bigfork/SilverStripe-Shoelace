@@ -154,26 +154,27 @@ ErrorDocument 500 /assets/error-500.html
     </IfModule>
 
     # HTML, TXT, CSS, JavaScript, JSON, XML, HTC:
-    <IfModule filter_module>
-        FilterDeclare   COMPRESS
-        FilterProvider  COMPRESS  DEFLATE resp=Content-Type $text/html
-        FilterProvider  COMPRESS  DEFLATE resp=Content-Type $text/css
-        FilterProvider  COMPRESS  DEFLATE resp=Content-Type $text/plain
-        FilterProvider  COMPRESS  DEFLATE resp=Content-Type $text/xml
-        FilterProvider  COMPRESS  DEFLATE resp=Content-Type $text/x-component
-        FilterProvider  COMPRESS  DEFLATE resp=Content-Type $application/javascript
-        FilterProvider  COMPRESS  DEFLATE resp=Content-Type $application/json
-        FilterProvider  COMPRESS  DEFLATE resp=Content-Type $application/xml
-        FilterProvider  COMPRESS  DEFLATE resp=Content-Type $application/xhtml+xml
-        FilterProvider  COMPRESS  DEFLATE resp=Content-Type $application/rss+xml
-        FilterProvider  COMPRESS  DEFLATE resp=Content-Type $application/atom+xml
-        FilterProvider  COMPRESS  DEFLATE resp=Content-Type $application/vnd.ms-fontobject
-        FilterProvider  COMPRESS  DEFLATE resp=Content-Type $image/svg+xml
-        FilterProvider  COMPRESS  DEFLATE resp=Content-Type $image/x-icon
-        FilterProvider  COMPRESS  DEFLATE resp=Content-Type $application/x-font-ttf
-        FilterProvider  COMPRESS  DEFLATE resp=Content-Type $font/opentype
-        FilterChain     COMPRESS
-        FilterProtocol  COMPRESS  DEFLATE change=yes;byteranges=no
+	<IfModule mod_filter.c>
+        AddOutputFilterByType DEFLATE application/atom+xml \
+                                      application/javascript \
+                                      application/json \
+                                      application/ld+json \
+                                      application/manifest+json \
+                                      application/rss+xml \
+                                      application/vnd.ms-fontobject \
+                                      application/x-font-ttf \
+                                      application/x-web-app-manifest+json \
+                                      application/xhtml+xml \
+                                      application/xml \
+                                      font/opentype \
+                                      image/svg+xml \
+                                      image/x-icon \
+                                      text/css \
+                                      text/html \
+                                      text/plain \
+                                      text/vtt \
+                                      text/x-component \
+                                      text/xml
     </IfModule>
 
     <IfModule !mod_filter.c>
