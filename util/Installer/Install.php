@@ -24,7 +24,6 @@ class Install {
 		}
 
 		$io = $event->getIO();
-		$io->ask('key is ' . $tpApiKey);
 
 		// If the theme has already been renamed, assume setup complete
 		if (file_exists($base . 'themes/default')) {
