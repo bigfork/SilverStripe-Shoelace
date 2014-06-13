@@ -14,7 +14,17 @@ class Install {
 	public static function postInstall(Event $event) {
 		if ( ! stristr(__DIR__, 'Devsites')) exit;
 		$base = __DIR__ . '/../../';
+
+		// read tinypng api key from file
+		$tinypngkey = $base . '../../tinypngkey.txt';
+		if (file_exists($tinypngkey)) {
+			$tpApiKey = file_get_contents($tinypngkey);
+		} else {
+			$tpApiKey = '';
+		}
+
 		$io = $event->getIO();
+		$io->ask('key is ' . $tpApiKey);
 
 		// If the theme has already been renamed, assume setup complete
 		if (file_exists($base . 'themes/default')) {
@@ -22,7 +32,6 @@ class Install {
 				$description = $io->ask('Please specify the project description: ');
 				$dbHost = $io->ask('Please specify the database host: ');
 				$dbName = $io->ask('Please specify the database name: ');
-				$tpApiKey = $io->ask('TinyPNG API Key: ');
 
 				self::performRename($theme, $description, $dbHost, $dbName, $tpApiKey);
 				self::removeReadme();
