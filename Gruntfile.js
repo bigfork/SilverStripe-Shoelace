@@ -66,7 +66,7 @@ module.exports = function(grunt) {
 				files: {
 					'themes/<%= pkg.name %>/css/style.css' : 'themes/<%= pkg.name %>/scss/style.scss',
 					'themes/<%= pkg.name %>/css/editor.css' : 'themes/<%= pkg.name %>/scss/editor.scss',
-					'themes/<%= pkg.name %>/css/ie7.css' : 'themes/<%= pkg.name %>/scss/ie7.scss'
+					'themes/<%= pkg.name %>/css/ie8.css' : 'themes/<%= pkg.name %>/scss/ie8.scss'
 				}
 			}
 		},
@@ -93,7 +93,7 @@ module.exports = function(grunt) {
 				files: {
 					'themes/<%= pkg.name %>/css/style.css' : 'themes/<%= pkg.name %>/css/style.css',
 					'themes/<%= pkg.name %>/css/editor.css' : 'themes/<%= pkg.name %>/css/editor.css',
-					'themes/<%= pkg.name %>/css/ie7.css' : 'themes/<%= pkg.name %>/css/ie7.css'
+					'themes/<%= pkg.name %>/css/ie8.css' : 'themes/<%= pkg.name %>/css/ie8.css'
 				}
 			}
 		},

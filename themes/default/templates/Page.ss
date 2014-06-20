@@ -15,11 +15,10 @@
 
 	<link rel="shortcut icon" href="{$BaseURL}favicon.ico" />
 
-	<!--[if lt IE 8]><link rel="stylesheet" type="text/css" href="{$ThemeDir}/css/ie7.css" /><![endif]-->
-	<!--[if gte IE 8]><!--><link rel="stylesheet" type="text/css" href="{$ThemeDir}/css/style.css" /><!--<![endif]-->
+	<!--[if lte IE 8]><link rel="stylesheet" type="text/css" href="{$ThemeDir}/css/ie8.css" /><![endif]-->
+	<!--[if gt IE 8]><!--><link rel="stylesheet" type="text/css" href="{$ThemeDir}/css/style.css" /><!--<![endif]-->
 
 	<!--[if lte IE 8]><script type="text/javascript" src="{$ThemeDir}/js/modernizr.min.js"></script><![endif]-->
-	<!--[if IE 8]><script type="text/javascript" src="{$ThemeDir}/js/respond.min.js"></script><![endif]-->
 
 	<script type="text/javascript">
 	(function(H){H.className=H.className.replace(/\\bnojs\\b/,'')})(document.documentElement)
