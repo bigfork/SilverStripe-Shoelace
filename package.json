@@ -13,10 +13,10 @@
     "grunt-notify": "*",
     "grunt-deployments": "git+https://github.com/stnvh/grunt-deployments.git",
     "grunt-ssh": "*",
+    "shelljs": "*",
     "matchdep": "*"
   },
   "description": "Default",
   "main": "Gruntfile.js",
-  "author": "Bigfork",
-  "tinypngapikey": ""
+  "author": "Bigfork"
 }
