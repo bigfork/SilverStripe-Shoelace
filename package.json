@@ -11,6 +11,8 @@
     "grunt-tinypng": "*",
     "grunt-scss-lint": "*",
     "grunt-notify": "*",
+    "grunt-deployments": "git+https://github.com/stnvh/grunt-deployments.git",
+    "grunt-ssh": "*",
     "matchdep": "*"
   },
   "description": "Default",
