@@ -5,10 +5,68 @@ module.exports = function(grunt) {
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 
+		// get your own passwords!
+		bf_conf: grunt.file.readJSON('../../bigfork.json'),
+
+		// sql deployment
+		deployments: {
+			options: {
+				backups_dir: '../.sqlbackups'
+			},
+			local: {
+				title: 'Local',
+				database: '<%= pkg.sql.name %>',
+				user: '<%= bf_conf.sql.local.user %>',
+				pass: '<%= bf_conf.sql.local.pass %>',
+				host: '<%= pkg.sql.host %>'
+			},
+			test: {
+				title: 'Megafork - Test',
+				database: '<%= pkg.sql.name %>_test',
+				user: '<%= bf_conf.sql.remote.user %>',
+				pass: '<%= bf_conf.sql.remote.pass %>',
+				host: '127.0.0.1',
+				ssh_host: '<%= bf_conf.sql.remote.ssh_host %>'
+			},
+			live: {
+				title: 'Megafork - Live',
+				database: '<%= pkg.sql.name %>_live',
+				user: '<%= bf_conf.sql.remote.user %>',
+				pass: '<%= bf_conf.sql.remote.pass %>',
+				host: '127.0.0.1',
+				ssh_host: '<%= bf_conf.ssh.user %>@<%= bf_conf.ssh.host %>'
+			},
+			loz: {
+				title: 'Loz test',
+				database: '<%= pkg.sql.name %>',
+				type: 'live',
+				user: '<%= bf_conf.sql.local.user %>',
+				pass: '<%= bf_conf.sql.local.pass %>',
+				host: 'loz.local'
+			}
+		},
+
+		// ssh deployment
+		sshconfig: {
+			megafork: {
+				host: '<%= bf_conf.ssh.host %>',
+				username: '<%= bf_conf.ssh.user %>',
+				privateKey: grunt.file.read('../../.ssh/id_rsa')
+			}
+		},
+		sshexec: {
+			test: {
+				command: 'uptime',
+				options: {
+					config: 'megafork'
+				}
+			}
+		},
+
 		// compress pngs
 		tinypng: {
 			options: {
-				apiKey: '<%= pkg.tinypngapikey %>',
+				apiKey: '<%= bf_conf.tinypng %>',
 				summarize: true,
 				showProgress: true,
 				stopOnImageError: true,
