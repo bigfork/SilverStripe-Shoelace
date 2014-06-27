@@ -9,7 +9,8 @@
         "kinglozzer/htmleditornoalignment": "1.0.*",
         "feejin/silverstripe-securitytemplates": "1.0.*",
         "stnvh/silverstripe-infoboxes": "1.*",
-        "jonom/silverstripe-betternavigator": "dev-master"
+        "jonom/silverstripe-betternavigator": "dev-master",
+        "camspiers/silverstripe-loggerbridge": "dev-master"
     },
     "autoload": {
         "psr-0": {
