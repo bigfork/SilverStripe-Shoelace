@@ -15,28 +15,33 @@ class Install {
 		if ( ! stristr(__DIR__, 'Devsites')) exit;
 		$base = __DIR__ . '/../../';
 
-		// read tinypng api key from file
-		$tinypngkey = $base . '../../tinypngkey.txt';
-		if (file_exists($tinypngkey)) {
-			$tpApiKey = file_get_contents($tinypngkey);
+		$conf = array();
+
+		// local config
+		$conffile = $base . '../../bigfork.json';
+		if (file_exists($conffile)) {
+			$userconf = json_decode(file_get_contents($conffile), true);
 		} else {
-			$tpApiKey = '';
+			exit;
 		}
 
 		$io = $event->getIO();
 
 		// If the theme has already been renamed, assume setup complete
 		if (file_exists($base . 'themes/default')) {
-			if ($theme = $io->ask('Please specify the theme name: ')) {
-				$description = $io->ask('Please specify the project description: ');
-				$dbHost = $io->ask('Please specify the database host: ');
-				$dbName = $io->ask('Please specify the database name: ');
+			if(isset($userconf['extras'])) {
+				$conf['extras'] = $userconf['extras'];
+			}
+			if ($conf['theme'] = $io->ask('Please specify the theme name: ')) {
+				$conf['description'] = $io->ask('Please specify the project description: ');
+				$conf['sql-host'] = $io->ask('Please specify the database host: ');
+				$conf['sql-name'] = $io->ask('Please specify the database name: ');
 
-				self::performRename($theme, $description, $dbHost, $dbName, $tpApiKey);
+				self::performRename($conf);
 				self::removeReadme();
 			}
 		}
-
+		
 		if ($io->ask('Would you like to set up a vhost? (y/n): ') == 'y') {
 			$hostName = $io->ask('Please specify the host name (excluding \'.dev\'): ');
 			self::setupVhost($hostName);
@@ -74,7 +79,7 @@ class Install {
 	 * @param string|null $dbName
 	 * @return void
 	 */
-	public static function performRename($theme, $description, $dbHost = null, $dbName = null, $tpApiKey = null) {
+	public static function performRename($conf) {
 		if ( ! stristr(__DIR__, 'Devsites')) exit;
 
 		$base = __DIR__ . '/../../';
@@ -86,22 +91,28 @@ class Install {
 
 		// Rename theme directory
 		$themeBase = $base . 'themes/';
-		@rename($themeBase . 'default/', $themeBase . $theme . '/');
+		@rename($themeBase . 'default/', $themeBase . $conf['theme'] . '/');
 
 		// Update package.json with theme name
 		$json = file_get_contents($base . 'package.json');
 		$contents = json_decode($json, true);
-		$contents['name'] = $theme;
-		$contents['description'] = $description;
-		$contents['tinypngapikey'] = $tpApiKey;
+		$contents['name'] = $conf['theme'];
+		$contents['description'] = $conf['description'];
+		$contents['sql']['name'] = $conf['sql-name'];
+		$contents['sql']['host'] = $conf['sql-host'];
+		if(isset($conf['extras'])) {
+			foreach($extras as $key => $value) {
+				$contents[$key] = $value;
+			}
+		}
 		$json = json_encode($contents);
 		file_put_contents($base . 'package.json', $json);
 
 		// Update YAML config
-		$config['SSViewer']['current_theme'] = $theme;
-		if ($dbHost || $dbName) {
-			$config['Database']['host'] = $dbHost;
-			$config['Database']['name'] = $dbName;
+		$config['SSViewer']['current_theme'] = $conf['theme'];
+		if ($conf['sql-host'] || $conf['sql-name']) {
+			$config['Database']['host'] = $conf['sql-host'];
+			$config['Database']['name'] = $conf['sql-name'];
 		}
 
 		$yaml = \Spyc::YAMLDump($config);
