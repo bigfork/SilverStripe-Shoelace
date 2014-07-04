@@ -28,7 +28,7 @@ class Page_Controller extends ContentController {
 		Requirements::set_write_js_to_body(false);
 		Yepnope::set_timeout(10000);
 		Yepnope::add_test(
-			'(document.documentElement.className.indexOf(\'lte-ie8\') === -1)',
+			'"querySelector" in document && "localStorage" in window && "addEventListener" in window',
 			'//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js',
 			'//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js',
 			$requirements,
