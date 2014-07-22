@@ -24,7 +24,7 @@ Options -Indexes
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Sensitive filetypes
 
-<FilesMatch "(^#.*#|\.(bak|config|dist|fla|inc|ini|log|psd|sh|sql|ss|sw[op]|ya?ml)|~)$">
+<FilesMatch "(^#.*#|\.(bak|config|dist|fla|inc|ini|log|psd|sh|sql|ss|sublime-.*|sw[op]|ya?ml)|~)$">
     # Apache < 2.3
     <IfModule !mod_authz_core.c>
         Order allow,deny

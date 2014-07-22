@@ -2,14 +2,14 @@
 $config = Config::inst();
 
 // optionally use a different database on dev
-if ( ! preg_match('/(\.local|\.dev|\.proxylocal\.com)$/', $_SERVER['HTTP_HOST'])) {
+if( ! preg_match('/(\.local|\.dev|\.proxylocal\.com)$/', $_SERVER['HTTP_HOST'])) {
 	define('SS_DATABASE_SERVER', 'localhost');
-} elseif ( ! defined('SS_DATABASE_SERVER')) {
+} elseif( ! defined('SS_DATABASE_SERVER')) {
 	define('SS_DATABASE_SERVER', $config->get('Database', 'host'));
 }
 
 // use database name from config.yml unless defined in environment
-if ( ! defined('SS_DATABASE_NAME')){
+if( ! defined('SS_DATABASE_NAME')){
 	define('SS_DATABASE_NAME', $config->get('Database', 'name'));
 }
 
