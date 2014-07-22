@@ -6,7 +6,7 @@ module.exports = function(grunt) {
 		pkg: grunt.file.readJSON('package.json'),
 
 		// get your own passwords!
-		bf_conf: grunt.file.readJSON(process.env['HOME'] + '/bigfork.json'),
+		bf_conf: grunt.file.readJSON('../../bigfork.json'),
 
 		// sql deployment
 		deployments: {
@@ -22,21 +22,27 @@ module.exports = function(grunt) {
 			},
 			test: {
 				title: 'Megafork - Test',
-				database: '<%= pkg.sql.name %>',
-				type: 'test',
+				database: '<%= pkg.sql.name %>_test',
+				user: '<%= bf_conf.sql.remote.user %>',
+				pass: '<%= bf_conf.sql.remote.pass %>',
+				host: '127.0.0.1',
+				ssh_host: '<%= bf_conf.sql.remote.ssh_host %>'
+			},
+			live: {
+				title: 'Megafork - Live',
+				database: '<%= pkg.sql.name %>_live',
 				user: '<%= bf_conf.sql.remote.user %>',
 				pass: '<%= bf_conf.sql.remote.pass %>',
 				host: '127.0.0.1',
 				ssh_host: '<%= bf_conf.ssh.user %>@<%= bf_conf.ssh.host %>'
 			},
-			live: {
-				title: 'Megafork - Live',
-				database: '<%= pkg.sql.name %>_live',
+			loz: {
+				title: 'Loz test',
+				database: '<%= pkg.sql.name %>',
 				type: 'live',
-				user: '<%= bf_conf.sql.remote.user %>',
-				pass: '<%= bf_conf.sql.remote.pass %>',
-				host: '127.0.0.1',
-				ssh_host: '<%= bf_conf.ssh.user %>@<%= bf_conf.ssh.host %>'
+				user: '<%= bf_conf.sql.local.user %>',
+				pass: '<%= bf_conf.sql.local.pass %>',
+				host: 'loz.local'
 			}
 		},
 
@@ -45,54 +51,12 @@ module.exports = function(grunt) {
 			megafork: {
 				host: '<%= bf_conf.ssh.host %>',
 				username: '<%= bf_conf.ssh.user %>',
-				privateKey: grunt.file.read(process.env['HOME'] + '/.ssh/id_rsa')
+				privateKey: grunt.file.read('../../.ssh/id_rsa')
 			}
 		},
 		sshexec: {
 			test: {
-				command: 'echo {{GITREPO}}',
-				options: {
-					config: 'megafork'
-				}
-			},
-			deploy_live: {
-				command: [
-					'cd /home/www/vhosts/live/{{DIR}}',
-					'git init',
-					'git remote add origin {{GITREPO}}',
-					'git pull origin master',
-					'composer install'
-				].join(' && '),
-				options: {
-					config: 'megafork'
-				}
-			},
-			deploy_test: {
-				command: [
-					'cd /home/www/vhosts/test/{{DIR}}',
-					'git init',
-					'git remote add origin {{GITREPO}}',
-					'git pull origin master',
-					'composer install'
-				].join(' && '),
-				options: {
-					config: 'megafork'
-				}
-			},
-			update_live: {
-				command: [
-					'cd /home/www/vhosts/live/{{DIR}}',
-					'git pull origin master'
-				].join(' && '),
-				options: {
-					config: 'megafork'
-				}
-			},
-			update_test: {
-				command: [
-					'cd /home/www/vhosts/test/{{DIR}}',
-					'git pull origin master'
-				].join(' && '),
+				command: 'uptime',
 				options: {
 					config: 'megafork'
 				}
@@ -225,33 +189,4 @@ module.exports = function(grunt) {
 	grunt.registerTask('css',  ['scsslint', 'sass', 'autoprefixer']);
 	grunt.registerTask('png',  ['tinypng']);
 	grunt.registerTask('default', ['js', 'css']);
-	grunt.registerTask('deploy', function(type, dir) {
-		if(!type || !dir) {
-			return;
-		}
-		var shell = require('shelljs');
-
-		var gitremote = shell.exec('git --git-dir=.git config --get remote.origin.url', {silent: true}).output.trim();
-
-		var orig = grunt.config.get('sshexec.deploy_' + type + '.command');
-		orig = orig.replace('{{DIR}}', dir);
-		orig = orig.replace('{{GITREPO}}', gitremote);
-
-		grunt.config.set('sshexec.deploy_' + type + '.command', orig);
-		grunt.task.run('sshexec:deploy_' + type);
-		shell.exec('grunt db_push --target="' + type + '"', {silent:true});
-	});
-	grunt.registerTask('update', function(type, dir) {
-		if(!type || !dir) {
-			return;
-		}
-		var shell = require('shelljs');
-
-		var orig = grunt.config.get('sshexec.update_' + type + '.command');
-		orig = orig.replace('{{DIR}}', dir);
-
-		grunt.config.set('sshexec.update_' + type + '.command', orig);
-		grunt.task.run('sshexec:update_' + type);
-		shell.exec('grunt db_push --target="' + type + '"', {silent:true});
-	});
 };
