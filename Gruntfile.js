@@ -6,7 +6,7 @@ module.exports = function(grunt) {
 		pkg: grunt.file.readJSON('package.json'),
 
 		// get your own passwords!
-		bf_conf: grunt.file.readJSON('../../bigfork.json'),
+		bf_conf: grunt.file.readJSON(process.env['HOME'] + '/bigfork.json'),
 
 		// sql deployment
 		deployments: {
@@ -14,51 +14,60 @@ module.exports = function(grunt) {
 				backups_dir: '../.sqlbackups'
 			},
 			local: {
-				title: 'Local',
+				title: 'Bigfork local',
 				database: '<%= pkg.sql.name %>',
 				user: '<%= bf_conf.sql.local.user %>',
 				pass: '<%= bf_conf.sql.local.pass %>',
 				host: '<%= pkg.sql.host %>'
 			},
 			test: {
-				title: 'Megafork - Test',
-				database: '<%= pkg.sql.name %>_test',
-				user: '<%= bf_conf.sql.remote.user %>',
-				pass: '<%= bf_conf.sql.remote.pass %>',
-				host: '127.0.0.1',
-				ssh_host: '<%= bf_conf.sql.remote.ssh_host %>'
-			},
-			live: {
-				title: 'Megafork - Live',
-				database: '<%= pkg.sql.name %>_live',
+				title: 'Bigfork remote - Test',
+				database: '<%= pkg.sql.name %>',
+				type: 'test',
 				user: '<%= bf_conf.sql.remote.user %>',
 				pass: '<%= bf_conf.sql.remote.pass %>',
 				host: '127.0.0.1',
 				ssh_host: '<%= bf_conf.ssh.user %>@<%= bf_conf.ssh.host %>'
 			},
-			loz: {
-				title: 'Loz test',
-				database: '<%= pkg.sql.name %>',
+			live: {
+				title: 'Bigfork remote - Live',
+				database: '<%= pkg.sql.name %>_live',
 				type: 'live',
-				user: '<%= bf_conf.sql.local.user %>',
-				pass: '<%= bf_conf.sql.local.pass %>',
-				host: 'loz.local'
+				user: '<%= bf_conf.sql.remote.user %>',
+				pass: '<%= bf_conf.sql.remote.pass %>',
+				host: '127.0.0.1',
+				ssh_host: '<%= bf_conf.ssh.user %>@<%= bf_conf.ssh.host %>'
 			}
 		},
 
 		// ssh deployment
 		sshconfig: {
-			megafork: {
+			bigfork: {
 				host: '<%= bf_conf.ssh.host %>',
 				username: '<%= bf_conf.ssh.user %>',
-				privateKey: grunt.file.read('../../.ssh/id_rsa')
+				privateKey: grunt.file.read(process.env['HOME'] + '/.ssh/id_rsa')
 			}
 		},
 		sshexec: {
-			test: {
-				command: 'uptime',
+			deploy: {
+				command: [
+					'cd /home/www/vhosts/{{TYPE}}/{{DIR}}',
+					'git init',
+					'git remote add origin {{GITREPO}}',
+					'git pull origin master',
+					'composer install'
+				].join(' && '),
 				options: {
-					config: 'megafork'
+					config: 'bigfork'
+				}
+			},
+			update: {
+				command: [
+					'cd /home/www/vhosts/{{TYPE}}/{{DIR}}',
+					'git pull origin master'
+				].join(' && '),
+				options: {
+					config: 'bigfork'
 				}
 			}
 		},
@@ -189,4 +198,55 @@ module.exports = function(grunt) {
 	grunt.registerTask('css',  ['scsslint', 'sass', 'autoprefixer']);
 	grunt.registerTask('png',  ['tinypng']);
 	grunt.registerTask('default', ['js', 'css']);
+	grunt.registerTask('deploy', function(type, dir, db, update) {
+		if(!type || !dir) {
+			grunt.log.writeln('Please specify valid arguments.');
+			return;
+		}
+		if(type != 'live' && type != 'test') {
+			grunt.log.writeln('Please specify either \'live\' or \'test\' as the directory.');
+			return;
+		}
+		if(!db) {
+			db = false;
+		} else if(db == 'true') {
+			db = true;
+		}
+		if(!update) {
+			update = false;
+		} else if(update == 'true') {
+			update = true;
+		}
+
+		var shell = require('shelljs');
+
+		var gitremote;
+		if(!update) {
+			gitremote = shell.exec('git --git-dir=.git config --get remote.origin.url', {silent: true}).output.trim();
+			if(gitremote.indexOf('CleanInstall') > -1) {
+				grunt.log.writeln('Please change the remote origin from default: \'' + gitremote + '\'');
+				return;
+			}
+		}
+
+		var command;
+		if(!update) {
+			command = 'sshexec.deploy';
+		} else {
+			command = 'sshexec.update';
+		}
+
+		var orig = grunt.config.get(command + '.command');
+		orig = orig.replace('{{TYPE}}', type);
+		orig = orig.replace('{{DIR}}', dir);
+		if(!update) {
+			orig = orig.replace('{{GITREPO}}', gitremote);
+		}
+
+		grunt.config.set(command + '.command', orig);
+		grunt.task.run(command);
+		if(db === true) {
+			shell.exec('grunt db_push --target="' + type + '"', {silent:true});
+		}
+	});
 };

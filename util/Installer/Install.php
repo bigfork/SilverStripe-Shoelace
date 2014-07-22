@@ -29,6 +29,10 @@ class Install {
 
 		// If the theme has already been renamed, assume setup complete
 		if (file_exists($base . 'themes/default')) {
+			if (isset($userconf['extras'])) {
+				$conf['extras'] = $userconf['extras'];
+			}
+
 			if ($conf['theme'] = $io->ask('Please specify the theme name: ')) {
 				$conf['description'] = $io->ask('Please specify the project description: ');
 				$conf['sql-host'] = $io->ask('Please specify the database host: ');
@@ -97,6 +101,13 @@ class Install {
 		$contents['description'] = $conf['description'];
 		$contents['sql']['name'] = $conf['sql-name'];
 		$contents['sql']['host'] = $conf['sql-host'];
+
+		if (isset($conf['extras'])) {
+			foreach($extras as $key => $value) {
+				$contents[$key] = $value;
+			}
+		}
+		
 		$json = json_encode($contents);
 		file_put_contents($base . 'package.json', $json);
 
