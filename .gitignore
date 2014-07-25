@@ -1,16 +1,18 @@
-_resampled
-.DS_Store
-*.sublime-*
-/.sass-cache/
-/bfgoogleanalytics/
-/cms/
-/framework/
-/googlesitemaps/
-/gridfieldextensions/
-/htmleditornoalignment/
-/infoboxes/
-/metatitle/
-/node_modules/
-/securitytemplates/
-/vendor/
-/yepnopesilverstripe/
+## ignore all 
+*
+
+## whitelist folders
+!/assets/
+!/mysite/
+!/polyfill/
+!/themes/
+!/util/
+
+## whitelist files
+!.gitignore
+!.htaccess
+!.scss-lint.yml
+!Gruntfile.js
+!composer.json
+!package.json
+!robots.txt
