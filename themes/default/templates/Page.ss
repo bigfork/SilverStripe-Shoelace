@@ -25,6 +25,7 @@
 	</script>
 </head>
 <body class="{$ClassName.LowerCase}">
+{$BetterNavigator}
 
 <% include Nav %>
 

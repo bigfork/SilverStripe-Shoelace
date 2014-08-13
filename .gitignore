@@ -2,6 +2,7 @@ _resampled
 .DS_Store
 *.sublime-*
 /.sass-cache/
+/betternavigator/
 /bfgoogleanalytics/
 /cms/
 /framework/
