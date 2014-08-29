@@ -13,26 +13,26 @@ This is aimed heavily at stuff we use so may not be that useful to anyone else. 
 
 The syntax for this function is as follows:
 
-##### grunt deploy
+##### grunt push
 
-```grunt deploy:[test/live]:[dir]:[true/false]:[true/false]```
+```grunt push:[test/live]:[dir]:[true/false]:[true/false]```
 
 the first argument is either ```test``` or ```live```, which determines the staging type of the site (which part of the server it's uploaded to).
 
-the second argument is the directory in which the site is deployed to/ receeds in.
+the second argument is the directory in which the site is deployed to / receeds in.
 
-the third argument (which is optional, default ```false```) determines if the local database should be uploaded to the server, set to true if so.
+the third argument (which is optional, default ```false```) determines if you want to deploy (init & pull from master) an existing site rather than update an existing one.
 
-the fourth argument (which is optional, default ```false```) determines if you want to update (pull from master) rather than deploy, set true if so.
+the fourth argument (which is optional, default ```false```) determines if the local database should be uploaded to the server, set to true if so.
 
 ##### examples
 
-```grunt deploy:live:newsite:true```
+```grunt push:live:newsite:true:true```
 
-this stages the site to the live part of the server in the directory ```newsite``` and uploads the database too.
+this initialises & pulls the site to the live part of the server in the directory ```newsite``` and uploads the database too.
 
-```grunt deploy:test:fork```
+```grunt push:test:fork```
 
-this stages the site to the test part of the server in the directory ```fork``` and does not upload the database.
+this updates the existing site in the test part of the server in the directory ```fork``` and does not upload the database.
 
 **NOTE:** *As mentioned before, this stuff has been built to work around our setup and will most likely not work anywhere else.*

@@ -198,30 +198,32 @@ module.exports = function(grunt) {
 	grunt.registerTask('css',  ['scsslint', 'sass', 'autoprefixer']);
 	grunt.registerTask('png',  ['tinypng']);
 	grunt.registerTask('default', ['js', 'css']);
-	grunt.registerTask('deploy', function(type, dir, db, update) {
+	grunt.registerTask('push', function(type, dir, deploy, db) {
 		if(!type || !dir) {
 			grunt.log.writeln('Please specify valid arguments.');
+			grunt.log.writeln('usage: push:type:directory:deploy:pushdb');
+			grunt.log.writeln('syntax: push:[test/live]:[str]:[true/false]:[true/false]');
 			return;
 		}
 		if(type != 'live' && type != 'test') {
 			grunt.log.writeln('Please specify either \'live\' or \'test\' as the directory.');
 			return;
 		}
+		if(!deploy) {
+			deploy = false;
+		} else if(deploy == 'true') {
+			deploy = true;
+		}
 		if(!db) {
 			db = false;
 		} else if(db == 'true') {
 			db = true;
 		}
-		if(!update) {
-			update = false;
-		} else if(update == 'true') {
-			update = true;
-		}
 
 		var shell = require('shelljs');
 
 		var gitremote;
-		if(!update) {
+		if(deploy) {
 			gitremote = shell.exec('git --git-dir=.git config --get remote.origin.url', {silent: true}).output.trim();
 			if(gitremote.indexOf('CleanInstall') > -1) {
 				grunt.log.writeln('Please change the remote origin from default: \'' + gitremote + '\'');
@@ -230,22 +232,29 @@ module.exports = function(grunt) {
 		}
 
 		var command;
-		if(!update) {
-			command = 'sshexec.deploy';
+		if(deploy) {
+			command = 'deploy';
+			grunt.log.writeln('[push:deploy] init & pull from ' + gitremote + ' origin:master into ' + type + '/' + dir);
 		} else {
-			command = 'sshexec.update';
+			command = 'update';
+			grunt.log.writeln('[push] pull latest from origin:master into ' + type + '/' + dir);
 		}
 
-		var orig = grunt.config.get(command + '.command');
+		var orig = grunt.config.get('sshexec.' + command + '.command');
 		orig = orig.replace('{{TYPE}}', type);
 		orig = orig.replace('{{DIR}}', dir);
-		if(!update) {
+		if(deploy) {
 			orig = orig.replace('{{GITREPO}}', gitremote);
 		}
 
-		grunt.config.set(command + '.command', orig);
-		grunt.task.run(command);
+		grunt.config.set('sshexec.' + command + '.command', orig);
+		grunt.task.run('sshexec:' + command);
+		var sql = {
+			db: grunt.config.get('deployments.' + type + '.database'),
+			user: grunt.config.get('deployments.' + type + '.ssh_host')
+		}
 		if(db === true) {
+			grunt.log.writeln('[' + command + '] pushing database ' + sql.db + ' to ' + sql.db + '_' + type + ' via ' + sql.user);
 			shell.exec('grunt db_push --target="' + type + '"', {silent:true});
 		}
 	});
