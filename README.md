@@ -9,7 +9,7 @@ This is aimed heavily at stuff we use so may not be that useful to anyone else. 
 
 
 #### Site deployment
-```grunt deploy``` has been added to make website deployment and updates easier. it uses a modified [grunt-deployments module](https://github.com/stnvh/grunt-deployments) and the [grunt-ssh module](https://github.com/andrewrjones/grunt-ssh) to do so.
+```grunt push``` has been added to make website deployment and updates easier. it uses a modified [grunt-deployments module](https://github.com/stnvh/grunt-deployments) and the [grunt-ssh module](https://github.com/andrewrjones/grunt-ssh) to do so.
 
 The syntax for this function is as follows:
 
