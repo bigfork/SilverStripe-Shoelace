@@ -15,7 +15,7 @@
 
 	<link rel="shortcut icon" href="{$BaseURL}favicon.ico" />
 
-	<!--[if lte IE 8]><link rel="stylesheet" type="text/css" href="{$ThemeDir}/css/ie8.css" /><![endif]-->
+	<!--[if lte IE 8]><link rel="stylesheet" type="text/css" href="{$ThemeDir}/css/style_ie8.css" /><![endif]-->
 	<!--[if gt IE 8]><!--><link rel="stylesheet" type="text/css" href="{$ThemeDir}/css/style.css" /><!--<![endif]-->
 
 	<!--[if lte IE 8]><script type="text/javascript" src="{$ThemeDir}/js/modernizr.min.js"></script><![endif]-->

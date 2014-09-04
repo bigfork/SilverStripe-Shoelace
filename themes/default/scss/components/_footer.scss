@@ -1,0 +1,7 @@
+footer {
+	background: $black;
+
+	@media screen and (min-width: 960px) {
+		background: $white;
+	}
+}

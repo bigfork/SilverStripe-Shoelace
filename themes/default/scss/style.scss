@@ -1,9 +1,9 @@
-@import '_reset';
-@import '_normalize';
-@import '_variables';
-@import '_typography';
-@import '_mixins';
-@import '_utils';
+@import 'includes/_reset';
+@import 'includes/_normalize';
+@import 'includes/_variables';
+@import 'includes/_typography';
+@import 'includes/_mixins';
+@import 'includes/_utils';
 
 /* Layout
 ---------------------------------------------------------------------------------- */
@@ -12,11 +12,5 @@
 	box-sizing: border-box;
 }
 
-@import '_320';
-
-/* Breakpoints
----------------------------------------------------------------------------------- */
-
-@media screen and (min-width: 480px) {
-	@import '_480';
-}
+@import 'components/_header';
+@import 'components/_footer';
