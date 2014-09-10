@@ -209,12 +209,12 @@ module.exports = function(grunt) {
 			grunt.log.writeln('Please specify either \'live\' or \'test\' as the directory.');
 			return;
 		}
-		if(!deploy) {
+		if(!deploy || deploy == 'false') {
 			deploy = false;
 		} else if(deploy == 'true') {
 			deploy = true;
 		}
-		if(!db) {
+		if(!db || db == 'false') {
 			db = false;
 		} else if(db == 'true') {
 			db = true;
