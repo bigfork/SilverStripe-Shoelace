@@ -1,0 +1,5 @@
+## whitelist everything
+!*
+
+## ignore original stuff
+.DS_Store
