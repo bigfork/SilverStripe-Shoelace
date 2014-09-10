@@ -140,12 +140,12 @@ module.exports = function(grunt) {
 		// scss lint
 		scsslint: {
 			files: [
-				'themes/<%= pkg.name %>/scss/*.scss'
+				'themes/<%= pkg.name %>/scss/**/*.scss'
 			],
 			options: {
 				exclude: [
-					'themes/<%= pkg.name %>/scss/_reset.scss',
-					'themes/<%= pkg.name %>/scss/_normalize.scss'
+					'themes/<%= pkg.name %>/scss/includes/_reset.scss',
+					'themes/<%= pkg.name %>/scss/includes/_normalize.scss'
 				]
 			}
 		},
@@ -190,7 +190,7 @@ module.exports = function(grunt) {
 				tasks: ['js']
 			},
 			sass: {
-				files: 'themes/<%= pkg.name %>/scss/*.scss',
+				files: 'themes/<%= pkg.name %>/scss/**/*.scss',
 				tasks: ['sass']
 			},
 			notify: {
