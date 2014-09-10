@@ -127,8 +127,7 @@ module.exports = function(grunt) {
 		sass: {
 			dist: {
 				options: {
-					style: 'compressed',
-					banner: '<%= tag.banner %>'
+					style: 'compressed'
 				},
 				files: {
 					'themes/<%= pkg.name %>/css/style.css' : 'themes/<%= pkg.name %>/scss/style.scss',
