@@ -1,0 +1,13 @@
+Injector:
+    Monolog:
+        class: Monolog\Logger
+        constructor:
+            0: 'default'
+            1:
+                - '%$ErrorLogHandler'
+    ErrorLogHandler:
+        class: Monolog\Handler\ErrorLogHandler
+    LoggerBridge:
+        class: Camspiers\LoggerBridge\LoggerBridge
+        constructor:
+            0: '%$Monolog'

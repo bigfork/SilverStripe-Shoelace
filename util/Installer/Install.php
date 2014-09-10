@@ -84,10 +84,10 @@ class Install {
 		if ( ! stristr(__DIR__, 'Devsites')) exit;
 
 		$base = __DIR__ . '/../../';
-		$yamlPath = $base . 'mysite/_config/config.yml';
-
 		include($base . 'framework/thirdparty/spyc/spyc.php');
-		$contents = file_get_contents($yamlPath);
+
+		$configPath = $base . 'mysite/_config/config.yml';
+		$contents = file_get_contents($configPath);
 		$config = \Spyc::YAMLLoad($contents);
 
 		// Rename theme directory
@@ -118,8 +118,20 @@ class Install {
 			$config['Database']['name'] = $conf['sql-name'];
 		}
 
+		// Write our updated config file
 		$yaml = \Spyc::YAMLDump($config);
-		file_put_contents($yamlPath, $yaml);
+		file_put_contents($configPath, $yaml);
+
+		// Rename app name in logging configuration
+		$loggingPath = $base . 'mysite/_config/logging.yml';
+		$contents = file_get_contents($loggingPath);
+		$config = \Spyc::YAMLLoad($contents);
+		
+		$desc = $conf['description'] ?: 'App';
+		$config['Injector']['Monolog']['constructor'][0] = "'$desc'";
+
+		$yaml = \Spyc::YAMLDump($config);
+		file_put_contents($loggingPath, $yaml);
 	}
 
 	/**
