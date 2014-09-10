@@ -49,7 +49,7 @@ linters:
     force_nesting: true
 
   NameFormat:
-    enabled: true
+    enabled: false
     convention: hyphenated_lowercase # or 'BEM', or a regex pattern
 
   PlaceholderInExtend:

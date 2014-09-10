@@ -12,5 +12,7 @@
 	box-sizing: border-box;
 }
 
+$_is_ie: false;
+
 @import 'components/_header';
 @import 'components/_footer';

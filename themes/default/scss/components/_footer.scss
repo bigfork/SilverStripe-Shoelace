@@ -1,7 +1,7 @@
 footer {
 	background: $black;
 
-	@media screen and (min-width: 960px) {
+	@include respond(960px) {
 		background: $white;
 	}
 }

@@ -3,7 +3,6 @@
 
 /* REM sizing
 ---------------------------------------------------------------------------------- */
-
 @mixin rem-fontsize($size) {
 	font-size: $size * 1px;
 	font-size: ($size * 1rem/10);
@@ -16,4 +15,36 @@
 	border-top-right-radius: $tr;
 	border-bottom-right-radius: $br;
 	border-bottom-left-radius: $bl;
+}
+
+/* Media queries
+---------------------------------------------------------------------------------- */
+@mixin respond($width, $minMax: 'min') {
+	// IE? Strip out media queries
+	@if $_is_ie {
+		@content;
+	} @else {
+		// Otherwise, responsive goodness
+		@media screen and (#{$minMax}-width: $width) {
+			@content;
+		}
+	}
+}
+
+/* High-DPI displays
+---------------------------------------------------------------------------------- */
+@mixin retina($density: 1.5) {
+	// IE? NO RETINA 4 U
+	@if not $_is_ie {
+		// Otherwise, all the pixels
+		@media
+			only screen and (-webkit-min-device-pixel-ratio: #{$density}),
+			only screen and (   min--moz-device-pixel-ratio: #{$density}),
+			only screen and (     -o-min-device-pixel-ratio: #{($density * 10)}/10),
+			only screen and (        min-device-pixel-ratio: #{$density}),
+			only screen and (                min-resolution: ($density * 96dpi)),
+			only screen and (                min-resolution: #{$density}dppx) {
+				@content;
+		}
+	}
 }

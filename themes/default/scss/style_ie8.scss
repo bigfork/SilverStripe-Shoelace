@@ -16,5 +16,7 @@
 /* Import required files without media queries
 ---------------------------------------------------------------------------------- */
 
+$_is_ie: true;
+
 @import 'components/_header';
 @import 'components/_footer';

@@ -150,6 +150,25 @@ module.exports = function(grunt) {
 			}
 		},
 
+		// csscompress
+		cssc: {
+			main: {
+				files: {
+					'themes/<%= pkg.name %>/css/style.css': 'themes/<%= pkg.name %>/css/style.css'
+				},
+				options: {
+					sortSelectors: false,
+					sortDeclarations: false,
+					consolidateViaDeclarations: false,
+					consolidateViaSelectors: false,
+					consolidateMediaQueries: true,
+					compress: true,
+					sort: false,
+					safe: false
+				}
+			}
+		},
+
 		// add vendor prefixes
 		autoprefixer: {
 			dist: {
@@ -194,7 +213,7 @@ module.exports = function(grunt) {
 
 	// Task(s).
 	grunt.registerTask('js',  ['jshint', 'uglify']);
-	grunt.registerTask('css',  ['scsslint', 'sass', 'autoprefixer']);
+	grunt.registerTask('css',  ['scsslint', 'sass', 'autoprefixer', 'cssc']);
 	grunt.registerTask('png',  ['tinypng']);
 	grunt.registerTask('default', ['js', 'css']);
 	grunt.registerTask('push', function(type, dir, deploy, db) {
