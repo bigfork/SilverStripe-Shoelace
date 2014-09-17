@@ -3,14 +3,14 @@
         "silverstripe/framework": "3.1.6",
         "silverstripe/cms": "3.1.6",
         "silverstripe/googlesitemaps": "1.2.*",
+        "camspiers/silverstripe-loggerbridge": "0.5.*",
+        "feejin/silverstripe-securitytemplates": "1.0.*",
+        "jonom/silverstripe-betternavigator": "dev-master#519555838f5eae516826e08aa0ef174b801b92df",
         "kinglozzer/yepnopesilverstripe": "2.0.*",
         "kinglozzer/bfgoogleanalytics": "1.1.*",
         "kinglozzer/metatitle": "1.0.*",
         "kinglozzer/htmleditornoalignment": "1.0.*",
-        "feejin/silverstripe-securitytemplates": "1.0.*",
-        "stnvh/silverstripe-infoboxes": "1.*",
-        "jonom/silverstripe-betternavigator": "dev-master",
-        "camspiers/silverstripe-loggerbridge": "dev-master"
+        "stnvh/silverstripe-infoboxes": "1.*"
     },
     "autoload": {
         "psr-0": {
