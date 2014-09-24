@@ -150,21 +150,14 @@ module.exports = function(grunt) {
 			}
 		},
 
-		// csscompress
-		cssc: {
+		// combine media queries
+		cmq: {
+			options: {
+				log: false
+			},
 			main: {
 				files: {
 					'themes/<%= pkg.name %>/css/style.css': 'themes/<%= pkg.name %>/css/style.css'
-				},
-				options: {
-					sortSelectors: false,
-					sortDeclarations: false,
-					consolidateViaDeclarations: false,
-					consolidateViaSelectors: false,
-					consolidateMediaQueries: true,
-					compress: true,
-					sort: false,
-					safe: false
 				}
 			}
 		},
@@ -213,7 +206,7 @@ module.exports = function(grunt) {
 
 	// Task(s).
 	grunt.registerTask('js',  ['jshint', 'uglify']);
-	grunt.registerTask('css',  ['scsslint', 'sass', 'autoprefixer', 'cssc']);
+	grunt.registerTask('css',  ['scsslint', 'sass', 'autoprefixer', 'cmq']);
 	grunt.registerTask('png',  ['tinypng']);
 	grunt.registerTask('default', ['js', 'css']);
 	grunt.registerTask('push', function(type, dir, deploy, db) {
