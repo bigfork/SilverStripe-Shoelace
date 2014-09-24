@@ -14,5 +14,6 @@
 !.scss-lint.yml
 !Gruntfile.js
 !composer.json
+!composer.lock
 !package.json
 !robots.txt
