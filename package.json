@@ -10,7 +10,7 @@
     "grunt-autoprefixer": "*",
     "grunt-tinypng": "*",
     "grunt-scss-lint": "*",
-    "grunt-combine-media-queries": "*",
+    "grunt-combine-media-queries": "git+https:\/\/github.com\/stnvh\/grunt-combine-media-queries.git",
     "grunt-notify": "*",
     "grunt-deployments": "git+https://github.com/stnvh/grunt-deployments.git",
     "grunt-ssh": "*",
