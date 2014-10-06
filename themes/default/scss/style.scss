@@ -1,9 +1,9 @@
-@import 'includes/_reset';
-@import 'includes/_normalize';
-@import 'includes/_variables';
-@import 'includes/_typography';
-@import 'includes/_mixins';
-@import 'includes/_utils';
+@import 'includes/reset';
+@import 'includes/normalize';
+@import 'includes/variables';
+@import 'includes/typography';
+@import 'includes/mixins';
+@import 'includes/utils';
 
 /* Layout
 ---------------------------------------------------------------------------------- */
@@ -14,5 +14,9 @@
 
 $_is_ie: false;
 
-@import 'components/_header';
-@import 'components/_footer';
+// Core layout
+@import 'layout/header';
+@import 'layout/footer';
+
+// Reusable components
+@import 'components/breadcrumbs';

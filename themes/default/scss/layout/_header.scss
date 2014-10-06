@@ -1,0 +1,11 @@
+/* Layout: header
+---------------------------------------------------------------------------------- */
+
+header {
+	color: $black;
+	background: $white;
+
+	@include retina {
+		// Retina rules here
+	}
+}
