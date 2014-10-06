@@ -1,6 +1,0 @@
-## whitelist everything
-!*
-
-## ignore original stuff
-_resampled
-.DS_Store

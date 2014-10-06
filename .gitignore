@@ -1,19 +1,18 @@
-## ignore all 
-*
+## ignorance is bliss
 
-## whitelist directories
-!/assets/
-!/mysite/
-!/polyfill/
-!/themes/
-!/util/
-
-## whitelist files
-!.gitignore
-!.htaccess
-!.scss-lint.yml
-!Gruntfile.js
-!composer.json
-!composer.lock
-!package.json
-!robots.txt
+_resampled
+.DS_Store
+*.sublime-*
+/.sass-cache/
+/bfgoogleanalytics/
+/cms/
+/framework/
+/googlesitemaps/
+/gridfieldextensions/
+/htmleditornoalignment/
+/infoboxes/
+/metatitle/
+/node_modules/
+/securitytemplates/
+/vendor/
+/yepnopesilverstripe/
