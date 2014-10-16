@@ -1,3 +1,6 @@
+// Disables media queries
+$_is_ie: true;
+
 @import 'includes/reset';
 @import 'includes/normalize';
 @import 'includes/variables';
@@ -12,9 +15,6 @@
 	box-sizing: border-box;
 	*behavior: url('/polyfill/box-sizing/boxsizing.htc');
 }
-
-// Disables media queries
-$_is_ie: true;
 
 // Core layout
 @import 'layout/header';
