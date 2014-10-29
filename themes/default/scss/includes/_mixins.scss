@@ -8,6 +8,12 @@
 	font-size: ($size * 1rem/10);
 }
 
+// alt name
+@mixin font-size($size) {
+	font-size: $size * 1px;
+	font-size: ($size * 1rem/10);
+}
+
 /* Partially rounded corners - ($top-left, $top-right, $bottom-right, $bottom-left)
 ---------------------------------------------------------------------------------- */
 @mixin rounded-partial($tl, $tr, $br, $bl) {
