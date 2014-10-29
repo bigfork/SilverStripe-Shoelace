@@ -4,11 +4,9 @@
 /* REM sizing
 ---------------------------------------------------------------------------------- */
 @mixin rem-fontsize($size) {
-	font-size: $size * 1px;
-	font-size: ($size * 1rem/10);
+	@include font-size($size);
 }
 
-// alt name
 @mixin font-size($size) {
 	font-size: $size * 1px;
 	font-size: ($size * 1rem/10);
