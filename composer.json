@@ -5,7 +5,7 @@
         "silverstripe/googlesitemaps": "1.2.*",
         "camspiers/silverstripe-loggerbridge": "0.5.*",
         "feejin/silverstripe-securitytemplates": "1.0.*",
-        "jonom/silverstripe-betternavigator": "dev-master#519555838f5eae516826e08aa0ef174b801b92df",
+        "jonom/silverstripe-betternavigator": "dev-master#8329322693",
         "kinglozzer/yepnopesilverstripe": "2.0.*",
         "kinglozzer/bfgoogleanalytics": "1.1.*",
         "kinglozzer/metatitle": "1.0.*",
