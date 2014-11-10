@@ -1,3 +1,6 @@
+// YAY!
+$_is_ie: false;
+
 @import 'includes/reset';
 @import 'includes/normalize';
 @import 'includes/variables';
@@ -11,8 +14,6 @@
 * {
 	box-sizing: border-box;
 }
-
-$_is_ie: false;
 
 // Core layout
 @import 'layout/header';
