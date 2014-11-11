@@ -36,3 +36,11 @@ HtmlEditorConfig::get('cms')->setButtonsForLine(1, "formatselect,separator,bulli
 	separator,spellchecker,undo,redo,code");
 HtmlEditorConfig::get('cms')->setButtonsForLine(2, "tablecontrols");
 HtmlEditorConfig::get('cms')->setButtonsForLine(3, '');
+HtmlEditorConfig::get('cms')->setOptions(array(
+	'paste_text_sticky' => 'true',
+	'paste_text_sticky_default' => 'true',
+	'paste_auto_cleanup_on_paste' => 'true',
+	'paste_remove_styles' => 'true',
+	'paste_strip_class_attributes' => 'all',
+	'paste_remove_spans' => 'true'
+));
