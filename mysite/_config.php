@@ -30,9 +30,15 @@ Security::setDefaultAdmin('admin', 'password');
 
 // TinyMCE Config
 HtmlEditorConfig::get('cms')->disablePlugins('emotions', 'fullscreen');
-HtmlEditorConfig::get('cms')->setOption('theme_advanced_blockformats', 'p,h2,h3');
 HtmlEditorConfig::get('cms')->setButtonsForLine(1, "formatselect,separator,bullist,numlist,
 	separator,bold,italic,sup,sub,separator,sslink,unlink,anchor,separator,ssmedia,pasteword,
 	separator,spellchecker,undo,redo,code");
 HtmlEditorConfig::get('cms')->setButtonsForLine(2, "tablecontrols");
 HtmlEditorConfig::get('cms')->setButtonsForLine(3, '');
+HtmlEditorConfig::get('cms')->setOptions(array(
+	'theme_advanced_blockformats' => 'p,h2,h3',
+	'paste_auto_cleanup_on_paste' => 'true',
+	'paste_remove_styles' => 'true',
+	'paste_strip_class_attributes' => 'all',
+	'paste_remove_spans' => 'true'
+));
