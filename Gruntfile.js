@@ -151,9 +151,10 @@ module.exports = function(grunt) {
 		},
 
 		// combine media queries
-		cmq: {
+		combine_mq: {
 			options: {
-				log: false
+				log: false,
+				minify: true
 			},
 			main: {
 				files: {
@@ -206,7 +207,7 @@ module.exports = function(grunt) {
 
 	// Task(s).
 	grunt.registerTask('js',  ['jshint', 'uglify']);
-	grunt.registerTask('css',  ['scsslint', 'sass', 'autoprefixer', 'cmq']);
+	grunt.registerTask('css',  ['scsslint', 'sass', 'autoprefixer', 'combine_mq']);
 	grunt.registerTask('png',  ['tinypng']);
 	grunt.registerTask('default', ['js', 'css']);
 	grunt.registerTask('push', function(type, dir, deploy, db) {
