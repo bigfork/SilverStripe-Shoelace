@@ -13,12 +13,12 @@
         "stnvh/silverstripe-infoboxes": "1.*"
     },
     "autoload": {
-        "psr-0": {
-            "util\\Installer\\Install": ""
+        "psr-4": {
+            "Bigfork\\": "util/Bigfork"
         }
     },
     "scripts": {
-        "post-install-cmd": "util\\Installer\\Install::postInstall",
-        "post-update-cmd": "util\\Installer\\Install::postUpdate"
+        "post-install-cmd": "Bigfork\\Installer\\Install::postInstall",
+        "post-update-cmd": "Bigfork\\Installer\\Install::postUpdate"
     }
 }
