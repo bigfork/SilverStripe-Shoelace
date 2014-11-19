@@ -4,6 +4,10 @@
 /* REM sizing
 ---------------------------------------------------------------------------------- */
 @mixin rem-fontsize($size) {
+	@include font-size($size);
+}
+
+@mixin font-size($size) {
 	font-size: $size * 1px;
 	font-size: ($size * 1rem/10);
 }
