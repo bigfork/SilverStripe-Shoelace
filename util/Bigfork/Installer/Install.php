@@ -7,28 +7,85 @@ use Spyc;
 /**
  * Our magic installererererer.
  * Everything in here is geared towards setting up a SilverStripe project.
- * @todo Improve environment checks, rather than guessing based on directory
  */
 class Install
 {
+    /**
+     * The file that contains environment information
+     */
+    const ENVIRONMENT_FILE = '_ss_environment.php';
     /**
      * @var string
      */
     private static $basePath = '';
 
     /**
-     * Get the document root for this project.
-     * @todo Is there a way of getting this info via Composer\Script\Event?
+     * Get the document root for this project. Attempts getcwd(), falls back to
+     * directory traversal.
      * @return string
      */
     public static function getBasepath()
     {
         if (! self::$basePath) {
-            $candidate = dirname(dirname(dirname(dirname(__FILE__))));
+            $candidate = getcwd() ?: dirname(dirname(dirname(dirname(__FILE__))));
             self::$basePath = rtrim($candidate, DIRECTORY_SEPARATOR);
         }
 
         return self::$basePath;
+    }
+
+    /**
+     * Returns a text description of the current environment type. Assumes
+     * 'live' if it can't determine an environment type.
+     * @return string
+     */
+    protected static function getEnvironmentType()
+    {
+        if ($file = self::getEnvironmentFile()) {
+            include_once $file;
+
+            if (defined('GLOBAL_ENVIRONMENT_TYPE')) {
+                return GLOBAL_ENVIRONMENT_TYPE;
+            }
+        }
+
+        return 'live';
+    }
+
+    /**
+     * Try to find a file that contains information about the environment. Scans
+     * the current working directory and all parents looking for the file.
+     * @return string|boolean
+     */
+    protected static function getEnvironmentFile()
+    {
+        $envFile = self::ENVIRONMENT_FILE;
+        $directory = realpath('.');
+
+        // Traverse directories "upwards" until we hit an unreadable directory
+        // or the root of the drive
+        do {
+            // Add the trailing slash we need to concatenate properly
+            $directory .= DIRECTORY_SEPARATOR;
+
+            // If it's readable, go ahead
+            if (is_readable($directory)) {
+                // If the file exists, return its path
+                if (file_exists($directory.$envFile)) {
+                    return $directory.$envFile;
+                }
+            } else {
+                // If we can't read the directory, give up
+                break;
+            }
+
+            // Go up a level
+            $directory = dirname($directory);
+
+            // If these are the same, we've hit the root of the drive
+        } while (dirname($directory) != $directory);
+
+        return false;
     }
 
     /**
@@ -39,13 +96,13 @@ class Install
      */
     public static function postInstall(Event $event)
     {
-        $io = $event->getIO();
-        $basePath = self::getBasepath();
-
-        // Crude check for development vs live environments
-        if (! stristr(__DIR__, 'Devsites')) {
+        // Check environment type
+        if (self::getEnvironmentType() !== 'dev') {
             exit;
         }
+
+        $io = $event->getIO();
+        $basePath = self::getBasepath();
 
         // Local configuration options
         $homeDir = dirname(dirname($basePath));
@@ -91,8 +148,8 @@ class Install
      */
     public static function postUpdate(Event $event)
     {
-        // Crude check for development vs live environments
-        if (! stristr(__DIR__, 'Devsites')) {
+        // Check environment type
+        if (self::getEnvironmentType() !== 'dev') {
             exit;
         }
 
