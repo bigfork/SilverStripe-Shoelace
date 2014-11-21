@@ -90,7 +90,6 @@ class Install
 
     /**
      * Called after every "composer install" command.
-     * @todo Remove local configuration options (bigfork.json)
      * @param  Composer\Script\Event $event
      * @return void
      */
@@ -104,15 +103,6 @@ class Install
         $io = $event->getIO();
         $basePath = self::getBasepath();
 
-        // Local configuration options
-        $homeDir = dirname(dirname($basePath));
-        $conffile = rtrim($homeDir, DIRECTORY_SEPARATOR).'/bigfork.json';
-        if (file_exists($conffile)) {
-            $userconfig = json_decode(file_get_contents($conffile), true);
-        } else {
-            exit;
-        }
-
         // If the theme has already been renamed, assume this setup is complete
         if (file_exists($basePath.'/themes/default')) {
             // Only try to rename things if the user actually provides some info
@@ -123,10 +113,6 @@ class Install
                     'sql-host' => $io->ask('Please specify the database host: '),
                     'sql-name' => $io->ask('Please specify the database name: '),
                 );
-
-                if (isset($userconfig['extras'])) {
-                    $config['extras'] = $userconfig['extras'];
-                }
 
                 self::applyConfiguration($config);
                 self::removeReadme();
@@ -171,7 +157,7 @@ class Install
 
         // Rename theme directory
         $themeBase = $base.'/themes/';
-        @rename($themeBase.'default/', $themeBase.$config['theme'].'/');
+        rename($themeBase.'default/', $themeBase.$config['theme'].'/');
 
         // Update package.json with provided information
         $packagePath = $base.'/package.json';
@@ -194,7 +180,6 @@ class Install
 
     /**
      * Update package.json with relevant information in provided config.
-     * @todo Remove $config['extras'] stuff?
      * @param  string $filePath
      * @param  array  $config
      * @return void
@@ -208,13 +193,9 @@ class Install
             'description' => $config['description'],
             'sql' => array(
                 'name' => $config['sql-name'],
-                'host' => $config['sql-host'],
-            ),
+                'host' => $config['sql-host']
+            )
         );
-
-        if (isset($config['extras']) && is_array($config['extras'])) {
-            $new = array_merge($new, $config['extras']);
-        }
 
         $contents = array_merge($old, $new);
         $json = json_encode($contents);
@@ -233,6 +214,7 @@ class Install
 
         // Update YAML config
         $yamlConfig['SSViewer']['current_theme'] = $config['theme'];
+        
         if (isset($config['sql-host']) || isset($config['sql-name'])) {
             $yamlConfig['Database']['host'] = $config['sql-host'];
             $yamlConfig['Database']['name'] = $config['sql-name'];
