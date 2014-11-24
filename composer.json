@@ -1,7 +1,7 @@
 {
     "require": {
-        "silverstripe/framework": "3.1.6",
-        "silverstripe/cms": "3.1.6",
+        "silverstripe/framework": "3.1.8",
+        "silverstripe/cms": "3.1.8",
         "silverstripe/googlesitemaps": "1.2.*",
         "camspiers/silverstripe-loggerbridge": "0.5.*",
         "feejin/silverstripe-securitytemplates": "1.0.*",
