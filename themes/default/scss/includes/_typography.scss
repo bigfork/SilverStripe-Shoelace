@@ -1,4 +1,4 @@
-@import '_mixins';
+@import 'mixins';
 
 /* Styles for HtmlEditorFields
 ---------------------------------------------------------------------------------- */
@@ -21,8 +21,8 @@ body {
 /* The following is used by both style.scss (front-end) and editor.scss (CMS)
 ---------------------------------------------------------------------------------- */
 .typography {
-	line-height: 1.5;
 	@include rem-fontsize(13);
+	line-height: 1.5;
 
 	p {
 		margin-bottom: 1em;
@@ -109,6 +109,8 @@ body {
 ---------------------------------------------------------------------------------- */
 
 	img {
+		// scss-lint:disable SelectorFormat
+		
 		&.left {
 			float: left;
 			margin: 0 1em 0 0;
