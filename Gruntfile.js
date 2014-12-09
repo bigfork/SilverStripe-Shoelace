@@ -117,11 +117,21 @@ module.exports = function(grunt) {
 		watch: {
 			uglify: {
 				files: 'themes/<%= pkg.name %>/js/src/app.js',
-				tasks: ['js']
+				tasks: ['js'],
+				options: {
+					spawn: false,
+					interrupt: true,
+					debounceDelay: 250
+				}
 			},
 			sass: {
 				files: 'themes/<%= pkg.name %>/scss/**/*.scss',
-				tasks: ['sass']
+				tasks: ['css'],
+				options: {
+					spawn: false,
+					interrupt: true,
+					debounceDelay: 250
+				}
 			},
 			notify: {
 				files: ['<%= watch.uglify.files %>', '<%= watch.sass.files %>'],
@@ -142,8 +152,8 @@ module.exports = function(grunt) {
 	});
 
 	// Task(s).
-	grunt.registerTask('js',  ['newer:jshint', 'newer:uglify']);
-	grunt.registerTask('css',  ['newer:scsslint', 'newer:sass', 'newer:autoprefixer', 'newer:combine_mq']);
-	grunt.registerTask('png',  ['newer:tinypng']);
+	grunt.registerTask('js',  ['jshint', 'uglify']);
+	grunt.registerTask('css',  ['scsslint', 'sass', 'autoprefixer', 'combine_mq']);
+	grunt.registerTask('png',  ['tinypng']);
 	grunt.registerTask('default', ['js', 'css']);
 };
