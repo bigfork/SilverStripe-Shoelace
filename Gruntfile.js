@@ -1,6 +1,6 @@
 module.exports = function(grunt) {
 
-	require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
+	require('load-grunt-tasks')(grunt);
 
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
@@ -206,9 +206,9 @@ module.exports = function(grunt) {
 	});
 
 	// Task(s).
-	grunt.registerTask('js',  ['jshint', 'uglify']);
-	grunt.registerTask('css',  ['scsslint', 'sass', 'autoprefixer', 'combine_mq']);
-	grunt.registerTask('png',  ['tinypng']);
+	grunt.registerTask('js',  ['newer:jshint', 'newer:uglify']);
+	grunt.registerTask('css',  ['newer:scsslint', 'newer:sass', 'newer:autoprefixer', 'newer:combine_mq']);
+	grunt.registerTask('png',  ['newer:tinypng']);
 	grunt.registerTask('default', ['js', 'css']);
 	grunt.registerTask('push', function(type, dir, deploy, db) {
 		if(!type || !dir) {

@@ -14,8 +14,10 @@
     "grunt-notify": "*",
     "grunt-deployments": "git+https:\/\/github.com\/stnvh\/grunt-deployments.git",
     "grunt-ssh": "*",
+    "grunt-newer":"*",
     "shelljs": "*",
-    "matchdep": "*"
+    "matchdep": "*",
+    "load-grunt-tasks":"*"
   },
   "description": "Default",
   "main": "Gruntfile.js",
