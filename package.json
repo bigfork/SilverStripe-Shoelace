@@ -13,7 +13,6 @@
     "grunt-combine-mq": "git+https:\/\/github.com\/stnvh\/grunt-combine-mq.git",
     "grunt-notify": "*",
     "grunt-newer":"*",
-    "matchdep": "*",
     "load-grunt-tasks":"*"
   },
   "description": "Default",
