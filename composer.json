@@ -1,11 +1,11 @@
 {
     "require": {
-        "silverstripe/framework": "3.1.8",
-        "silverstripe/cms": "3.1.8",
+        "silverstripe/framework": "3.1.9",
+        "silverstripe/cms": "3.1.9",
         "silverstripe/googlesitemaps": "1.2.*",
-        "camspiers/silverstripe-loggerbridge": "0.5.*",
+        "camspiers/silverstripe-loggerbridge": "dev-master#f3d76be925",
         "feejin/silverstripe-securitytemplates": "1.0.*",
-        "jonom/silverstripe-betternavigator": "dev-master#8329322693",
+        "jonom/silverstripe-betternavigator": "dev-master#fdd895ef9d",
         "kinglozzer/yepnopesilverstripe": "2.0.*",
         "kinglozzer/bfgoogleanalytics": "1.1.*",
         "kinglozzer/metatitle": "1.0.*",
