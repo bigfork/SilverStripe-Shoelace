@@ -12,10 +12,7 @@
     "grunt-scss-lint": "*",
     "grunt-combine-mq": "git+https:\/\/github.com\/stnvh\/grunt-combine-mq.git",
     "grunt-notify": "*",
-    "grunt-deployments": "git+https:\/\/github.com\/stnvh\/grunt-deployments.git",
-    "grunt-ssh": "*",
-    "shelljs": "*",
-    "matchdep": "*"
+    "load-grunt-tasks":"*"
   },
   "description": "Default",
   "main": "Gruntfile.js",
