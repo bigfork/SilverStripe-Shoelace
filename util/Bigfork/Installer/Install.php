@@ -110,8 +110,8 @@ class Install
                 $config = array(
                     'theme' => $theme,
                     'description' => $io->ask('Please specify the project description: '),
-                    'sql-host' => $io->ask('Please specify the database host: '),
-                    'sql-name' => $io->ask('Please specify the database name: '),
+                    'sql-host' => $io->ask('Please specify the database host: ', strstr(gethostname(), '.local') ? gethostname() : null),
+                    'sql-name' => $io->ask('Please specify the database name: ', $theme),
                 );
 
                 self::applyConfiguration($config);
