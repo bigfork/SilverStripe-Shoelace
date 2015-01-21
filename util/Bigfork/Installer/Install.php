@@ -119,11 +119,6 @@ class Install
             }
         }
 
-        if ($io->ask('Would you like to set up a vhost? (y/n): ') == 'y') {
-            $hostName = $io->ask('Please specify the host name (excluding \'.dev\'): ');
-            self::setupVhost($hostName);
-        }
-
         self::installNpm();
         exit;
     }
@@ -255,29 +250,6 @@ class Install
             echo shell_exec('npm install');
             chdir($current);
         }
-    }
-
-    /**
-     * Setup a new vhost. Makes very opinionated assumptions about paths,
-     * doesn't restart apache.
-     * @param  string $hostName
-     * @return void
-     */
-    protected static function setupVhost($hostName)
-    {
-        $folderPath = self::getBasepath();
-        $dirName = rtrim(basename($folderPath), DIRECTORY_SEPARATOR);
-        $fileName = '/private/etc/apache2/sites-enabled/'.$dirName.'.conf';
-
-        $data = <<<XML
-<VirtualHost *:80>
-    DocumentRoot "$folderPath"
-    ServerName $hostName.dev
-    ServerAlias $hostName.t.proxylocal.com
-</VirtualHost>
-XML;
-
-        file_put_contents($fileName, $data);
     }
 
     /**
