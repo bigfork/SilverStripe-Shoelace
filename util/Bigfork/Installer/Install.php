@@ -107,10 +107,11 @@ class Install
         if (file_exists($basePath.'/themes/default')) {
             // Only try to rename things if the user actually provides some info
             if ($theme = $io->ask('Please specify the theme name: ')) {
+                $host = strstr(gethostname(), '.local') ? gethostname() : null;
                 $config = array(
                     'theme' => $theme,
                     'description' => $io->ask('Please specify the project description: '),
-                    'sql-host' => $io->ask('Please specify the database host: ', strstr(gethostname(), '.local') ? gethostname() : null),
+                    'sql-host' => $io->ask('Please specify the database host: ', $host),
                     'sql-name' => $io->ask('Please specify the database name: ', $theme),
                 );
 
