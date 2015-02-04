@@ -83,6 +83,7 @@ gulp.task('css', ['scss-lint'], function() {
 			browsers: ['last 2 versions', 'ie 8', 'ie 9', 'android 2.1']
 		}))
 		.pipe(p.cmq())
+		.pipe(p.cssmin())
 		.pipe(gulp.dest(conf.dest));
 });
 
