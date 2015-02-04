@@ -24,6 +24,9 @@
 /* Media queries
 ---------------------------------------------------------------------------------- */
 @mixin respond($width, $minMax: 'min') {
+	@if(typeof($width) == 'string') {
+		$width: unquote($width);
+	}
 	// IE? Strip out media queries
 	@if $_is_ie {
 		@content;
