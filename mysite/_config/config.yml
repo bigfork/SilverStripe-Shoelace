@@ -2,4 +2,4 @@ Database:
   host: 'default'
   name: 'default'
 SSViewer:
-  current_theme: 'default'
+  theme: 'default'

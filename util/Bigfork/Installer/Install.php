@@ -209,7 +209,7 @@ class Install
         $yamlConfig = Spyc::YAMLLoad(file_get_contents($filePath));
 
         // Update YAML config
-        $yamlConfig['SSViewer']['current_theme'] = $config['theme'];
+        $yamlConfig['SSViewer']['theme'] = $config['theme'];
         
         if (isset($config['sql-host']) || isset($config['sql-name'])) {
             $yamlConfig['Database']['host'] = $config['sql-host'];
