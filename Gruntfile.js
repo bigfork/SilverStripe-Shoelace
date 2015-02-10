@@ -124,7 +124,7 @@ module.exports = function(grunt) {
 					debounceDelay: 250
 				}
 			},
-			sass: {
+			css: {
 				files: 'themes/<%= pkg.name %>/scss/**/*.scss',
 				tasks: ['css'],
 				options: {
@@ -134,7 +134,7 @@ module.exports = function(grunt) {
 				}
 			},
 			notify: {
-				files: ['<%= watch.uglify.files %>', '<%= watch.sass.files %>'],
+				files: ['<%= watch.uglify.files %>', '<%= watch.css.files %>'],
 				tasks: ['notify']
 			}
 		},
@@ -156,4 +156,11 @@ module.exports = function(grunt) {
 	grunt.registerTask('css',  ['scsslint', 'sass', 'autoprefixer', 'combine_mq']);
 	grunt.registerTask('png',  ['tinypng']);
 	grunt.registerTask('default', ['js', 'css']);
+	
+	// On watch events, configure scsslint to only run on changed file
+	grunt.event.on('watch', function(action, filepath, target) {
+		if(target === 'css') {
+			grunt.config('scsslint.files', filepath);
+		}
+	});
 };
