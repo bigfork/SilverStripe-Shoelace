@@ -117,7 +117,7 @@ module.exports = function(grunt) {
 		watch: {
 			uglify: {
 				files: 'themes/<%= pkg.name %>/js/src/app.js',
-				tasks: ['js'],
+				tasks: ['js', 'notify'],
 				options: {
 					spawn: false,
 					interrupt: true,
@@ -126,16 +126,12 @@ module.exports = function(grunt) {
 			},
 			css: {
 				files: 'themes/<%= pkg.name %>/scss/**/*.scss',
-				tasks: ['css'],
+				tasks: ['css', 'notify'],
 				options: {
 					spawn: false,
 					interrupt: true,
 					debounceDelay: 250
 				}
-			},
-			notify: {
-				files: ['<%= watch.uglify.files %>', '<%= watch.css.files %>'],
-				tasks: ['notify']
 			}
 		},
 
@@ -146,7 +142,7 @@ module.exports = function(grunt) {
 					title: 'Grunt',
 					message: 'Tasks complete',
 				}
-			},
+			}
 		}
 
 	});
