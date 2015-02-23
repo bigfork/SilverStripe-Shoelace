@@ -120,7 +120,6 @@ module.exports = function(grunt) {
 				tasks: ['js', 'notify'],
 				options: {
 					spawn: false,
-					interrupt: true,
 					debounceDelay: 250
 				}
 			},
@@ -129,7 +128,6 @@ module.exports = function(grunt) {
 				tasks: ['css', 'notify'],
 				options: {
 					spawn: false,
-					interrupt: true,
 					debounceDelay: 250
 				}
 			}
