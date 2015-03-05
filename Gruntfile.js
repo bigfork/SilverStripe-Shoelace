@@ -63,7 +63,7 @@ module.exports = function(grunt) {
 		sass: {
 			dist: {
 				options: {
-					style: 'compressed'
+					style: 'expanded'
 				},
 				files: {
 					'themes/<%= pkg.name %>/css/style.css' : 'themes/<%= pkg.name %>/scss/style.scss',
@@ -150,7 +150,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('css',  ['scsslint', 'sass', 'autoprefixer', 'combine_mq']);
 	grunt.registerTask('png',  ['tinypng']);
 	grunt.registerTask('default', ['js', 'css']);
-	
+
 	// On watch events, configure scsslint to only run on changed file
 	grunt.event.on('watch', function(action, filepath, target) {
 		if(target === 'css') {
