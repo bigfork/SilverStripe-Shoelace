@@ -7,7 +7,7 @@
 					<% if Children %>
 						<ul>
 							<% loop Children %>
-								<li><a href="{$Link}">$MenuTitle.XML</a></li>
+								<li class="{$LinkingMode}"><a href="{$Link}">$MenuTitle.XML</a></li>
 							<% end_loop %>
 						</ul>
 					<% end_if %>
