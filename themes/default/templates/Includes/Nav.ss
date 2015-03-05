@@ -3,11 +3,11 @@
 		<ul>
 			<% loop Menu(1) %>
 				<li class="{$LinkingMode} n{$Pos}">
-					<a href="{$Link}">$MenuTitle.XML</a>
+					<a href="{$Link}">{$MenuTitle.XML}</a>
 					<% if Children %>
 						<ul>
 							<% loop Children %>
-								<li class="{$LinkingMode}"><a href="{$Link}">$MenuTitle.XML</a></li>
+								<li class="{$LinkingMode}"><a href="{$Link}">{$MenuTitle.XML}</a></li>
 							<% end_loop %>
 						</ul>
 					<% end_if %>
