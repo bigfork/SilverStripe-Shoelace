@@ -7,7 +7,7 @@
     "gulp-util": "*",
     "gulp-plumber": "*",
     "gulp-scsslint": "*",
-    "gulp-sass": "*",
+    "gulp-sass": "git+https:\/\/github.com\/stnvh\/gulp-sass.git",
     "gulp-autoprefixer": "*",
     "gulp-combine-mq": "*",
     "gulp-cssmin": "*",
