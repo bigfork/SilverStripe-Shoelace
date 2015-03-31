@@ -8,7 +8,7 @@ var gulp = require('gulp'),
 		}
 	}),
 	pkg = require('./package.json'),
-	conf = require(process.env['HOME'] + '/bigfork.json'),
+	conf = require(process.env.HOME + '/bigfork.json'),
 
 	// options!
 	opt = {
@@ -39,6 +39,7 @@ var config = function(name) {
 	return opt[name.replace('-', '_')];
 },
 
+/* custom scss-lint error handler */
 lint = {
 	log: function(file) {
 		var errorCount = file.scsslint.errorCount,
@@ -80,7 +81,7 @@ gulp.task('scss-lint', function() {
 gulp.task('css', ['scss-lint'], function() {
 	var conf = config('css');
 	return gulp.src(conf.src)
-		.pipe(p.sass())
+		.pipe(p.sass({ errLogToConsole: true }))
 		.pipe(p.autoprefixer({
 			browsers: ['last 2 versions', 'ie 8', 'ie 9', 'android 2.1']
 		}))
