@@ -13,12 +13,13 @@ var gulp = require('gulp'),
 	// options!
 	opt = {
 		scss_lint: {
-			src: [
-				'themes/' + pkg.name + '/scss/**/!(_reset|_normalize)*.scss'
-			]
+			src: ['themes/' + pkg.name + '/scss/**/!(_reset|_normalize)*.scss']
 		},
 		css: {
-			src: ['themes/' + pkg.name + '/scss/**/*.scss'],
+			src: [
+				'themes/' + pkg.name + '/scss/style*.scss',
+				'themes/' + pkg.name + '/scss/editor.scss'
+			],
 			dest: 'themes/' + pkg.name + '/css/'
 		},
 		png: {
@@ -37,6 +38,7 @@ var gulp = require('gulp'),
 var config = function(name) {
 	return opt[name.replace('-', '_')];
 },
+
 lint = {
 	log: function(file) {
 		var errorCount = file.scsslint.errorCount,
