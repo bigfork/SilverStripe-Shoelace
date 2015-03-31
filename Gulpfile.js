@@ -48,11 +48,11 @@ lint = {
 
 		file.scsslint.results.forEach(function(result) {
 			var msg =
-				p.gutil.colors.cyan(file.path) + ':' +
+				p.gutil.colors.cyan(file.path.replace(__dirname + '/', '')) + ':' +
 				p.gutil.colors.red(result.line) + ' ' +
 				('error' === result.severity ? p.gutil.colors.red('[E]') : p.gutil.colors.cyan('[W]')) + ' ' +
 				result.reason;
-			output += msg;
+			output += msg + "\n";
 		});
 		setTimeout(function() {
 			p.gutil.log(output);
