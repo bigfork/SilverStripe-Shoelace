@@ -1,4 +1,6 @@
 var gulp = require('gulp'),
+	path = require('path'),
+
 	p = require('gulp-load-plugins')({
 		pattern: ['gulp-*', 'gulp.*'],
 		replaceString: /\bgulp[\-.]/,
@@ -7,6 +9,10 @@ var gulp = require('gulp'),
 			'gulp-util': 'gutil'
 		}
 	}),
+
+	handle = require('./gulp/lib/handlers.js'), // custom handlers
+
+	c = p.gutil.colors,
 	pkg = require('./package.json'),
 	conf = require(process.env.HOME + '/bigfork.json'),
 
@@ -17,8 +23,8 @@ var gulp = require('gulp'),
 		},
 		css: {
 			src: [
-				'themes/' + pkg.name + '/scss/style*.scss',
-				'themes/' + pkg.name + '/scss/editor.scss'
+				'themes/' + pkg.name + '/scss/editor.scss',
+				'themes/' + pkg.name + '/scss/style*.scss'
 			],
 			dest: 'themes/' + pkg.name + '/css/'
 		},
@@ -35,58 +41,37 @@ var gulp = require('gulp'),
 		}
 	};
 
+/* config getter */
+
 var config = function(name) {
 	return opt[name.replace('-', '_')];
-},
-
-/* custom scss-lint error handler */
-lint = {
-	log: function(file) {
-		var errorCount = file.scsslint.errorCount,
-			plural = errorCount === 1 ? '' : 's',
-			output = '';
-
-		file.scsslint.results.forEach(function(result) {
-			var msg =
-				p.gutil.colors.cyan(file.path.replace(__dirname + '/', '')) + ':' +
-				p.gutil.colors.red(result.line) + ' ' +
-				('error' === result.severity ? p.gutil.colors.red('[E]') : p.gutil.colors.cyan('[W]')) + ' ' +
-				result.reason;
-			output += msg + "\n";
-		});
-		setTimeout(function() {
-			p.gutil.log(output);
-		}, 0);
-	},
-	error: function(file) {
-		var error;
-		if (file.scsslint && !file.scsslint.success) {
-			error = new p.gutil.PluginError('scss-lint', 'scss-lint failed');
-		}
-		p.gutil.beep();
-		return error;
-	}
 };
+
+/* begin tasks */
 
 // lint css
 gulp.task('scss-lint', function() {
 	var conf = config('scss-lint');
 	return gulp.src(conf.src)
 		.pipe(p.scsslint('.scss-lint.yml'))
-		.pipe(p.scsslint.reporter(lint.log))
-		.pipe(p.scsslint.reporter(lint.error))
+		.pipe(p.scsslint.reporter(handle.lint.error))
 });
 
 // compile scss into css
 gulp.task('css', ['scss-lint'], function() {
 	var conf = config('css');
 	return gulp.src(conf.src)
-		.pipe(p.sass({ errLogToConsole: true }))
+		.pipe(p.plumber({errorHandler: handle.generic.error}))
+		.pipe(p.sass())
 		.pipe(p.autoprefixer({
 			browsers: ['last 2 versions', 'ie 8', 'ie 9', 'android 2.1']
 		}))
 		.pipe(p.cmq())
 		.pipe(p.cssmin())
+		.pipe(p.tap(function(file) {
+			p.gutil.log(c.green('✔ ') + path.basename(file.path) + ' compiled');
+		}))
+		.pipe(handle.notify.show('CSS compiled - <%= file.relative %>'))
 		.pipe(gulp.dest(conf.dest));
 });
 
@@ -94,9 +79,14 @@ gulp.task('css', ['scss-lint'], function() {
 gulp.task('js', function() {
 	var conf = config('js');
 	return gulp.src(conf.src)
+		.pipe(p.plumber({errorHandler: handle.generic.error}))
 		.pipe(p.jshint())
-		.pipe(p.concat('app.min.js'))
 		.pipe(p.uglify())
+		.pipe(p.concat('app.min.js'))
+		.pipe(p.tap(function(file) {
+			p.gutil.log(c.green('✔ ') + path.basename(file.path) + ' compiled');
+		}))
+		.pipe(handle.notify.show('JS compiled - <%= file.relative %>'))
 		.pipe(gulp.dest(conf.dest));
 });
 
@@ -104,7 +94,12 @@ gulp.task('js', function() {
 gulp.task('png', function() {
 	var conf = config('png');
 	return gulp.src(conf.src)
+		.pipe(p.plumber({errorHandler: handle.generic.error}))
 		.pipe(p.tinypng(conf.tinypng))
+		.pipe(p.tap(function(file) {
+			p.gutil.log(c.green('✔ ') + path.basename(file.path) + ' compressed');
+		}))
+		.pipe(handle.notify.show('Image compressed - <%= file.relative %>'))
 		.pipe(gulp.dest(conf.dest));
 });
 
