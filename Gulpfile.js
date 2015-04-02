@@ -14,7 +14,7 @@ var gulp = require('gulp'),
 
 	c = p.gutil.colors,
 	pkg = require('./package.json'),
-	conf = require(process.env.HOME + '/bigfork.json'),
+	bigfork = require(process.env.HOME + '/bigfork.json'),
 
 	// options!
 	opt = {
@@ -95,11 +95,11 @@ gulp.task('png', function() {
 	var conf = config('png');
 	return gulp.src(conf.src)
 		.pipe(p.plumber({errorHandler: handle.generic.error}))
-		.pipe(p.tinypng(conf.tinypng))
+		.pipe(p.tinypng(bigfork.tinypng))
 		.pipe(p.tap(function(file) {
 			p.gutil.log(c.green('✔ ') + path.basename(file.path) + ' compressed');
 		}))
-		.pipe(handle.notify.show('Image compressed - <%= file.relative %>'))
+		.pipe(handle.notify.show('Images compressed'))
 		.pipe(gulp.dest(conf.dest));
 });
 
@@ -115,3 +115,11 @@ gulp.watch('themes/' + pkg.name + '/scss/**/*.scss', function() {
 gulp.watch('themes/' + pkg.name + '/js/src/*.js', function() {
 	gulp.start('js');
 });
+
+/* log supress for tinypng */
+var cl = console.log;
+console.log = function () {
+    var args = Array.prototype.slice.call(arguments);
+    if (args.length > 1 && args[1].match(/^gulp-tingpng/)) return;
+    return cl.apply(console, args);
+};
