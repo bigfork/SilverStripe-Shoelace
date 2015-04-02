@@ -45,7 +45,7 @@ lint = {
 
 			files.indexOf(base) < 0 && files.push(base);
 
-			p.gutil.log(c.cyan(file.path.replace(path.resolve(__dirname, '../../'), '')) + ':' +
+			p.gutil.log(c.red('✘ ') + c.cyan(file.path.replace(path.resolve(__dirname, '../../'), '')) + ':' +
 				c.red(result.line) + ' ' +
 				('error' === result.severity ? c.red('[E]') : c.cyan('[W]')) + ' ' +
 				result.reason);
@@ -53,7 +53,7 @@ lint = {
 
 		if(files) {
 			p.gutil.beep();
-			error = new p.gutil.PluginError('gulp-scsslint', 'SCSS lint failed for ' + files.join(', '));
+			error = new p.gutil.PluginError('scss-lint', 'SCSS lint failed for ' + files.join(', '));
 
 			notify.error(error);
 
@@ -89,7 +89,7 @@ generic = {
 			};
 		}
 
-		p.gutil.log(alert.message);
+		p.gutil.log(c.red('✘ ') + alert.message);
 		p.gutil.beep();
 
 		notify.error(err, alert.notify);
