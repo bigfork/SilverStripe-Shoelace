@@ -7,7 +7,7 @@
 	<% base_tag %>
 	<title><% if MetaTitle %>$MetaTitle.XML<% else %>$Title.XML &raquo; $SiteConfig.Title<% end_if %></title>
 	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	$MetaTags(false)
 
 	<link href="//www.google-analytics.com" rel="dns-prefetch" />
