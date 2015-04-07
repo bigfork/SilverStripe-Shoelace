@@ -97,9 +97,17 @@ gulp.task('png', function() {
 	var conf = config('png');
 	return gulp.src(conf.src)
 		.pipe(p.plumber({errorHandler: handle.generic.error}))
-		.pipe(p.tinypng(bigfork.tinypng))
+		.pipe(p.tinypng({
+			key: bigfork.tinypng,
+			checkSigs: true,
+			sigFile: 'themes/' + pkg.name + '/images/.tinypng-sigs'
+		}))
 		.pipe(p.tap(function(file) {
-			p.gutil.log(c.green('✔ ') + path.basename(file.path) + ' compressed');
+			if(file.skipped) {
+				p.gutil.log(c.green('✔ ') + c.grey(path.basename(file.path) + ' skipped'));
+			} else {
+				p.gutil.log(c.green('✔ ') + path.basename(file.path) + ' compressed');
+			}
 		}))
 		.pipe(handle.notify.show('Images compressed'))
 		.pipe(gulp.dest(conf.dest));
