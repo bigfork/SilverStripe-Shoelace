@@ -42,7 +42,6 @@ var gulp = require('gulp'),
 	};
 
 /* config getter */
-
 var config = function(name) {
 	return opt[name.replace('-', '_')];
 };
@@ -70,9 +69,7 @@ gulp.task('css', ['scss-lint'], function() {
 		.pipe(p.cssmin({
 			compatibility: 'ie8'
 		}))
-		.pipe(p.tap(function(file) {
-			p.gutil.log(c.green('✔ ') + path.basename(file.path) + ' compiled');
-		}))
+		.pipe(handle.generic.log('compiled'))
 		.pipe(handle.notify.show('CSS compiled - <%= file.relative %>'))
 		.pipe(gulp.dest(conf.dest));
 });
@@ -85,9 +82,7 @@ gulp.task('js', function() {
 		.pipe(p.jshint())
 		.pipe(p.uglify())
 		.pipe(p.concat('app.min.js'))
-		.pipe(p.tap(function(file) {
-			p.gutil.log(c.green('✔ ') + path.basename(file.path) + ' compiled');
-		}))
+		.pipe(handle.generic.log('compiled'))
 		.pipe(handle.notify.show('JS compiled - <%= file.relative %>'))
 		.pipe(gulp.dest(conf.dest));
 });
@@ -102,12 +97,12 @@ gulp.task('png', function() {
 			checkSigs: true,
 			sigFile: 'themes/' + pkg.name + '/images/.tinypng-sigs'
 		}))
-		.pipe(p.tap(function(file) {
+		.pipe(handle.generic.log('compressed', false, function(file, msg, opt) {
 			if(file.skipped) {
-				p.gutil.log(c.green('✔ ') + c.grey(path.basename(file.path) + ' skipped'));
-			} else {
-				p.gutil.log(c.green('✔ ') + path.basename(file.path) + ' compressed');
+				msg = c.gray('skipped');
+				opt.type = 'bad';
 			}
+			return arguments;
 		}))
 		.pipe(handle.notify.show('Images compressed'))
 		.pipe(gulp.dest(conf.dest));
@@ -125,11 +120,3 @@ gulp.watch('themes/' + pkg.name + '/scss/**/*.scss', function() {
 gulp.watch('themes/' + pkg.name + '/js/src/*.js', function() {
 	gulp.start('js');
 });
-
-/* log supress for tinypng */
-var cl = console.log;
-console.log = function () {
-    var args = Array.prototype.slice.call(arguments);
-    if (args.length > 1 && args[1].match(/^gulp-tingpng/)) return;
-    return cl.apply(console, args);
-};
