@@ -5,6 +5,7 @@ var gulp = require('gulp'),
 		pattern: ['gulp-*', 'gulp.*'],
 		replaceString: /\bgulp[\-.]/,
 		rename: {
+			'gulp-tinypng-compress': 'tinypng',
 			'gulp-combine-mq': 'cmq',
 			'gulp-util': 'gutil'
 		}
