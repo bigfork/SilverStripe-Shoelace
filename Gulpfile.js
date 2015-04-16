@@ -7,7 +7,8 @@ var gulp = require('gulp'),
 		rename: {
 			'gulp-tinypng-compress': 'tinypng',
 			'gulp-combine-mq': 'cmq',
-			'gulp-util': 'gutil'
+			'gulp-util': 'gutil',
+			'gulp-minify-css': 'minifyCSS'
 		}
 	}),
 
@@ -67,7 +68,7 @@ gulp.task('css', ['scss-lint'], function() {
 			browsers: ['last 2 versions', 'ie 8', 'ie 9', 'android 2.1']
 		}))
 		.pipe(p.cmq())
-		.pipe(p.cssmin({
+		.pipe(p.minifyCSS({
 			compatibility: 'ie8'
 		}))
 		.pipe(handle.generic.log('compiled'))
