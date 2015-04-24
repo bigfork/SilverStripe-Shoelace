@@ -115,10 +115,12 @@ gulp.task('default', function() {
 });
 
 // watch tasks
-gulp.watch('themes/' + pkg.name + '/scss/**/*.scss', function() {
-	gulp.start('css');
-});
+gulp.task('watch', function() {
+	gulp.watch('themes/' + pkg.name + '/scss/**/*.scss', function() {
+		gulp.start('css');
+	});
 
-gulp.watch('themes/' + pkg.name + '/js/src/*.js', function() {
-	gulp.start('js');
+	gulp.watch('themes/' + pkg.name + '/js/src/*.js', function() {
+		gulp.start('js');
+	});
 });
