@@ -3,14 +3,16 @@
 
 /* Occasionally handly class for forcing stuff to hide
 ---------------------------------------------------------------------------------- */
-.h {
+.h,
+%h {
 	// scss-lint:disable ImportantRule
 	display: none !important;
 }
 
 /* Clearfix - Assign class to element to self clear children
 ---------------------------------------------------------------------------------- */
-.group {
+.group,
+%group {
 	zoom: 1; // IE 6/7
 
 	&:before,
@@ -26,7 +28,8 @@
 
 /* Utility class for replacing text with a background-image
 ---------------------------------------------------------------------------------- */
-.replace {
+.replace,
+%replace {
 	display: block;
 	overflow: hidden;
 	white-space: nowrap;
