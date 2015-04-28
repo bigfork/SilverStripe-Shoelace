@@ -35,8 +35,14 @@ linters:
   HexFormat:
     enabled: true
 
+  IdSelector:
+    enabled: false
+
   IdWithExtraneousSelector:
     enabled: true
+
+  ImportantRule:
+    enabled: false
 
   Indentation:
     enabled: false
