@@ -20,6 +20,6 @@
     "gulp-tinypng-compress": "^1.1.0"
   },
   "description": "Default",
-  "main": "Gruntfile.js",
+  "main": "Gulpfile.js",
   "author": "Bigfork"
 }
