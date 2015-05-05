@@ -69,7 +69,8 @@ gulp.task('css', ['scss-lint'], function() {
 		}))
 		.pipe(p.cmq())
 		.pipe(p.minifyCSS({
-			compatibility: 'ie8'
+			compatibility: 'ie8',
+			processImport: false
 		}))
 		.pipe(handle.generic.log('compiled'))
 		.pipe(handle.notify.show('CSS compiled - <%= file.relative %>'))
