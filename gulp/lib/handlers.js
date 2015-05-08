@@ -42,8 +42,8 @@ lint = {
 
 			files.indexOf(base) < 0 && files.push(base);
 
-			generic.log(':' + c.red(result.line) + ' ' +
-				result.reason,
+			generic.log(
+				' - ' + c.red(result.line) + ':' + c.red(result.column) + ' - ' + c.yellow(result.linter) + ': ' + result.reason,
 				{type: 'bad', space: false, pipe: false, file: file}
 			);
 		});
