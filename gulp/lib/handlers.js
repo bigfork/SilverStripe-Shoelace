@@ -144,12 +144,42 @@ generic = {
 
 		return opt.pipe ? through.obj(log) : log.apply(this, [opt.file]);
 	}
+},
+
+/* small plugin to minify CSS, without the bells & whistles */
+minify = function() {
+	return through.obj(function(file, enc, cb) {
+		if(file.isNull() || file.isStream()) return cb();
+
+		if(file.isBuffer()) {
+			var min = file.clone()
+				contents = min.contents.toString(),
+
+				layers = [
+					[/\/\*(?:(?!\*\/)[\s\S])*\*\/|[\r\n\t]+/g, ''],
+					[/ {2,}/g, ''],
+					[/ ([{:}]) /g, '$1'],
+					[/([;,]) /g, '$1'],
+					[/ !/g, '!']
+				];
+
+			for(var i = 0; i < layers.length; i++) {
+				contents = contents.replace(layers[i][0], layers[i][1]);
+			}
+
+			min.contents = new Buffer(contents);
+			this.push(min);
+
+			return cb();
+		}
+	});
 };
 
 module.exports = {
 	notify: notify,
 	lint: lint,
-	generic: generic
+	generic: generic,
+	minify: minify
 };
 
 /* log supress for tinypng */

@@ -12,7 +12,6 @@
     "gulp-sass": "git+https:\/\/github.com\/stnvh\/gulp-sass.git",
     "gulp-autoprefixer": "^2.0",
     "gulp-combine-mq": "~0.4.0",
-    "gulp-minify-css":"^1.0.0",
     "gulp-jshint": "~1.9.0",
     "gulp-uglify": "^1.0.0",
     "gulp-concat": "^2.0",
