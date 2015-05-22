@@ -64,6 +64,11 @@ Options -Indexes
 <IfModule mod_rewrite.c>
     SetEnv HTTP_MOD_REWRITE On
     RewriteEngine On
+    
+    # Prevent search indexing on dev environments
+    RewriteCond %{HTTP_HOST} !^.*\.(dev|megafork\.co\.uk|proxylocal\.com)$ [NC]
+    RewriteRule ^.*$ - [ENV=NOINDEX:true]
+    Header set X-Robots-Tag "none" env=NOINDEX
 
     # Force www.actualdomain.com with 301 redirects
     # RewriteCond %{HTTP_HOST} !^.*\.(dev|proxylocal\.com)$ [NC]
