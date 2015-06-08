@@ -9,7 +9,7 @@
     "gulp-notify": "^2.0",
     "gulp-plumber": "^1.0",
     "gulp-scsslint": "~0.0.0",
-    "gulp-sass": "git+https:\/\/github.com\/stnvh\/gulp-sass.git",
+    "gulp-sass": "^2.0.0",
     "gulp-autoprefixer": "^2.0",
     "gulp-combine-mq": "~0.4.0",
     "gulp-jshint": "~1.9.0",
