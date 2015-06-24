@@ -13,7 +13,7 @@ html {
 }
 
 body {
-	font-family: $font-body;
+	font-family: $font__body;
 }
 
 /* Typography
@@ -38,17 +38,23 @@ body {
 
 	h1,
 	.h1 {
+		color: $colour__grey--dark;
 		font-size: 200%;
+		font-family: $font__head--large;
 	}
 
 	h2,
 	.h2 {
+		color: $colour__grey--light;
 		font-size: 150%;
+		font-family: $font__head;
 	}
 
 	h3,
 	.h3 {
+		color: $colour__grey;
 		font-size: 120%;
+		font-family: $font__head;
 	}
 
 	ul {
@@ -79,13 +85,13 @@ body {
 	a {
 		&:link,
 		&:visited {
-			color: $black;
+			color: $colour__black;
 			text-decoration: none;
 		}
 
 		&:hover,
 		&:active {
-			color: $black;
+			color: $colour__black;
 			text-decoration: underline;
 		}
 	}
@@ -110,7 +116,7 @@ body {
 
 	img {
 		// scss-lint:disable SelectorFormat
-		
+
 		&.left {
 			float: left;
 			margin: 0 1em 0 0;

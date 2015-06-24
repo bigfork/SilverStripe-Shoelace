@@ -1,8 +1,12 @@
 /* SCSS Variables
 ---------------------------------------------------------------------------------- */
 
-$white: #fff;
-$black: #000;
+$colour__white: #fff;
+$colour__black: #000;
+$colour__grey: #888;
+$colour__grey--dark: #444;
+$colour__grey--light: #ccc;
 
-$font-head: arial, sans-serif;
-$font-body: arial, sans-serif;
+$font__head: verdana, sans-serif;
+$font__head--large: 'Trebuchet MS', verdana, sans-serif;
+$font__body: verdana, sans-serif;

@@ -2,9 +2,9 @@
 ---------------------------------------------------------------------------------- */
 
 footer {
-	background: $black;
+	background: $colour__black;
 
 	@include respond(960px) {
-		background: $white;
+		background: $colour__white;
 	}
 }
