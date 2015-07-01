@@ -7,7 +7,8 @@ var gulp = require('gulp'),
 		rename: {
 			'gulp-tinypng-compress': 'tinypng',
 			'gulp-combine-mq': 'cmq',
-			'gulp-util': 'gutil'
+			'gulp-util': 'gutil',
+			'gulp-css-globbing': 'glob'
 		}
 	}),
 
@@ -62,6 +63,9 @@ gulp.task('css', ['scss-lint'], function() {
 	var conf = config('css');
 	return gulp.src(conf.src)
 		.pipe(p.plumber({errorHandler: handle.generic.error}))
+		.pipe(p.glob({
+			extensions: ['.scss']
+		}))
 		.pipe(p.sass())
 		.pipe(p.autoprefixer({
 			browsers: ['last 2 versions', 'ie 8', 'ie 9', 'android 2.1']

@@ -16,8 +16,7 @@ $_is_ie: false;
 }
 
 // Core layout
-@import 'layout/header';
-@import 'layout/footer';
+@import 'layout/*';
 
 // Reusable components
-@import 'components/breadcrumbs';
+@import 'components/*';
