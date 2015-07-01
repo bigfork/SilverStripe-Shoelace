@@ -2,8 +2,8 @@
 ---------------------------------------------------------------------------------- */
 
 header {
-	color: $colour__white;
-	background: $colour__black;
+	color: $color__white;
+	background: $color__black;
 
 	@include retina {
 		// Retina rules here
