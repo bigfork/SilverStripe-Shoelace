@@ -38,21 +38,21 @@ body {
 
 	h1,
 	.h1 {
-		color: $colour__grey--dark;
+		color: $color__grey--dark;
 		font-size: 200%;
 		font-family: $font__head--large;
 	}
 
 	h2,
 	.h2 {
-		color: $colour__grey--light;
+		color: $color__grey--light;
 		font-size: 150%;
 		font-family: $font__head;
 	}
 
 	h3,
 	.h3 {
-		color: $colour__grey;
+		color: $color__grey;
 		font-size: 120%;
 		font-family: $font__head;
 	}
@@ -85,13 +85,13 @@ body {
 	a {
 		&:link,
 		&:visited {
-			color: $colour__black;
+			color: $color__black;
 			text-decoration: none;
 		}
 
 		&:hover,
 		&:active {
-			color: $colour__black;
+			color: $color__black;
 			text-decoration: underline;
 		}
 	}
