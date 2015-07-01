@@ -1,24 +1,11 @@
 /* Mixins
 ---------------------------------------------------------------------------------- */
 
-/* REM sizing
+/* REM sizing with PX fallback
 ---------------------------------------------------------------------------------- */
-@mixin rem-fontsize($size) {
-	@include font-size($size);
-}
-
 @mixin font-size($size) {
 	font-size: $size * 1px;
 	font-size: ($size * 1rem/10);
-}
-
-/* Partially rounded corners - ($top-left, $top-right, $bottom-right, $bottom-left)
----------------------------------------------------------------------------------- */
-@mixin rounded-partial($tl, $tr, $br, $bl) {
-	border-top-left-radius: $tl;
-	border-top-right-radius: $tr;
-	border-bottom-right-radius: $br;
-	border-bottom-left-radius: $bl;
 }
 
 /* IE conditional
