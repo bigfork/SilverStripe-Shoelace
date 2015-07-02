@@ -8,32 +8,10 @@
 	font-size: ($size * 1rem/10);
 }
 
-/* Column generator
-   Generate % width column based on pixel values
-   Does not account for gutters, that's just for doing multi-width columns
-
-   @colWidth: width of one column
-   @totalWidth: width of container
-   @gutterWidth: width of space between columns
-   @columns: how many columns this spans, assumes equal widths
-
-   Examples
-
-   .column__single {
-      @include column(470, 960)
-   }
-
-   .column__one-third {
-	  @include column(225, 960, 20, 1)
-   }
-
-   .column__two-thirds {
-      @include column(225, 960, 20, 2)
-   }
+/* Column generator - generate % width column based on pixel values
 ---------------------------------------------------------------------------------- */
-@mixin column($colWidth, $totalWidth, $gutterWidth: 0, $columns: 1) {
-	$totalColWidth = ($colWidth * $columns) + ($gutterWidth * ($columns - 1));
-	width: ($totalColWidth / $totalWidth) * 100%;
+@mixin column($colWidth, $totalWidth) {
+	width: ($colWidth / $totalWidth) * 100%;
 }
 
 /* IE conditional
