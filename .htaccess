@@ -146,7 +146,7 @@ ErrorDocument 500 /assets/error-500.html
 <IfModule mod_headers.c>
     <FilesMatch "\.(eot|otf|ttc|ttf|woff)$">
         Header set Access-Control-Allow-Origin "*"
-</FilesMatch>
+    </FilesMatch>
 </IfModule>
 
 # ------------------------------------------------------------------------------
