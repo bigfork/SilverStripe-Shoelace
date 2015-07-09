@@ -2,7 +2,7 @@
   "name": "default",
   "version": "0.1.0",
   "devDependencies": {
-    "gulp": "~3.8",
+    "gulp": "3.x",
     "through2": "~0.6",
     "gulp-load-plugins": "^0.9",
     "gulp-util": "^3.0",
