@@ -82,7 +82,10 @@ gulp.task('js', function() {
 	var conf = config('js');
 	return gulp.src(conf.src)
 		.pipe(p.plumber({errorHandler: handle.generic.error}))
-		.pipe(p.jshint())
+		.pipe(p.jshint({
+			esnext: true
+		}))
+		.pipe(p.babel())
 		.pipe(p.uglify())
 		.pipe(p.concat('app.min.js'))
 		.pipe(handle.generic.log('compiled'))
