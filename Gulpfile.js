@@ -120,11 +120,15 @@ gulp.task('default', function() {
 
 // watch tasks
 gulp.task('watch', function() {
-	gulp.watch('themes/' + pkg.name + '/scss/**/*.scss', function() {
+	p.watch('themes/' + pkg.name + '/scss/**/*.scss', function() {
 		gulp.start('css');
 	});
 
-	gulp.watch('themes/' + pkg.name + '/js/src/*.js', function() {
+	p.watch('themes/' + pkg.name + '/js/src/*.js', function() {
 		gulp.start('js');
+	});
+
+	p.watch('themes/' + pkg.name + '/images/src/**/*.png', function() {
+		gulp.start('png');
 	});
 });
