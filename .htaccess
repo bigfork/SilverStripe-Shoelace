@@ -86,30 +86,9 @@ Options -Indexes
 
     RewriteBase '/'
 
-    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    # Maintenance mode - redirects non dev / megafork domains
-    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-    # Check we're on the correct host and not requesting an asset
-    # RewriteCond %{HTTP_HOST} !^.*\.(dev|devdomain\.co\.uk)$ [NC]
-    # RewriteCond %{REQUEST_URI} !(\.css|\.js|\.png|\.jpg|\.gif|\.htc|robots\.txt)$ [NC]
-
-    # Check the request isn't already a rewrite or a SilverStripe dev / admin request
-    # RewriteCond %{REQUEST_URI} !framework\/main\.php$ [NC]
-    # RewriteCond %{REQUEST_URI} !^/?(dev|Security|maintenance)/ [NC]
-
-    # Prevent infinite redirects
-    # RewriteCond %{REQUEST_URI} !^/?maintenance/
-    # RewriteRule .* /maintenance/ [R=302,L]
-
-    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    # End maintenance mode
-    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
     # SilverStripe rewrites - includes optional maintenance rule for the above
     RewriteCond %{REQUEST_URI} ^(.*)$
     RewriteCond %{REQUEST_FILENAME} !-f
-    # RewriteCond %{REQUEST_FILENAME} !^.*maintenance/?$
     RewriteRule .* framework/main.php?url=%1&%{QUERY_STRING} [L]
 </IfModule>
 
