@@ -82,6 +82,18 @@ body {
 		}
 	}
 
+	sup,
+	sub {
+		position: relative;
+		top: -0.4em;
+		font-size: 80%;
+		vertical-align: baseline;
+	}
+
+	sub {
+		top: 0.4em;
+	}
+
 	a {
 		&:link,
 		&:visited {
@@ -115,27 +127,41 @@ body {
 ---------------------------------------------------------------------------------- */
 
 	img {
-		// scss-lint:disable SelectorFormat
+		display: block;
+		max-width: 100%;
+		height: auto;
 
-		&.left {
-			float: left;
-			margin: 0 1em 0 0;
-		}
-
-		&.right {
-			float: right;
-			margin: 0 0 0 1em;
-		}
-
+		&.left,
+		&.right,
 		&.leftAlone {
-			float: left;
-			margin-right: 100%;
+			margin-bottom: 1em;
 		}
 
 		&.center {
 			display: block;
 			float: none;
 			margin: 0 auto;
+		}
+	}
+}
+
+@include respond(480px) {
+	.typography {
+		img {
+			&.left {
+				float: left;
+				margin: 0 1em 1em 0;
+			}
+
+			&.right {
+				float: right;
+				margin: 0 0 1em 1em;
+			}
+
+			&.leftAlone {
+				float: left;
+				margin-right: 100%;
+			}
 		}
 	}
 }
