@@ -33,5 +33,8 @@
 
 <% include Footer %>
 
+<!--[if lt 9]><script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script><![endif]-->
+<!--[if gte IE 9]><!--><script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script><!--<![endif]-->
+
 </body>
 </html>

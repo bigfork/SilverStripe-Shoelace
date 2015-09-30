@@ -6,7 +6,6 @@
         "camspiers/silverstripe-loggerbridge": "0.6.*",
         "feejin/silverstripe-securitytemplates": "1.0.*",
         "jonom/silverstripe-betternavigator": "2.0.*",
-        "kinglozzer/yepnopesilverstripe": "^2.0",
         "kinglozzer/bfgoogleanalytics": "^1.1",
         "kinglozzer/htmleditoruploadfield": "^1.0",
         "kinglozzer/metatitle": "^1.0",
