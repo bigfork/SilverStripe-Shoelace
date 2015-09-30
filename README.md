@@ -1,6 +1,6 @@
 #SilverStripe Clean Install#
 
-Boostrap for SilverStripe, peculiar to Bigforks requirements.
+Bootstrap for SilverStripe, peculiar to Bigforks requirements.
 
 ##Contributors:##
 * Colin Richardson
