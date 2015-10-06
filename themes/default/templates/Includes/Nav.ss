@@ -1,13 +1,15 @@
-<header>
-	<nav>
-		<ul>
+<header class="header">
+	<nav class="nav">
+		<ul class="nav__menu">
 			<% loop Menu(1) %>
-				<li class="{$LinkingMode} n{$Pos}">
-					<a href="{$Link}">{$MenuTitle.XML}</a>
+				<li class="nav__item nav__item--{$LinkingMode}">
+					<a class="nav__link" href="{$Link}">{$MenuTitle.XML}</a>
 					<% if Children %>
-						<ul>
+						<ul class="nav__submenu">
 							<% loop Children %>
-								<li class="{$LinkingMode}"><a href="{$Link}">{$MenuTitle.XML}</a></li>
+								<li class="nav__subitem nav__subitem--{$LinkingMode}">
+									<a class="nav__sublink" href="{$Link}">{$MenuTitle.XML}</a>
+								</li>
 							<% end_loop %>
 						</ul>
 					<% end_if %>
