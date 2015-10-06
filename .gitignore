@@ -9,6 +9,7 @@ _resampled
 /betternavigator/
 /bfgoogleanalytics/
 /cms/
+/focuspoint/
 /framework/
 /googlesitemaps/
 /gridfieldextensions/
@@ -19,5 +20,7 @@ _resampled
 /node_modules/
 /securitytemplates/
 /silverstripe-loggerbridge/
+/silverstripe-menumanager/
+/silverstripe-responsive-images/
 /vendor/
 /yepnopesilverstripe/
