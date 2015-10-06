@@ -1,10 +1,7 @@
-@import 'mixins';
-
 /* Styles for HtmlEditorFields
 ---------------------------------------------------------------------------------- */
 
-/* Custom fonts
----------------------------------------------------------------------------------- */
+@import 'mixins';
 
 /* Set base font size / family
 ---------------------------------------------------------------------------------- */
@@ -38,21 +35,21 @@ body {
 
 	h1,
 	.h1 {
-		color: $color__grey--dark;
+		color: $color__black;
 		font-size: 200%;
 		font-family: $font__head--large;
 	}
 
 	h2,
 	.h2 {
-		color: $color__grey--light;
+		color: $color__black--light;
 		font-size: 150%;
 		font-family: $font__head;
 	}
 
 	h3,
 	.h3 {
-		color: $color__grey;
+		color: $color__black;
 		font-size: 120%;
 		font-family: $font__head;
 	}
