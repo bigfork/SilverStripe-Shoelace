@@ -29,7 +29,7 @@
 
 <div class="viewport">
 
-	<% include Nav %>
+	<% include Header %>
 
 	{$Layout}
 
