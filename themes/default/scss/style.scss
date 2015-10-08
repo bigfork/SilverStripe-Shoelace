@@ -15,8 +15,5 @@ $_is_ie: false;
 	box-sizing: border-box;
 }
 
-// Core layout
-@import 'layout/*';
-
-// Reusable components
+// Many styles
 @import 'components/*';

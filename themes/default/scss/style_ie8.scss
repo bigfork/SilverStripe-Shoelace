@@ -16,8 +16,5 @@ $_is_ie: true;
 	*behavior: url('/polyfill/box-sizing/boxsizing.htc');
 }
 
-// Core layout
-@import 'layout/*';
-
-// Reusable components
+// Many styles
 @import 'components/*';
