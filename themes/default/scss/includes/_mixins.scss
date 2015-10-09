@@ -29,13 +29,13 @@
 		$width: unquote($width);
 	}
 	// IE? Strip out media queries
-	@if $_is_ie {
-		@content;
-	} @else {
-		// Otherwise, responsive goodness
+	@if not $_is_ie {
 		@media screen and (#{$minMax}-width: $width) {
 			@content;
 		}
+	} @elseif($minMax == 'min') {
+		// Otherwise, responsive goodness
+		@content;
 	}
 }
 
