@@ -1,4 +1,5 @@
 var gulp = require('gulp'),
+	bs = require('browser-sync').create(),
 	path = require('path'),
 
 	p = require('gulp-load-plugins')({
@@ -74,7 +75,8 @@ gulp.task('css', ['scss-lint'], function() {
 		.pipe(handle.minify())
 		.pipe(handle.generic.log('compiled'))
 		.pipe(handle.notify.show('CSS compiled - <%= file.relative %>'))
-		.pipe(gulp.dest(conf.dest));
+		.pipe(gulp.dest(conf.dest))
+		.pipe(bs.stream());
 });
 
 // lint, concat and uglify javascript
@@ -120,6 +122,10 @@ gulp.task('default', function() {
 
 // watch tasks
 gulp.task('watch', function() {
+	bs.init({
+		proxy: 'http://' + path.basename(__dirname) + '.dev'
+	});
+
 	p.watch('themes/' + pkg.name + '/scss/**/*.scss', function() {
 		gulp.start('css');
 	});

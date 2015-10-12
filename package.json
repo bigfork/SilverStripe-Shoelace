@@ -19,7 +19,8 @@
     "gulp-tinypng-compress": "^1.1.0",
     "gulp-css-globbing": "^0.1.8",
     "gulp-babel": "5.x",
-    "gulp-watch": "^4.3"
+    "gulp-watch": "^4.3",
+    "browser-sync": "2.x"
   },
   "description": "Default",
   "main": "Gulpfile.js",
