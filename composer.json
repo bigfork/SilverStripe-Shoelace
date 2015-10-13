@@ -10,6 +10,7 @@
         "kinglozzer/htmleditornoalignment": "^1.0",
         "kinglozzer/htmleditoruploadfield": "^1.0",
         "kinglozzer/metatitle": "^1.0",
+        "silverstripe/blog": "^2.1",
         "silverstripe/cms": "~3.1.13",
         "silverstripe/framework": "~3.1.13",
         "silverstripe/googlesitemaps": "1.2.*",

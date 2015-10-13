@@ -8,6 +8,7 @@ _resampled
 /.sass-cache/
 /betternavigator/
 /bfgoogleanalytics/
+/blog/
 /cms/
 /focuspoint/
 /framework/
@@ -16,11 +17,13 @@ _resampled
 /htmleditornoalignment/
 /htmleditoruploadfield/
 /infoboxes/
+/lumberjack/
 /metatitle/
 /node_modules/
 /securitytemplates/
 /silverstripe-loggerbridge/
 /silverstripe-menumanager/
 /silverstripe-responsive-images/
+/tagfield/
 /vendor/
 /yepnopesilverstripe/
