@@ -25,10 +25,10 @@ Security::setDefaultAdmin('admin', 'password');
 // TinyMCE Config
 $config = HtmlEditorConfig::get('cms');
 $config->disablePlugins('emotions', 'fullscreen');
-$config->setButtonsForLine(1, "formatselect,separator,bullist,numlist,
+$config->setButtonsForLine(1, 'formatselect,separator,bullist,numlist,
 	separator,bold,italic,sup,sub,separator,sslink,unlink,anchor,separator,ssmedia,pasteword,
-	separator,spellchecker,undo,redo,code");
-$config->setButtonsForLine(2, "tablecontrols");
+	separator,spellchecker,undo,redo,code');
+$config->setButtonsForLine(2, 'tablecontrols');
 $config->setButtonsForLine(3, '');
 $config->setOptions(array(
 	'theme_advanced_blockformats' => 'p,h2,h3',
