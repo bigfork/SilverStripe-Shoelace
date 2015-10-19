@@ -186,6 +186,6 @@ module.exports = {
 var cl = console.log;
 console.log = function() {
     var args = Array.prototype.slice.call(arguments);
-    if (args.length > 1 && args[1].match(/^gulp-tinypng/)) return;
+    if (args.length > 1 && args[1].toString().match(/^gulp-tinypng/)) return;
     return cl.apply(console, args);
 };
