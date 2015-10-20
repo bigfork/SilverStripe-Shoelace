@@ -2,6 +2,7 @@ var path = require('path'),
 	pkg = require('../../package.json'),
 
 	gutil = require('gulp-util'),
+	c = gutil.colors,
 	notification = require('gulp-notify'),
 	through = require('through2');
 
@@ -37,8 +38,7 @@ lint = {
 			files = [];
 
 		file.scsslint.results.forEach(function(result) {
-			var base = path.basename(file.path),
-				c = gutil.colors;
+			var base = path.basename(file.path);
 
 			files.indexOf(base) < 0 && files.push(base);
 
@@ -62,8 +62,7 @@ lint = {
 /* everything else handler */
 generic = {
 	error: function(err) {
-		var c = gutil.colors,
-			alert = {};
+		var alert = {};
 
 		if(err.fileName) err.file = err.fileName; // standardise
 
@@ -130,8 +129,7 @@ generic = {
 
 			if(opt.type == 'bad') opt.color = 'cyan';
 
-			var c = gutil.colors,
-				start = (opt.type == 'good' ? c.green('✔') : c.red('✘')) + ' ',
+			var start = (opt.type == 'good' ? c.green('✔') : c.red('✘')) + ' ',
 				filename = file ? path.basename(file.relative) + (opt.space ? ' ' : '') : '';
 
 			if(opt.color in c) filename = c[opt.color](filename);
