@@ -1,27 +1,38 @@
 var gulp = require('gulp'),
-	bs = require('browser-sync').create(),
-	path = require('path'),
 
-	p = require('gulp-load-plugins')({
-		pattern: ['gulp-*', 'gulp.*'],
-		replaceString: /\bgulp[\-.]/,
-		rename: {
-			'gulp-tinypng-compress': 'tinypng',
-			'gulp-combine-mq': 'cmq',
-			'gulp-util': 'gutil',
-			'gulp-css-globbing': 'glob'
-		}
-	}),
-
-	handle = require('./gulp/lib/handlers.js'), // custom handlers
-
-	c = p.gutil.colors,
+	/* env */
 	pkg = require('./package.json'),
 	bigfork = require(process.env.HOME + '/bigfork.json'),
 
+	/* util */
+	path = require('path'),
+	handle = require('./gulp/lib/handlers.js'), // custom handlers,
+	gutil = require('gulp-util'),
+	color = gutil.colors,
+	notify = require('gulp-notify'),
+	plumber = require('gulp-plumber'),
+	concat = require('gulp-concat'),
+	watch = require('gulp-watch'),
+	browsersync = require('browser-sync').create(),
+
+	/* css */
+	scsslint = require('gulp-scsslint'),
+	sass = require('gulp-sass'),
+	autoprefix = require('gulp-autoprefixer'),
+	cmq = require('gulp-combine-mq'),
+	glob = require('gulp-css-globbing'),
+
+	/* js */
+	jshint  = require('gulp-jshint'),
+	uglify = require('gulp-uglify'),
+	babel = require('gulp-babel'),
+
+	/* img */
+	tinypng = require('gulp-tinypng-compress'),
+
 	// options!
 	opt = {
-		scss_lint: {
+		scsslint: {
 			src: ['themes/' + pkg.name + '/scss/**/!(_reset|_normalize)*.scss']
 		},
 		css: {
@@ -44,52 +55,50 @@ var gulp = require('gulp'),
 		}
 	};
 
-/* config getter */
-var config = function(name) {
-	return opt[name.replace('-', '_')];
-};
-
 /* begin tasks */
 
 // lint css
 gulp.task('scss-lint', function() {
-	var conf = config('scss-lint');
+	var conf = opt.scsslint;
+
 	return gulp.src(conf.src)
-		.pipe(p.scsslint('.scss-lint.yml'))
-		.pipe(p.scsslint.reporter(handle.lint.error))
+		.pipe(scsslint('.scss-lint.yml'))
+		.pipe(scsslint.reporter(handle.lint.error))
 });
 
 // compile scss into css
 gulp.task('css', ['scss-lint'], function() {
-	var conf = config('css');
+	var conf = opt.css;
+
 	return gulp.src(conf.src)
-		.pipe(p.plumber({errorHandler: handle.generic.error}))
-		.pipe(p.glob({
+		.pipe(plumber({errorHandler: handle.generic.error}))
+		.pipe(glob({
 			extensions: ['.scss']
 		}))
-		.pipe(p.sass())
-		.pipe(p.autoprefixer({
+		.pipe(sass())
+		.pipe(autoprefix({
 			browsers: ['last 2 versions', 'ie 8', 'ie 9', 'android 2.1']
 		}))
-		.pipe(p.cmq())
+		.pipe(cmq())
 		.pipe(handle.minify())
 		.pipe(handle.generic.log('compiled'))
 		.pipe(handle.notify.show('CSS compiled - <%= file.relative %>'))
 		.pipe(gulp.dest(conf.dest))
-		.pipe(bs.stream());
+		.pipe(browsersync.stream());
 });
 
 // lint, concat and uglify javascript
 gulp.task('js', function() {
-	var conf = config('js');
+	var conf = opt.js;
+
 	return gulp.src(conf.src)
-		.pipe(p.plumber({errorHandler: handle.generic.error}))
-		.pipe(p.jshint({
+		.pipe(plumber({errorHandler: handle.generic.error}))
+		.pipe(jshint({
 			esnext: true
 		}))
-		.pipe(p.babel())
-		.pipe(p.uglify())
-		.pipe(p.concat('app.min.js'))
+		.pipe(babel())
+		.pipe(uglify())
+		.pipe(concat('app.min.js'))
 		.pipe(handle.generic.log('compiled'))
 		.pipe(handle.notify.show('JS compiled - <%= file.relative %>'))
 		.pipe(gulp.dest(conf.dest));
@@ -97,10 +106,11 @@ gulp.task('js', function() {
 
 // compress pngs
 gulp.task('png', function() {
-	var conf = config('png');
+	var conf = opt.png;
+
 	return gulp.src(conf.src)
-		.pipe(p.plumber({errorHandler: handle.generic.error}))
-		.pipe(p.tinypng({
+		.pipe(plumber({errorHandler: handle.generic.error}))
+		.pipe(tinypng({
 			key: bigfork.tinypng,
 			checkSigs: true,
 			sigFile: 'themes/' + pkg.name + '/images/.tinypng-sigs'
@@ -122,19 +132,25 @@ gulp.task('default', function() {
 
 // watch tasks
 gulp.task('watch', function() {
-	bs.init({
-		proxy: 'http://' + path.basename(__dirname) + '.dev'
-	});
+	var parent = path.basename(path.join(__dirname, '../'));
 
-	p.watch('themes/' + pkg.name + '/scss/**/*.scss', function() {
+	if(parent == 'Devsites') {
+		browsersync.init({
+			proxy: 'http://' + path.basename(__dirname) + '.dev'
+		});
+	} else {
+		handle.generic.log('Not in Devsites - skipping BrowserSync', {type: 'bad', pipe: false});
+	}
+
+	watch('themes/' + pkg.name + '/scss/**/*.scss', function() {
 		gulp.start('css');
 	});
 
-	p.watch('themes/' + pkg.name + '/js/src/*.js', function() {
+	watch('themes/' + pkg.name + '/js/src/*.js', function() {
 		gulp.start('js');
 	});
 
-	p.watch('themes/' + pkg.name + '/images/src/**/*.png', function() {
+	watch('themes/' + pkg.name + '/images/src/**/*.png', function() {
 		gulp.start('png');
 	});
 });

@@ -181,11 +181,3 @@ module.exports = {
 	generic: generic,
 	minify: minify
 };
-
-/* log supress for tinypng */
-var cl = console.log;
-console.log = function() {
-    var args = Array.prototype.slice.call(arguments);
-    if (args.length > 1 && args[1].toString().match(/^gulp-tinypng/)) return;
-    return cl.apply(console, args);
-};
