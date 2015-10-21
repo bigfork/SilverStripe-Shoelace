@@ -6,9 +6,7 @@ var gulp = require('gulp'),
 
 	/* util */
 	path = require('path'),
-	handle = require('./gulp/lib/handlers.js'), // custom handlers,
-	gutil = require('gulp-util'),
-	notify = require('gulp-notify'),
+	handle = require('gulp-bigfork-handler')(pkg), // custom handlers,
 	plumber = require('gulp-plumber'),
 	concat = require('gulp-concat'),
 	watch = require('gulp-watch'),

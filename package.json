@@ -3,9 +3,7 @@
   "version": "0.1.0",
   "devDependencies": {
     "gulp": "3.x",
-    "through2": "0.6.x",
-    "gulp-util": "3.0.x",
-    "gulp-notify": "2.x",
+    "gulp-bigfork-handler": "bigfork/gulp-handler",
     "gulp-plumber": "1.0.x",
     "gulp-scsslint": "0.x",
     "gulp-sass": "2.x",
