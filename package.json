@@ -8,7 +8,7 @@
     "gulp-scsslint": "0.x",
     "gulp-sass": "2.x",
     "gulp-autoprefixer": "3.x",
-    "gulp-combine-mq": "0.x",
+    "gulp-combine-mq": "frontendfriends/gulp-combine-mq#ae31a50",
     "gulp-jshint": "1.x",
     "gulp-uglify": "1.x",
     "gulp-concat": "2.x",
