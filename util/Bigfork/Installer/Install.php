@@ -186,11 +186,7 @@ class Install
         $old = json_decode($json, true);
         $new = array(
             'name' => $config['theme'],
-            'description' => $config['description'],
-            'sql' => array(
-                'name' => $config['sql-name'],
-                'host' => $config['sql-host']
-            )
+            'description' => $config['description']
         );
 
         $contents = array_merge($old, $new);
