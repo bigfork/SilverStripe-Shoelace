@@ -1,0 +1,11 @@
+/* CMS tweaks 
+-------------------------------------------------------------------------------- */
+
+#Form_AddForm_PageType .disabled {
+	display: none !important;
+}
+
+#Menu-Help,
+#Menu-ReportAdmin {
+	display: none;
+}

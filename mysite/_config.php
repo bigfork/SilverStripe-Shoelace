@@ -19,8 +19,8 @@ require_once 'conf/ConfigureFromEnv.php';
 // Set the site locale
 i18n::set_locale('en_GB');
 
-// Set default password - remove this after creating a proper user
-Security::setDefaultAdmin('admin', 'password');
+// Load extra CMS for admin
+LeftAndMain::require_css(basename(__DIR__) . '/css/cms.css');
 
 // TinyMCE Config
 $config = HtmlEditorConfig::get('cms');
