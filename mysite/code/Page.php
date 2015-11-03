@@ -24,6 +24,7 @@ class Page_Controller extends ContentController {
 
 		$themeDir = 'themes/' . Config::inst()->get('SSViewer', 'theme');
 
+		Requirements::set_suffix_requirements(false);
 		Requirements::combine_files(
 			'application.js',
 			array (
