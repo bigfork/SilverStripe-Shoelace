@@ -21,10 +21,11 @@ _resampled
 /lumberjack/
 /metatitle/
 /node_modules/
+/reports/
 /securitytemplates/
 /silverstripe-loggerbridge/
 /silverstripe-menumanager/
 /silverstripe-responsive-images/
+/siteconfig/
 /tagfield/
 /vendor/
-/yepnopesilverstripe/
