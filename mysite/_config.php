@@ -13,6 +13,8 @@ if (!defined('SS_DATABASE_NAME')) {
 	define('SS_DATABASE_NAME', $config->get('Database', 'name'));
 }
 
+define('SS_DATABASE_CLASS', 'MySQLPDODatabase');
+
 // load config from environment
 require_once 'conf/ConfigureFromEnv.php';
 
