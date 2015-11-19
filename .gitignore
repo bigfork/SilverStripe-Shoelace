@@ -5,6 +5,7 @@ _resampled
 *.sublime-*
 *.map
 /*.log
+/.site
 /.gulp/
 /.sass-cache/
 /betternavigator/
