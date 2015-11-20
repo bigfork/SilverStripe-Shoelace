@@ -7,5 +7,5 @@
 
 #Menu-Help,
 #Menu-ReportAdmin {
-	display: none;
+	display: none !important;
 }
