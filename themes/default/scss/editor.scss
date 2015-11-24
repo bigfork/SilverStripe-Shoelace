@@ -8,10 +8,3 @@ $_is_ie: false;
 @import 'includes/variables';
 @import 'includes/typography';
 
-body {
-	// scss-lint:disable SelectorFormat
-	
-	&.mceContentBody {
-		font-size: 13px;
-	}
-}
