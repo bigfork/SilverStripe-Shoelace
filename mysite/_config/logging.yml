@@ -1,3 +1,7 @@
+---
+Name: 'logging'
+After: 'silverstripe-loggerbridge'
+---
 Injector:
     Monolog:
         class: Monolog\Logger
@@ -11,3 +15,13 @@ Injector:
         class: Camspiers\LoggerBridge\LoggerBridge
         constructor:
             0: '%$Monolog'
+---
+Name: 'livelogging'
+After: '#logging'
+Except:
+  environment: dev
+---
+Injector:
+  LoggerBridge:
+    properties:
+      ErrorReporter: '%$LoggerBridgeDebugErrorReporter'
