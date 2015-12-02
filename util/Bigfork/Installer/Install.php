@@ -202,19 +202,38 @@ class Install
      */
     protected static function updateYamlConfig($filePath, array $config)
     {
-        $yamlConfig = Spyc::YAMLLoad(file_get_contents($filePath));
+        $contents = file_get_contents($filePath);
+        $blocks = preg_split('/^---$/m', $contents, -1, PREG_SPLIT_NO_EMPTY);
 
-        // Update YAML config
-        $yamlConfig['SSViewer']['theme'] = $config['theme'];
-        
-        if (isset($config['sql-host']) || isset($config['sql-name'])) {
-            $yamlConfig['Database']['host'] = $config['sql-host'];
-            $yamlConfig['Database']['name'] = $config['sql-name'];
+        $mainBlock = false;
+        $parsedBlocks = array();
+        for ($i = 0; $i < count($blocks); $i++) {
+            $yamlConfig = Spyc::YAMLLoad($blocks[$i]);
+
+            // Flag that we've hit the "main" block we want to perform renaming on
+            if (isset($yamlConfig['Name']) && $yamlConfig['Name'] === 'default') {
+                $mainBlock = true;
+            } elseif ($mainBlock) {
+                // Update YAML config
+                $yamlConfig['SSViewer']['theme'] = $config['theme'];
+                
+                if (isset($config['sql-host']) || isset($config['sql-name'])) {
+                    $yamlConfig['Database']['host'] = $config['sql-host'];
+                    $yamlConfig['Database']['name'] = $config['sql-name'];
+                }
+
+                $mainBlock = false;
+            }
+
+            $parsedBlocks[] = $yamlConfig;
         }
 
         // Write our updated config file
-        $yaml = Spyc::YAMLDump($yamlConfig);
-        file_put_contents($filePath, $yaml);
+        $config = implode('', array_map(function($block) {
+            return Spyc::YAMLDump($block);
+        }, $parsedBlocks));
+
+        file_put_contents($filePath, $config);
     }
 
     /**
@@ -225,13 +244,34 @@ class Install
      */
     protected static function updateLoggingConfig($filePath, array $config)
     {
-        $yamlConfig = Spyc::YAMLLoad(file_get_contents($filePath));
+        $contents = file_get_contents($filePath);
+        $blocks = preg_split('/^---$/m', $contents, -1, PREG_SPLIT_NO_EMPTY);
 
-        $desc = $config['description'] ?: 'App';
-        $yamlConfig['Injector']['Monolog']['constructor'][0] = "'{$desc}'";
+        $mainBlock = false;
+        $parsedBlocks = array();
+        for ($i = 0; $i < count($blocks); $i++) {
+            $yamlConfig = Spyc::YAMLLoad($blocks[$i]);
 
-        $yaml = Spyc::YAMLDump($yamlConfig);
-        file_put_contents($filePath, $yaml);
+            // Flag that we've hit the "main" block we want to perform renaming on
+            if (isset($yamlConfig['Name']) && $yamlConfig['Name'] === 'logging') {
+                $mainBlock = true;
+            } elseif ($mainBlock) {
+                // Update YAML config
+                $desc = $config['description'] ?: 'App';
+                $yamlConfig['Injector']['Monolog']['constructor'][0] = "'{$desc}'";
+
+                $mainBlock = false;
+            }
+
+            $parsedBlocks[] = $yamlConfig;
+        }
+
+        // Write our updated config file
+        $config = implode('', array_map(function($block) {
+            return Spyc::YAMLDump($block);
+        }, $parsedBlocks));
+
+        file_put_contents($filePath, $config);
     }
 
     /**
