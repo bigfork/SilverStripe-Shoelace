@@ -2,7 +2,6 @@
     "require": {
         "camspiers/silverstripe-loggerbridge": "0.6.*",
         "feejin/silverstripe-securitytemplates": "^1.0",
-        "heyday/silverstripe-menumanager": "~2.1.0",
         "heyday/silverstripe-responsive-images": "0.1.*",
         "jonom/focuspoint": "1.1.*",
         "jonom/silverstripe-betternavigator": "2.0.*",
@@ -10,7 +9,6 @@
         "kinglozzer/htmleditornoalignment": "^1.0",
         "kinglozzer/htmleditoruploadfield": "^1.0",
         "kinglozzer/metatitle": "^1.0",
-        "silverstripe/blog": "^2.1",
         "silverstripe/cms": "~3.2.0",
         "silverstripe/framework": "~3.2.0",
         "silverstripe/googlesitemaps": "1.2.*",
