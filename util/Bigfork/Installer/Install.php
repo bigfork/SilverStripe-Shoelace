@@ -212,6 +212,7 @@ class Install
 
             // Flag that we've hit the "main" block we want to perform renaming on
             if (isset($yamlConfig['Name']) && $yamlConfig['Name'] === 'default') {
+                $yamlConfig['Name'] = $config['theme'];
                 $mainBlock = true;
             } elseif ($mainBlock) {
                 // Update YAML config
