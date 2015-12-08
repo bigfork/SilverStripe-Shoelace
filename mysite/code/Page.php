@@ -1,6 +1,21 @@
 <?php
 
 class Page extends SiteTree {
+	
+	/**
+	 * @return FieldList 
+	 */
+	public function getCMSFields() {
+		$self =& $this;
+		$this->beforeUpdateCMSFields(function($fields) use ($self) {
+			$homeURL = Config::inst()->get('RootURLController', 'default_homepage_link');
+			if (!Permission::check('ADMIN') && self->URLSegment === $homeURL) {
+				$fields->removeByName('URLSegment');
+			}
+		});
+		
+		return parent::getCMSFields();
+	}
 
 	/**
 	 * @return FieldList $fields
