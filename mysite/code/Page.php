@@ -9,7 +9,7 @@ class Page extends SiteTree {
 		$self =& $this;
 		$this->beforeUpdateCMSFields(function($fields) use ($self) {
 			$homeURL = Config::inst()->get('RootURLController', 'default_homepage_link');
-			if (!Permission::check('ADMIN') && self->URLSegment === $homeURL) {
+			if (!Permission::check('ADMIN') && $self->URLSegment === $homeURL) {
 				$fields->removeByName('URLSegment');
 			}
 		});
