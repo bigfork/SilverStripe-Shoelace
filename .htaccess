@@ -80,7 +80,7 @@ Options -Indexes
     RewriteEngine On
 
     # Force www.actualdomain.com with 301 redirects
-    # RewriteCond %{HTTP_HOST} !^.*\.(dev|proxylocal\.com)$ [NC]
+    # RewriteCond %{HTTP_HOST} !^.*\.(dev|devdomain\.co\.uk)$ [NC]
     # RewriteCond %{HTTP_HOST} !^www\.actualdomain\.com$ [NC]
     # RewriteRule ^(.*)$ http://www.actualdomain.com/$1 [R=301,L]
 
