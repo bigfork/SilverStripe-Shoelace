@@ -86,6 +86,10 @@ Options -Indexes
 
     RewriteBase '/'
 
+    # Force trailing slash
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^(.*)([^/])$ /$1$2/ [L,R=301]
+
     # SilverStripe rewrites - includes optional maintenance rule for the above
     RewriteCond %{REQUEST_URI} ^(.*)$
     RewriteCond %{REQUEST_FILENAME} !-f
