@@ -14,6 +14,7 @@
     "gulp-concat": "2.x",
     "gulp-tinypng-compress": "1.x",
     "gulp-css-globbing": "0.x",
+    "gulp-cssnano": "2.x",
     "gulp-babel": "5.x",
     "gulp-watch": "4.x",
     "browser-sync": "2.x"
