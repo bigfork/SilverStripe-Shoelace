@@ -8,25 +8,25 @@ var gulp = require('gulp'),
 	path = require('path'),
 	handle = require('gulp-bigfork-handler')(pkg), // custom handlers,
 	plumber = require('gulp-plumber'),
-	concat = require('gulp-concat'),
-	watch = require('gulp-watch'),
+	concat = null,
+	watch = null,
 	browsersync = require('browser-sync').create(),
 
 	/* css */
-	scsslint = require('gulp-scsslint'),
-	sass = require('gulp-sass'),
-	autoprefix = require('gulp-autoprefixer'),
-	cmq = require('gulp-combine-mq'),
-	glob = require('gulp-css-globbing'),
-	cssnano = require('gulp-cssnano'),
+	scsslint = null,
+	sass = null,
+	autoprefix = null,
+	cmq = null,
+	glob = null,
+	cssnano = null,
 
 	/* js */
-	jshint  = require('gulp-jshint'),
-	uglify = require('gulp-uglify'),
-	babel = require('gulp-babel'),
+	jshint  = null,
+	uglify = null,
+	babel = null,
 
 	/* img */
-	tinypng = require('gulp-tinypng-compress'),
+	tinypng = null,
 
 	// options!
 	opt = {
@@ -57,6 +57,8 @@ var gulp = require('gulp'),
 
 // lint css
 gulp.task('scss-lint', function() {
+	scsslint = require('gulp-scsslint');
+
 	var conf = opt.scsslint;
 
 	return gulp.src(conf.src)
@@ -66,6 +68,12 @@ gulp.task('scss-lint', function() {
 
 // compile scss into css
 gulp.task('css', ['scss-lint'], function() {
+	sass = require('gulp-sass');
+	autoprefix = require('gulp-autoprefixer');
+	cmq = require('gulp-combine-mq');
+	glob = require('gulp-css-globbing');
+	cssnano = require('gulp-cssnano');
+
 	var conf = opt.css;
 
 	return gulp.src(conf.src)
@@ -87,6 +95,11 @@ gulp.task('css', ['scss-lint'], function() {
 
 // lint, concat and uglify javascript
 gulp.task('js', function() {
+	concat = require('gulp-concat');
+	jshint  = require('gulp-jshint');
+	uglify = require('gulp-uglify');
+	babel = require('gulp-babel');
+
 	var conf = opt.js;
 
 	return gulp.src(conf.src)
@@ -104,6 +117,8 @@ gulp.task('js', function() {
 
 // compress pngs
 gulp.task('png', function() {
+	tinypng = require('gulp-tinypng-compress');
+
 	var conf = opt.png;
 
 	return gulp.src(conf.src)
@@ -130,6 +145,8 @@ gulp.task('default', function() {
 
 // watch tasks
 gulp.task('watch', function() {
+	watch = require('gulp-watch');
+
 	var parent = path.basename(path.join(__dirname, '../'));
 
 	if(parent == 'Devsites') {
