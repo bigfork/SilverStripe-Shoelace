@@ -86,7 +86,9 @@ gulp.task('css', ['scss-lint'], function() {
 			browsers: ['last 2 versions', 'ie 8', 'ie 9', 'android 2.1']
 		}))
 		.pipe(cmq())
-		.pipe(cssnano())
+		.pipe(cssnano({
+			zindex: false
+		}))
 		.pipe(handle.generic.log('compiled'))
 		.pipe(handle.notify.show('CSS compiled - <%= file.relative %>'))
 		.pipe(gulp.dest(conf.dest))
