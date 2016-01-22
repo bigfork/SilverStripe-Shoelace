@@ -13,3 +13,11 @@ Only:
 ---
 FocusPointImage:
   flush_on_change: true
+---
+Name: betterbuttonsconfig
+---
+BetterButtonsUtils:
+  create:
+    BetterButton_New: false
+  edit:
+    BetterButton_New: false
