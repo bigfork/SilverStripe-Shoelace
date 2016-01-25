@@ -1,6 +1,6 @@
 {
     "require": {
-        "camspiers/silverstripe-loggerbridge": "0.6.*",
+        "camspiers/silverstripe-loggerbridge": "^1.0",
         "feejin/silverstripe-securitytemplates": "^1.0",
         "heyday/silverstripe-responsive-images": "0.1.*",
         "jonom/focuspoint": "1.1.*",
