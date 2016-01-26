@@ -5,7 +5,7 @@
     "gulp": "3.x",
     "gulp-bigfork-handler": "bigfork/gulp-handler",
     "gulp-plumber": "1.0.x",
-    "gulp-scsslint": "0.x",
+    "gulp-scss-lint": "0.x",
     "gulp-sass": "2.x",
     "gulp-autoprefixer": "3.x",
     "gulp-combine-mq": "frontendfriends/gulp-combine-mq#ae31a50",
