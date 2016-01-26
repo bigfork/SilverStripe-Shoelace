@@ -129,7 +129,7 @@ linters:
     max_depth: 3
 
   SelectorFormat:
-    enabled: true
+    enabled: false
     convention: ^([^_-]+(__[^_-]+)?)(--[^_-]+)?$
 
   Shorthand:
