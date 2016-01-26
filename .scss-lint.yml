@@ -1,16 +1,29 @@
-# Default application configuration that all configurations inherit from.
 linters:
+  BangFormat:
+    enabled: true
+    space_before_bang: true
+    space_after_bang: false
+
+  BemDepth:
+    enabled: true
+    max_elements: 1
+
   BorderZero:
     enabled: true
+    convention: zero # or `none`
 
-  CapitalizationInSelector:
+  ChainedClasses:
     enabled: false
 
   ColorKeyword:
     enabled: true
 
+  ColorVariable:
+    enabled: true
+
   Comment:
     enabled: false
+    style: silent
 
   DebugStatement:
     enabled: true
@@ -18,8 +31,15 @@ linters:
   DeclarationOrder:
     enabled: true
 
+  DisableLinterReason:
+    enabled: false
+
   DuplicateProperty:
     enabled: false
+
+  ElsePlacement:
+    enabled: false
+    style: same_line # or 'new_line'
 
   EmptyLineBetweenBlocks:
     enabled: true
@@ -28,27 +48,44 @@ linters:
   EmptyRule:
     enabled: false
 
+  ExtendDirective:
+    enabled: false
+
   FinalNewline:
     enabled: true
     present: true
 
-  HexFormat:
+  HexLength:
+    enabled: false
+    style: sort # or 'long'
+
+  HexNotation:
+    enabled: true
+    style: lowercase # or 'uppercase'
+
+  HexValidation:
     enabled: true
 
   IdSelector:
     enabled: false
 
-  IdWithExtraneousSelector:
+  ImportantRule:
     enabled: true
 
-  ImportantRule:
-    enabled: false
+  ImportPath:
+    enabled: true
+    leading_underscore: false
+    filename_extension: false
 
   Indentation:
-    enabled: false
+    enabled: true
+    allow_non_nested_indentation: false
+    character: tab # or 'tab'
+    width: 1
 
   LeadingZero:
     enabled: false
+    style: exclude_zero # or 'include_zero'
 
   MergeableSelector:
     enabled: true
@@ -56,13 +93,21 @@ linters:
 
   NameFormat:
     enabled: false
-    convention: hyphenated_lowercase # or 'BEM', or a regex pattern
+    allow_leading_underscore: true
+    convention: ^_?([^_-]+(__[^_-]+)?)(--[^_-]+)?$ # or 'BEM', or a regex pattern
 
   NestingDepth:
     enabled: false
+    max_depth: 3
+    ignore_parent_selectors: false
 
   PlaceholderInExtend:
     enabled: true
+
+  PropertyCount:
+    enabled: false
+    include_nested: false
+    max_properties: 10
 
   PropertySortOrder:
     enabled: true
@@ -73,6 +118,9 @@ linters:
     enabled: true
     extra_properties: ['*behavior']
 
+  PseudoElement:
+    enabled: false
+
   QualifyingElement:
     enabled: false
 
@@ -81,18 +129,25 @@ linters:
     max_depth: 3
 
   SelectorFormat:
-    enabled: false
+    enabled: true
+    convention: ^([^_-]+(__[^_-]+)?)(--[^_-]+)?$
 
   Shorthand:
     enabled: true
 
   SingleLinePerProperty:
-    enabled: false
+    enabled: true
 
   SingleLinePerSelector:
     enabled: true
 
   SpaceAfterComma:
+    enabled: true
+
+  SpaceAroundOperator:
+    enabled: true
+
+  SpaceAfterVariableName:
     enabled: true
 
   SpaceAfterPropertyColon:
@@ -113,7 +168,16 @@ linters:
     enabled: true
     style: single_quotes # or double_quotes
 
-  TrailingSemicolonAfterPropertyValue:
+  TrailingSemicolon:
+    enabled: true
+
+  TrailingWhitespace:
+    enabled: true
+
+  TrailingZero:
+    enabled: false
+
+  TransitionAll:
     enabled: true
 
   UnnecessaryMantissa:
@@ -127,7 +191,7 @@ linters:
 
   VendorPrefix:
     enabled: false
-  
+
   VendorPrefixes:
     enabled: false
 
