@@ -54,7 +54,7 @@ Options -Indexes
 </IfModule>
 
 # ------------------------------------------------------------------------------
-# | Headers                                                                    |
+# | Headers/proxies                                                            |
 # ------------------------------------------------------------------------------
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -62,6 +62,14 @@ Options -Indexes
 
 <IfModule mod_headers.c>
     RequestHeader unset X-Forwarded-Host
+</IfModule>
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# Ensures that X-Forwarded-Host can only be used to determine the request host
+# name if the proxy's IP address is explicitly trusted
+
+<IfModule mod_env.c>
+    SetEnv BlockUntrustedIPs true
 </IfModule>
 
 # ##############################################################################
