@@ -92,16 +92,16 @@ body {
 	}
 
 	a {
+		color: $color__black;
+
 		&:link,
 		&:visited {
-			color: $color__black;
-			text-decoration: none;
+			text-decoration: underline;
 		}
 
 		&:hover,
 		&:active {
-			color: $color__black;
-			text-decoration: underline;
+			text-decoration: none;
 		}
 	}
 
