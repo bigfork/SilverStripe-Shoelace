@@ -23,12 +23,15 @@ _resampled
 /lumberjack/
 /metatitle/
 /node_modules/
+/opengraph/
 /redirectedurls/
 /reports/
 /securitytemplates/
+/share-care/
 /silverstripe-loggerbridge/
 /silverstripe-menumanager/
 /silverstripe-responsive-images/
 /siteconfig/
 /tagfield/
+/util/
 /vendor/
