@@ -1,3 +1,3 @@
 <footer class="footer">
-	Footer | Blank theme by <a href="http://www.bigfork.co.uk">Bigfork</a>
+	Footer<% if $ClassName = 'HomePage' %> | Blank theme by <a href="https://www.bigfork.co.uk">Bigfork</a><% end_if %>
 </footer>
