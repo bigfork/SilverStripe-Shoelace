@@ -7,26 +7,37 @@
 	// regex
 	var extensions = ['pdf', 'docx?', 'xlsx?', 'pp(t|s)x?', 'csv', 'rtf'];
 
-	$('a[href]').each(function() {
-		var self = this, pathname = this.pathname || '',
-		type = !this.protocol.match(/^mail/) ? 'Link' : 'Email';
+	$('a').each(function() {
+		if ($(this).data('track')) return false;
 
-		if(type == 'Link' && !(pathname.match(new RegExp('\.(' + extensions.join('|') + ')$', 'i'))) && this.host === window.location.host) return;
+		var self = this, pathname = this.pathname || '';
+		if( !(pathname.match(new RegExp('\.(' + extensions.join('|') + ')$', 'i'))) && this.host === window.location.host ) return;
 
-		$.each({action: 'Clicked', label: (pathname.replace(/(.*\/)+/,'') || this.innerHTML), value: d.title}, function(attr, val) {
-			$(self).attr('data-track', type).data(attr, val);
-		});
+		$.each({'event': 'Link', 'action': 'Clicked', 'label': (pathname.replace(/(.*\/)+/,'') || this.innerHTML), 'value': window.location.pathname}, function(attr, val) {
+			$(self).attr('data-track', 'link').data(attr, val);
+		}); 
+	});
+
+	$('a[href^=mailto]').each(function(){
+		var $self = $(this);
+
+		var address = $self.attr('href');
+		address = address.replace(/mailto:/, '');
+		$.trim(address);
+
+		$self.data('event', 'Email Link');
+		$self.data('action', address);
 	});
 
 	$(d).on('click', 'a[data-track]', function() {
 		var $this = $(this);
-		(typeof ga !== 'undefined') && ga('send', 'event', $this.data('track'), $this.data('action'), $this.data('value'), 1);
+		ga('send', 'event', $this.data('event'), $this.data('action'), $this.data('value'), 1);
 	});
 
 })(document);
 
 /**
- * Vanilla GA link handler
+ * Vanilla GA link handler - does not include emails
  * Stan Hutcheon - Bigfork Ltd.
  */
 
