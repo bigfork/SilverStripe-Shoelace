@@ -15,7 +15,7 @@
 
 		$.each({'event': 'Link', 'action': 'Clicked', 'label': (pathname.replace(/(.*\/)+/,'') || this.innerHTML), 'value': window.location.pathname}, function(attr, val) {
 			$(self).attr('data-track', 'link').data(attr, val);
-		}); 
+		});
 	});
 
 	$('a[href^=mailto]').each(function(){

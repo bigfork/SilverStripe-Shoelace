@@ -25,6 +25,10 @@ var gulp = require('gulp'),
 	uglify = null,
 	babel = null,
 
+	browserify = null,
+	source = null,
+	buffer = null,
+
 	/* img */
 	tinypng = null,
 
@@ -101,17 +105,21 @@ gulp.task('js', function() {
 	jshint  = require('gulp-jshint');
 	uglify = require('gulp-uglify');
 	babel = require('gulp-babel');
+	browserify = require('browserify');
+	source = require('vinyl-source-stream');
+	buffer = require('vinyl-buffer');
 
 	var conf = opt.js;
 
-	return gulp.src(conf.src)
+	return browserify('./themes/' + pkg.name + '/js/src/app.js').bundle()
 		.pipe(plumber({errorHandler: handle.generic.error}))
+		.pipe(source('app.min.js'))
+		.pipe(buffer())
 		.pipe(jshint({
 			esnext: true
 		}))
 		.pipe(babel())
 		.pipe(uglify())
-		.pipe(concat('app.min.js'))
 		.pipe(handle.generic.log('compiled'))
 		.pipe(handle.notify.show('JS compiled - <%= file.relative %>'))
 		.pipe(gulp.dest(conf.dest));
