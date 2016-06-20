@@ -3,7 +3,7 @@
  * ---------------------------------------------------------------------------------
  */
 
-require('./ga.bigfork'); // run our GA code
+require('./include/ga.bigfork'); // run our GA code
 
 /*
 var module = require('module'),

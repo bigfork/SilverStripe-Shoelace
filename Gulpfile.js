@@ -17,7 +17,7 @@ var gulp = require('gulp'),
 	sass = null,
 	autoprefix = null,
 	cmq = null,
-	glob = null,
+	cssglob = null,
 	cssnano = null,
 
 	/* js */
@@ -28,6 +28,7 @@ var gulp = require('gulp'),
 	browserify = null,
 	source = null,
 	buffer = null,
+	glob = null,
 
 	/* img */
 	tinypng = null,
@@ -49,10 +50,7 @@ var gulp = require('gulp'),
 			dest: 'themes/' + pkg.name + '/images/'
 		},
 		js: {
-			src: [
-				'themes/' + pkg.name + '/js/src/!(app)*.js',
-				'themes/' + pkg.name + '/js/src/app.js'
-			],
+			src: 'themes/' + pkg.name + '/js/src/*.js',
 			dest: 'themes/' + pkg.name + '/js/'
 		}
 	};
@@ -75,14 +73,14 @@ gulp.task('css', ['scss-lint'], function() {
 	sass = require('gulp-sass');
 	autoprefix = require('gulp-autoprefixer');
 	cmq = require('gulp-combine-mq');
-	glob = require('gulp-css-globbing');
+	cssglob = require('gulp-css-globbing');
 	cssnano = require('gulp-cssnano');
 
 	var conf = opt.css;
 
 	return gulp.src(conf.src)
 		.pipe(plumber({errorHandler: handle.generic.error}))
-		.pipe(glob({
+		.pipe(cssglob({
 			extensions: ['.scss']
 		}))
 		.pipe(sass())
@@ -108,21 +106,26 @@ gulp.task('js', function() {
 	browserify = require('browserify');
 	source = require('vinyl-source-stream');
 	buffer = require('vinyl-buffer');
+	glob = require('glob');
 
 	var conf = opt.js;
 
-	return browserify('./themes/' + pkg.name + '/js/src/app.js').bundle()
-		.pipe(plumber({errorHandler: handle.generic.error}))
-		.pipe(source('app.min.js'))
-		.pipe(buffer())
-		.pipe(jshint({
-			esnext: true
-		}))
-		.pipe(babel())
-		.pipe(uglify())
-		.pipe(handle.generic.log('compiled'))
-		.pipe(handle.notify.show('JS compiled - <%= file.relative %>'))
-		.pipe(gulp.dest(conf.dest));
+	glob(conf.src, function(err, files) {
+		files.map(function(entry) {
+			return browserify(entry).bundle()
+				.pipe(plumber({errorHandler: handle.generic.error}))
+				.pipe(source(path.basename(entry).replace(/\.js$/, '.min.js')))
+				.pipe(buffer())
+				.pipe(jshint({
+					esnext: true
+				}))
+				.pipe(babel())
+				.pipe(uglify())
+				.pipe(handle.generic.log('compiled'))
+				.pipe(handle.notify.show('JS compiled - <%= file.relative %>'))
+				.pipe(gulp.dest(conf.dest));
+		})
+	});
 });
 
 // compress pngs

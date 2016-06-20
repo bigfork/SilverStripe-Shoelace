@@ -20,7 +20,8 @@
     "browser-sync": "2.x",
     "browserify": "13.x",
     "vinyl-buffer": "1.x",
-    "vinyl-source-stream": "1.x"
+    "vinyl-source-stream": "1.x",
+    "glob": "7.x"
   },
   "description": "Default",
   "main": "Gulpfile.js",
