@@ -85,10 +85,11 @@ gulp.task('css', ['scss-lint'], function() {
 		}))
 		.pipe(sass())
 		.pipe(autoprefix({
-			browsers: ['last 2 versions', 'ie 8', 'ie 9', 'android 2.1']
+			browsers: ['ie >= 8', 'safari >= 8', '> 1%']
 		}))
 		.pipe(cmq())
 		.pipe(cssnano({
+			autoprefixer: false,
 			zindex: false
 		}))
 		.pipe(handle.generic.log('compiled'))
