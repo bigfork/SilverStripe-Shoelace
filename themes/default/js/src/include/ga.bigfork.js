@@ -1,6 +1,5 @@
 /**
  * GA link handler
- * Stan Hutcheon - Bigfork Ltd.
  */
 (function(d) {
 
@@ -11,13 +10,16 @@
 		if ($(this).data('track')) return false;
 
 		var self = this, pathname = this.pathname || '';
-		if( !(pathname.match(new RegExp('\.(' + extensions.join('|') + ')$', 'i'))) && this.host === window.location.host ) return;
+
+		// only track external links or links with approved extensions
+		if( ! (pathname.match(new RegExp('\.(' + extensions.join('|') + ')$', 'i'))) && this.host === window.location.host ) return;
 
 		$.each({'event': 'Link', 'action': 'Clicked', 'label': (pathname.replace(/(.*\/)+/,'') || this.innerHTML), 'value': window.location.pathname}, function(attr, val) {
-			$(self).attr('data-track', 'link').data(attr, val);
-		});
+			$(self).attr('data-track', 'link').attr('data-' + attr, val);
+		}); 
 	});
 
+	// track email links separately
 	$('a[href^=mailto]').each(function(){
 		var $self = $(this);
 
@@ -25,8 +27,8 @@
 		address = address.replace(/mailto:/, '');
 		$.trim(address);
 
-		$self.data('event', 'Email Link');
-		$self.data('action', address);
+		$self.attr('data-event', 'Email Link');
+		$self.attr('data-action', address);
 	});
 
 	$(d).on('click', 'a[data-track]', function() {
@@ -35,29 +37,3 @@
 	});
 
 })(document);
-
-/**
- * Vanilla GA link handler - does not include emails
- * Stan Hutcheon - Bigfork Ltd.
- */
-
-/*
-(function(d) {
-
-	// regex
-	var extensions = ['pdf', 'docx?', 'xlsx?', 'pp(t|s)x?', 'csv', 'rtf'];
-
-	for(var a = d.querySelectorAll('a[href]'), i = 0; i < a.length; i++) {
-		var self = a[i], pathname = self.pathname || '',
-		type = !self.protocol.match(/^mail/) ? 'Link' : 'Email',
-		attrs = {track: type, action: 'Clicked', label: (pathname.replace(/(.*\/)+/,'') || self.innerHTML), value: d.title};
-
-		if(type == 'Link' && !(pathname.match(new RegExp('\.(' + extensions.join('|') + ')$', 'i'))) && self.host === window.location.host) continue;
-
-		for(var p in attrs) {if(attrs.hasOwnProperty(p)) {
-			self.setAttribute('data-' + p, attrs[p]);
-		}}
-	}
-
-})(document);
-*/
