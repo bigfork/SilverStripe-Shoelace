@@ -14,7 +14,8 @@
 		// only track external links or links with approved extensions
 		if( ! (pathname.match(new RegExp('\.(' + extensions.join('|') + ')$', 'i'))) && this.host === window.location.host ) return;
 
-		$.each({'event': 'Link', 'action': 'Clicked', 'label': (pathname.replace(/(.*\/)+/,'') || this.innerHTML), 'value': window.location.pathname}, function(attr, val) {
+		// action is destination file or url, value is current page url
+		$.each({'event': 'Link Clicked', 'action': (pathname.replace(/(.*\/)+/,'') || this.innerHTML), 'value': window.location.pathname}, function(attr, val) {
 			$(self).attr('data-track', 'link').attr('data-' + attr, val);
 		}); 
 	});
