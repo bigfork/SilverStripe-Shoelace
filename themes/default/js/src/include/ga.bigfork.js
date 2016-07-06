@@ -22,6 +22,8 @@
 
 	// track email links separately
 	$('a[href^=mailto]').each(function(){
+		if ($(this).data('track')) return false;
+
 		var $self = $(this);
 
 		var address = $self.attr('href');
