@@ -5,7 +5,7 @@
 ---------------------------------------------------------------------------------- */
 @mixin font-size($size) {
 	font-size: $size * 1px;
-	font-size: ($size * 1rem/10);
+	font-size: ($size * 1rem / 10);
 }
 
 /* Column generator - generate % width column based on pixel values

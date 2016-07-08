@@ -59,13 +59,15 @@ var gulp = require('gulp'),
 
 // lint css
 gulp.task('scss-lint', function() {
-	scsslint = require('gulp-scsslint');
+	scsslint = require('gulp-scss-lint');
 
 	var conf = opt.scsslint;
 
 	return gulp.src(conf.src)
-		.pipe(scsslint('.scss-lint.yml'))
-		.pipe(scsslint.reporter(handle.lint.error))
+		.pipe(scsslint({
+			config: '.scss-lint.yml'
+		}))
+		.pipe(scsslint.failReporter())
 });
 
 // compile scss into css
