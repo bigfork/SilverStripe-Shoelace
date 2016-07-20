@@ -250,7 +250,7 @@ class Install
     protected static function installNpm(array $config)
     {
         $basePath = self::getBasepath();
-        $themePath = $base.'/themes/'.$config['theme'].'/';
+        $themePath = $basePath.'/themes/'.$config['theme'].'/';
 
         if (file_exists($themePath.'/package.json')) {
             $current = __DIR__;
