@@ -1,12 +1,11 @@
 var gulp = require('gulp'),
 
 	/* env */
-	pkg = require('./package.json'),
 	bigfork = require(process.env.HOME + '/bigfork.json'),
 
 	/* util */
 	path = require('path'),
-	handle = require('gulp-bigfork-handler')(pkg), // custom handlers,
+	handle = require('gulp-bigfork-handler'), // custom handlers,
 	plumber = require('gulp-plumber'),
 	concat = null,
 	watch = null,
@@ -59,13 +58,15 @@ var gulp = require('gulp'),
 
 // lint css
 gulp.task('scss-lint', function() {
-	scsslint = require('gulp-scsslint');
+	scsslint = require('gulp-scss-lint');
 
 	var conf = opt.scsslint;
 
 	return gulp.src(conf.src)
-		.pipe(scsslint('.scss-lint.yml'))
-		.pipe(scsslint.reporter(handle.lint.error))
+		.pipe(scsslint({
+			'config': '.scss-lint.yml',
+			'customReport': handle.lint.error
+		}));
 });
 
 // compile scss into css
@@ -161,8 +162,8 @@ gulp.task('default', function() {
 gulp.task('watch', function() {
 	watch = require('gulp-watch');
 
-	var sitepath = __dirname + '../../',
-		parent = path.basename(sitepath + '../');
+	var sitepath = path.join(__dirname, '/../../'),
+		parent = path.basename(path.join(sitepath, '../'));
 
 	if(parent == 'Devsites') {
 		browsersync.init({
@@ -172,15 +173,15 @@ gulp.task('watch', function() {
 		handle.generic.log('Not in Devsites - skipping BrowserSync', {type: 'bad', pipe: false});
 	}
 
-	watch('/scss/**/*.scss', function() {
+	watch('scss/**/*.scss', function() {
 		gulp.start('css');
 	});
 
-	watch('/js/src/*.js', function() {
+	watch('js/src/*.js', function() {
 		gulp.start('js');
 	});
 
-	watch('/images/src/**/*.png', function() {
+	watch('images/src/**/*.png', function() {
 		gulp.start('png');
 	});
 });
