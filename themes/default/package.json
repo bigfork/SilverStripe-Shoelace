@@ -1,6 +1,6 @@
 {
   "name": "default",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "devDependencies": {
     "gulp": "3.x",
     "gulp-bigfork-handler": "bigfork/gulp-handler",
@@ -22,8 +22,5 @@
     "vinyl-buffer": "1.x",
     "vinyl-source-stream": "1.x",
     "glob": "7.x"
-  },
-  "description": "Default",
-  "main": "Gulpfile.js",
-  "author": "Bigfork"
+  }
 }

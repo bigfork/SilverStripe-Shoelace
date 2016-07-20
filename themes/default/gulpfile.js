@@ -36,22 +36,22 @@ var gulp = require('gulp'),
 	// options!
 	opt = {
 		scsslint: {
-			src: ['themes/' + pkg.name + '/scss/**/!(_reset|_normalize)*.scss']
+			src: ['scss/**/!(_reset|_normalize)*.scss']
 		},
 		css: {
 			src: [
-				'themes/' + pkg.name + '/scss/editor.scss',
-				'themes/' + pkg.name + '/scss/style*.scss'
+				'scss/editor.scss',
+				'scss/style*.scss'
 			],
-			dest: 'themes/' + pkg.name + '/css/'
+			dest: 'css/'
 		},
 		png: {
-			src: ['themes/' + pkg.name + '/images/src/**/*.png'],
-			dest: 'themes/' + pkg.name + '/images/'
+			src: ['images/src/**/*.png'],
+			dest: 'images/'
 		},
 		js: {
-			src: 'themes/' + pkg.name + '/js/src/*.js',
-			dest: 'themes/' + pkg.name + '/js/'
+			src: 'js/src/*.js',
+			dest: 'js/'
 		}
 	};
 
@@ -140,7 +140,7 @@ gulp.task('png', function() {
 		.pipe(tinypng({
 			key: bigfork.tinypng,
 			checkSigs: true,
-			sigFile: 'themes/' + pkg.name + '/images/.tinypng-sigs'
+			sigFile: '/images/.tinypng-sigs'
 		}))
 		.pipe(handle.generic.log('compressed', false, function(file, msg, opt) {
 			if(file.skipped) {
@@ -161,25 +161,26 @@ gulp.task('default', function() {
 gulp.task('watch', function() {
 	watch = require('gulp-watch');
 
-	var parent = path.basename(path.join(__dirname, '../'));
+	var sitepath = __dirname + '../../',
+		parent = path.basename(sitepath + '../');
 
 	if(parent == 'Devsites') {
 		browsersync.init({
-			proxy: 'http://' + path.basename(__dirname) + '.dev'
+			proxy: 'http://' + path.basename(sitepath) + '.dev'
 		});
 	} else {
 		handle.generic.log('Not in Devsites - skipping BrowserSync', {type: 'bad', pipe: false});
 	}
 
-	watch('themes/' + pkg.name + '/scss/**/*.scss', function() {
+	watch('/scss/**/*.scss', function() {
 		gulp.start('css');
 	});
 
-	watch('themes/' + pkg.name + '/js/src/*.js', function() {
+	watch('/js/src/*.js', function() {
 		gulp.start('js');
 	});
 
-	watch('themes/' + pkg.name + '/images/src/**/*.png', function() {
+	watch('/images/src/**/*.png', function() {
 		gulp.start('png');
 	});
 });
