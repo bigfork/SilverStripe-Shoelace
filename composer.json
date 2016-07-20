@@ -22,7 +22,6 @@
         }
     },
     "scripts": {
-        "post-install-cmd": "Bigfork\\Installer\\Install::postInstall",
         "post-update-cmd": "Bigfork\\Installer\\Install::postUpdate"
     }
 }

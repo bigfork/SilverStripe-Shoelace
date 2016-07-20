@@ -28,7 +28,7 @@ class Install
      */
     public static function getBasepath()
     {
-        if (! self::$basePath) {
+        if (!self::$basePath) {
             $candidate = getcwd() ?: dirname(dirname(dirname(dirname(__FILE__))));
             self::$basePath = rtrim($candidate, DIRECTORY_SEPARATOR);
         }
@@ -66,39 +66,35 @@ class Install
         $envFile = self::ENVIRONMENT_FILE;
         $directory = realpath('.');
 
-        // Traverse directories "upwards" until we hit an unreadable directory
-        // or the root of the drive
+        // Traverse directories "upwards" searching for an environment file
         do {
-            // Add the trailing slash we need to concatenate properly
             $directory .= DIRECTORY_SEPARATOR;
 
-            // If it's readable, go ahead
-            if (is_readable($directory)) {
-                // If the file exists, return its path
-                if (file_exists($directory.$envFile)) {
-                    return $directory.$envFile;
-                }
-            } else {
-                // If we can't read the directory, give up
+            // // If we can't read the directory, give up
+            if (!is_readable($directory)) {
                 break;
+            }
+
+            // If the file exists, return its path
+            if (file_exists($directory.$envFile)) {
+                return $directory.$envFile;
             }
 
             // Go up a level
             $directory = dirname($directory);
-
-            // If these are the same, we've hit the root of the drive
-        } while (dirname($directory) != $directory);
+        } while (dirname($directory) != $directory); // If these are the same, we've hit the root of the drive
 
         return false;
     }
 
     /**
-     * Called after every "composer install" command.
+     * Called after every "composer update" command, or after a "composer install"
+     * command has been executed without a lock file present
      *
      * @param Composer\Script\Event $event
      * @return void
      */
-    public static function postInstall(Event $event)
+    public static function postUpdate(Event $event)
     {
         // Check environment type
         if (self::getEnvironmentType() !== 'dev') {
@@ -114,7 +110,6 @@ class Install
             if ($theme = $io->ask('Please specify the theme name: ')) {
                 $config = array(
                     'theme' => $theme,
-                    'description' => $io->ask('Please specify the project description: '),
                     'sql-host' => $io->ask('Please specify the database host: '),
                     'sql-name' => $io->ask('Please specify the database name: '),
                 );
@@ -129,8 +124,7 @@ class Install
     }
 
     /**
-     * Rename the 'default' theme directory, amend package name, description and
-     * settings in package.json (if present). Also updates a few SilverStripe
+     * Renames the 'default' theme directory and updates SilverStripe YAML
      * configuration files.
      *
      * @param array $config
@@ -224,8 +218,8 @@ class Install
                 $mainBlock = true;
             } elseif ($mainBlock) {
                 // Update YAML config
-                $desc = $config['description'] ?: 'App';
-                $yamlConfig['Injector']['Monolog']['constructor'][0] = "'{$desc}'";
+                $name = $config['theme'];
+                $yamlConfig['Injector']['Monolog']['constructor'][0] = "'{$name}'";
 
                 $mainBlock = false;
             }
