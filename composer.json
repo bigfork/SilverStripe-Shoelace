@@ -16,6 +16,9 @@
         "stnvh/silverstripe-infoboxes": "1.*",
         "unclecheese/betterbuttons" : "~1.2.0"
     },
+    "require-dev": {
+        "phpunit/phpunit": "~3.7"
+    },
     "autoload": {
         "psr-4": {
             "Bigfork\\": "util/Bigfork"
