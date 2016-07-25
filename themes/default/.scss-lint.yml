@@ -56,7 +56,6 @@ linters:
 
   NameFormat:
     enabled: false
-    convention: hyphenated_lowercase # or 'BEM', or a regex pattern
 
   NestingDepth:
     enabled: false
@@ -127,12 +126,6 @@ linters:
 
   VendorPrefix:
     enabled: false
-  
-  VendorPrefixes:
-    enabled: false
 
   ZeroUnit:
     enabled: true
-
-  Compass::*:
-    enabled: false

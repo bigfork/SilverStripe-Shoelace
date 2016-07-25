@@ -6,8 +6,6 @@ _resampled
 *.map
 /*.log
 /.site
-/.gulp/
-/.sass-cache/
 /betterbuttons/
 /betternavigator/
 /bfgoogleanalytics/
@@ -23,7 +21,6 @@ _resampled
 /infoboxes/
 /lumberjack/
 /metatitle/
-/node_modules/
 /opengraph/
 /redirectedurls/
 /reports/
