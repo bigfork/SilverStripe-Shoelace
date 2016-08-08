@@ -6,6 +6,9 @@ Database:
   name: 'default'
 SSViewer:
   theme: 'default'
+Page:
+  extensions:
+    - ShareCareFields
 ---
 Name: 'focuspoint-connector'
 Only:
