@@ -14,6 +14,7 @@ class Install
      * The file that contains environment information
      */
     const ENVIRONMENT_FILE = '_ss_environment.php';
+
     /**
      * @var string
      */
@@ -22,11 +23,12 @@ class Install
     /**
      * Get the document root for this project. Attempts getcwd(), falls back to
      * directory traversal.
+     *
      * @return string
      */
     public static function getBasepath()
     {
-        if (! self::$basePath) {
+        if (!self::$basePath) {
             $candidate = getcwd() ?: dirname(dirname(dirname(dirname(__FILE__))));
             self::$basePath = rtrim($candidate, DIRECTORY_SEPARATOR);
         }
@@ -37,6 +39,7 @@ class Install
     /**
      * Returns a text description of the current environment type. Assumes
      * 'live' if it can't determine an environment type.
+     *
      * @return string
      */
     protected static function getEnvironmentType()
@@ -55,6 +58,7 @@ class Install
     /**
      * Try to find a file that contains information about the environment. Scans
      * the current working directory and all parents looking for the file.
+     *
      * @return string|boolean
      */
     protected static function getEnvironmentFile()
@@ -62,38 +66,35 @@ class Install
         $envFile = self::ENVIRONMENT_FILE;
         $directory = realpath('.');
 
-        // Traverse directories "upwards" until we hit an unreadable directory
-        // or the root of the drive
+        // Traverse directories "upwards" searching for an environment file
         do {
-            // Add the trailing slash we need to concatenate properly
             $directory .= DIRECTORY_SEPARATOR;
 
-            // If it's readable, go ahead
-            if (is_readable($directory)) {
-                // If the file exists, return its path
-                if (file_exists($directory.$envFile)) {
-                    return $directory.$envFile;
-                }
-            } else {
-                // If we can't read the directory, give up
+            // // If we can't read the directory, give up
+            if (!is_readable($directory)) {
                 break;
+            }
+
+            // If the file exists, return its path
+            if (file_exists($directory.$envFile)) {
+                return $directory.$envFile;
             }
 
             // Go up a level
             $directory = dirname($directory);
-
-            // If these are the same, we've hit the root of the drive
-        } while (dirname($directory) != $directory);
+        } while (dirname($directory) != $directory); // If these are the same, we've hit the root of the drive
 
         return false;
     }
 
     /**
-     * Called after every "composer install" command.
-     * @param  Composer\Script\Event $event
+     * Called after every "composer update" command, or after a "composer install"
+     * command has been executed without a lock file present
+     *
+     * @param Composer\Script\Event $event
      * @return void
      */
-    public static function postInstall(Event $event)
+    public static function postUpdate(Event $event)
     {
         // Check environment type
         if (self::getEnvironmentType() !== 'dev') {
@@ -107,43 +108,26 @@ class Install
         if (file_exists($basePath.'/themes/default')) {
             // Only try to rename things if the user actually provides some info
             if ($theme = $io->ask('Please specify the theme name: ')) {
-                $host = strstr(gethostname(), '.local') ? gethostname() : null;
                 $config = array(
                     'theme' => $theme,
-                    'description' => $io->ask('Please specify the project description: '),
-                    'sql-host' => $io->ask('Please specify the database host: ', $host),
-                    'sql-name' => $io->ask('Please specify the database name: ', $theme),
+                    'sql-host' => $io->ask('Please specify the database host: '),
+                    'sql-name' => $io->ask('Please specify the database name: '),
                 );
 
                 self::applyConfiguration($config);
+                self::installNpm($config);
                 self::removeReadme();
             }
         }
 
-        self::installNpm();
         exit;
     }
 
     /**
-     * @param  Composer\Script\Event $event
-     * @return void
-     */
-    public static function postUpdate(Event $event)
-    {
-        // Check environment type
-        if (self::getEnvironmentType() !== 'dev') {
-            exit;
-        }
-
-        self::installNpm();
-        exit;
-    }
-
-    /**
-     * Rename the 'default' theme directory, amend package name, description and
-     * settings in package.json (if present). Also updates a few SilverStripe
+     * Renames the 'default' theme directory and updates SilverStripe YAML
      * configuration files.
-     * @param  array $config
+     *
+     * @param array $config
      * @return void
      */
     protected static function applyConfiguration(array $config)
@@ -154,12 +138,6 @@ class Install
         // Rename theme directory
         $themeBase = $base.'/themes/';
         rename($themeBase.'default/', $themeBase.$config['theme'].'/');
-
-        // Update package.json with provided information
-        $packagePath = $base.'/package.json';
-        if (file_exists($packagePath)) {
-            self::updateNpmPackage($packagePath, $config);
-        }
 
         // Update config.yml
         $configPath = $base.'/mysite/_config/config.yml';
@@ -175,29 +153,10 @@ class Install
     }
 
     /**
-     * Update package.json with relevant information in provided config.
-     * @param  string $filePath
-     * @param  array  $config
-     * @return void
-     */
-    protected static function updateNpmPackage($filePath, array $config)
-    {
-        $json = file_get_contents($filePath);
-        $old = json_decode($json, true);
-        $new = array(
-            'name' => $config['theme'],
-            'description' => $config['description']
-        );
-
-        $contents = array_merge($old, $new);
-        $json = json_encode($contents);
-        file_put_contents($filePath, $json);
-    }
-
-    /**
      * Update config.yml with relevant information in provided config.
-     * @param  string $filePath
-     * @param  array  $config
+     *
+     * @param string $filePath
+     * @param array $config
      * @return void
      */
     protected static function updateYamlConfig($filePath, array $config)
@@ -217,7 +176,7 @@ class Install
             } elseif ($mainBlock) {
                 // Update YAML config
                 $yamlConfig['SSViewer']['theme'] = $config['theme'];
-                
+
                 if (isset($config['sql-host']) || isset($config['sql-name'])) {
                     $yamlConfig['Database']['host'] = $config['sql-host'];
                     $yamlConfig['Database']['name'] = $config['sql-name'];
@@ -239,8 +198,9 @@ class Install
 
     /**
      * Update logging.yml with relevant information in provided config.
-     * @param  string $filePath
-     * @param  array  $config
+     *
+     * @param string $filePath
+     * @param array $config
      * @return void
      */
     protected static function updateLoggingConfig($filePath, array $config)
@@ -258,8 +218,8 @@ class Install
                 $mainBlock = true;
             } elseif ($mainBlock) {
                 // Update YAML config
-                $desc = $config['description'] ?: 'App';
-                $yamlConfig['Injector']['Monolog']['constructor'][0] = "'{$desc}'";
+                $name = $config['theme'];
+                $yamlConfig['Injector']['Monolog']['constructor'][0] = "'{$name}'";
 
                 $mainBlock = false;
             }
@@ -277,14 +237,18 @@ class Install
 
     /**
      * Runs "npm install" if a package.json file is present in the project.
+     *
+     * @param array $config
      * @return void
      */
-    protected static function installNpm()
+    protected static function installNpm(array $config)
     {
         $basePath = self::getBasepath();
-        if (file_exists($basePath.'/package.json')) {
+        $themePath = $basePath.'/themes/'.$config['theme'].'/';
+
+        if (file_exists($themePath.'/package.json')) {
             $current = __DIR__;
-            chdir($basePath);
+            chdir($themePath);
             echo shell_exec('npm install');
             chdir($current);
         }
@@ -292,6 +256,7 @@ class Install
 
     /**
      * Removes README.md from the project.
+     *
      * @return void
      */
     protected static function removeReadme()

@@ -9,6 +9,19 @@
 	display: none !important;
 }
 
+/* Visually hide things, but leave them accessible to screenreaders
+---------------------------------------------------------------------------------- */
+.h-hide-visually,
+%h-hide-visually {
+	position: absolute;
+	overflow: hidden;
+	width: 1px; height: 1px;
+	margin: -1px;
+	padding: 0;
+	border: 0;
+	clip: rect(0 0 0 0);
+}
+
 /* Clearfix - Assign class to element to self clear children
 ---------------------------------------------------------------------------------- */
 .group,
