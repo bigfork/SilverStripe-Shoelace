@@ -73,6 +73,9 @@ linters:
     enabled: true
     extra_properties: ['*behavior']
 
+  PseudoElement:
+    enabled: false
+
   QualifyingElement:
     enabled: false
 
