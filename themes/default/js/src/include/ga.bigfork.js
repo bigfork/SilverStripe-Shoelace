@@ -21,17 +21,20 @@
 	});
 
 	// track email links separately
-	$('a[href^=mailto]').each(function(){
-		if ($(this).data('track')) return false;
+	$('a[href^=mailto]').each(function(){ 
+ 
+		var $self = $(this),
+			trk = $self.attr('data-track'); 
 
-		var $self = $(this);
+		// override default link click behaviour unless a custom data-track value was assigned
+		if ( ! trk || trk == 'link') {
+			var address = $self.attr('href');
+			address = address.replace(/mailto:/, '');
+			$.trim(address);
 
-		var address = $self.attr('href');
-		address = address.replace(/mailto:/, '');
-		$.trim(address);
-
-		$self.attr('data-event', 'Email Link');
-		$self.attr('data-action', address);
+			$self.attr('data-event', 'Email Link');
+			$self.attr('data-action', address);
+		}
 	});
 
 	$(d).on('click', 'a[data-track]', function() {
