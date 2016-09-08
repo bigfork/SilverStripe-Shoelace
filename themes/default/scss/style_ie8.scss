@@ -1,5 +1,5 @@
-// YAY!
-$_is_ie: false;
+// Disables media queries
+$_is_ie: true;
 
 @import 'includes/reset';
 @import 'includes/normalize';
@@ -13,6 +13,7 @@ $_is_ie: false;
 
 * {
 	box-sizing: border-box;
+	*behavior: url('/polyfill/box-sizing/boxsizing.htc');
 }
 
 // Many styles
