@@ -1,27 +1,6 @@
 /* Mixins
 ---------------------------------------------------------------------------------- */
 
-/* REM sizing with PX fallback
----------------------------------------------------------------------------------- */
-@mixin font-size($size) {
-	font-size: $size * 1px;
-	font-size: ($size * 1rem / 10);
-}
-
-/* Column generator - generate % width column based on pixel values
----------------------------------------------------------------------------------- */
-@mixin column($colWidth, $totalWidth) {
-	width: ($colWidth / $totalWidth) * 100%;
-}
-
-/* IE conditional
----------------------------------------------------------------------------------- */
-@mixin ie() {
-	@if $_is_ie {
-		@content;
-	}
-}
-
 /* Media queries
 ---------------------------------------------------------------------------------- */
 @mixin respond($width, $minMax: 'min') {
