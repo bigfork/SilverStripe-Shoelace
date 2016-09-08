@@ -1,12 +1,10 @@
-// YAY!
-$_is_ie: false;
-
 @import 'includes/reset';
 @import 'includes/normalize';
 @import 'includes/variables';
 @import 'includes/typography';
 @import 'includes/mixins';
 @import 'includes/utils';
+@import '../node_modules/susy/sass/susy';
 
 /* Layout
 ---------------------------------------------------------------------------------- */
