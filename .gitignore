@@ -6,6 +6,7 @@ _resampled
 *.map
 /*.log
 /.site
+/assets/_combinedfiles/
 /betterbuttons/
 /betternavigator/
 /bfgoogleanalytics/
