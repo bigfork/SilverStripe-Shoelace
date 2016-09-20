@@ -124,20 +124,34 @@ body {
 ---------------------------------------------------------------------------------- */
 
 	img {
-		display: block;
-		max-width: 100%;
-		height: auto;
+		// scss-lint:disable SelectorFormat
+		max-width: 100%; height: auto;
+		vertical-align: middle;
 
 		&.left,
 		&.right,
-		&.leftAlone {
-			margin-bottom: 1em;
-		}
-
+		&.leftAlone,
 		&.center {
 			display: block;
 			float: none;
-			margin: 0 auto;
+			margin: 0 auto 1em;
+		}
+	}
+
+/* Image captions
+---------------------------------------------------------------------------------- */
+
+	.captionImage {
+		max-width: 100%;
+		margin-bottom: 1em;
+
+		img {
+			margin-bottom: 0;
+		}
+
+		p {
+			margin: 0.25em 0;
+			font-style: italic;
 		}
 	}
 }
@@ -145,6 +159,29 @@ body {
 @include respond(480px) {
 	.typography {
 		img {
+			&.left,
+			&.right,
+			&.leftAlone {
+				display: inline-block;
+			}
+
+			&.left {
+				float: left;
+				margin: 0 1em 0 0;
+			}
+
+			&.right {
+				float: right;
+				margin: 0 0 0 1em;
+			}
+
+			&.leftAlone {
+				float: left;
+				margin: 0 100% 0 0;
+			}
+		}
+
+		.captionImage {
 			&.left {
 				float: left;
 				margin: 0 1em 1em 0;
@@ -155,9 +192,13 @@ body {
 				margin: 0 0 1em 1em;
 			}
 
-			&.leftAlone {
-				float: left;
-				margin-right: 100%;
+			&.center {
+				margin: 0 auto 1em;
+			}
+
+			img {
+				float: none;
+				margin: 0;
 			}
 		}
 	}
