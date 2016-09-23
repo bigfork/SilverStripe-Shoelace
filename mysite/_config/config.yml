@@ -6,16 +6,11 @@ Database:
   name: 'default'
 SSViewer:
   theme: 'default'
+LeftAndMain:
+  help_link: 'http://silverstripe.bigfork.co.uk/v3/'
 Page:
   extensions:
     - ShareCareFields
----
-Name: 'focuspoint-connector'
-Only:
-  moduleexists: silverstripe-responsive-images
----
-FocusPointImage:
-  flush_on_change: true
 ---
 Name: betterbuttonsconfig
 ---

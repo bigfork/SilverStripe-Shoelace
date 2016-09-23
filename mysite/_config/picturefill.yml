@@ -1,6 +1,8 @@
 ---
 After: 'silverstripe-responsive-images/*'
 ---
+FocusPointImage:
+  flush_on_change: true
 Heyday\ResponsiveImages\ResponsiveImageExtension:
   sets:
     GallerySet:
