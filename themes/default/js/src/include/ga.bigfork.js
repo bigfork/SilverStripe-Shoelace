@@ -2,6 +2,9 @@
  * GA link handler
  */
 (function(d) {
+	if (!window.ga) {
+		return;
+	}
 
 	// regex
 	var extensions = ['pdf', 'docx?', 'xlsx?', 'pp(t|s)x?', 'csv', 'rtf'];
@@ -12,7 +15,7 @@
 		var self = this, pathname = this.pathname || '';
 
 		// only track external links or links with approved extensions
-		if( ! (pathname.match(new RegExp('\.(' + extensions.join('|') + ')$', 'i'))) && this.host === window.location.host ) return;
+		if( ! (pathname.match(new RegExp('\.(' + extensions.join('|') + ')$', 'i'))) && this.host === window.location.host) return;
 
 		// action is destination file or url, value is current page url
 		$.each({'event': 'Link Clicked', 'action': (pathname.replace(/(.*\/)+/,'') || this.innerHTML), 'value': window.location.pathname}, function(attr, val) {
@@ -41,5 +44,4 @@
 		var $this = $(this);
 		ga('send', 'event', $this.data('event'), $this.data('action'), $this.data('value'), 1);
 	});
-
 })(document);
