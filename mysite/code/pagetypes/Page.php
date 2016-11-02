@@ -1,5 +1,11 @@
 <?php
 
+use SilverStripe\CMS\Controllers\ContentController;
+use SilverStripe\CMS\Model\SiteTree;
+use SilverStripe\Core\Config\Config;
+use SilverStripe\Security\Permission;
+use SilverStripe\View\Requirements;
+
 class Page extends SiteTree
 {
     /**
@@ -41,7 +47,7 @@ class Page_Controller extends ContentController
     {
         parent::init();
 
-        $themeDir = 'themes/' . Config::inst()->get('SSViewer', 'theme');
+        $themeDir = 'themes/' . Config::inst()->get('SilverStripe\\View\\SSViewer', 'theme');
         Requirements::set_force_js_to_bottom(true);
         Requirements::set_suffix_requirements(false);
         Requirements::combine_files('application.js', [$themeDir . '/js/app.min.js']);

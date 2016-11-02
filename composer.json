@@ -1,20 +1,11 @@
 {
     "require": {
-        "bigfork/htmleditorsrcset": "^1.0",
-        "camspiers/silverstripe-loggerbridge": "^1.0",
-        "feejin/silverstripe-securitytemplates": "^1.0",
-        "heyday/silverstripe-responsive-images": "^1.0",
-        "jonom/focuspoint": "^1.1",
-        "jonom/silverstripe-share-care": "^1.2",
-        "kinglozzer/bfgoogleanalytics": "^1.1",
-        "kinglozzer/htmleditornoalignment": "^1.0",
-        "kinglozzer/metatitle": "^1.0",
-        "silverstripe/cms": "^3.3",
-        "silverstripe/framework": "^3.3",
-        "silverstripe/googlesitemaps": "^1.5",
-        "silverstripe-australia/gridfieldextensions": "^1.3",
-        "stnvh/silverstripe-infoboxes": "^1.2",
-        "unclecheese/betterbuttons": "^1.3"
+        "kinglozzer/metatitle": "^2.0",
+        "silverstripe/cms": "dev-master",
+        "silverstripe/framework": "dev-master",
+        "silverstripe/reports": "dev-master",
+        "silverstripe/siteconfig": "dev-master",
+        "symfony/yaml": "~2.7"
     },
     "require-dev": {
         "phpunit/phpunit": "~3.7"

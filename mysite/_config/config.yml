@@ -1,21 +1,12 @@
 ---
-Name: 'default'
+Name: default
 ---
 Database:
-  host: 'default'
-  name: 'default'
-SSViewer:
-  theme: 'default'
-LeftAndMain:
+  host: default
+  name: default
+SilverStripe\View\SSViewer:
+  theme: default
+SilverStripe\Admin\LeftAndMain:
+  extra_requirements_css:
+    - mysite/css/cms.css
   help_link: 'http://silverstripe.bigfork.co.uk/v3/'
-Page:
-  extensions:
-    - ShareCareFields
----
-Name: betterbuttonsconfig
----
-BetterButtonsUtils:
-  create:
-    BetterButton_New: false
-  edit:
-    BetterButton_New: false

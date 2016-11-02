@@ -1,4 +1,9 @@
 <?php
+
+use SilverStripe\Core\Config\Config;
+use SilverStripe\Forms\HTMLEditor\HtmlEditorConfig;
+use SilverStripe\i18n\i18n;
+
 $config = Config::inst();
 
 // optionally use a different database on dev
@@ -20,9 +25,6 @@ require_once 'conf/ConfigureFromEnv.php';
 
 // Set the site locale
 i18n::set_locale('en_GB');
-
-// Load extra CMS for admin
-LeftAndMain::require_css(basename(__DIR__) . '/css/cms.css');
 
 // TinyMCE Config
 $config = HtmlEditorConfig::get('cms');

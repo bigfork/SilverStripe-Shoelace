@@ -1,8 +1,10 @@
 <?php
+
 namespace Bigfork\Installer;
 
 use Composer\Script\Event;
-use Spyc;
+use Symfony\Component\Yaml\Dumper;
+use Symfony\Component\Yaml\Parser;
 
 /**
  * Our magic installererererer.
@@ -133,7 +135,6 @@ class Install
     protected static function applyConfiguration(array $config)
     {
         $base = self::getBasepath();
-        include $base.'/framework/thirdparty/spyc/spyc.php';
 
         // Rename theme directory
         $themeBase = $base.'/themes/';
@@ -143,12 +144,6 @@ class Install
         $configPath = $base.'/mysite/_config/config.yml';
         if (file_exists($configPath)) {
             self::updateYamlConfig($configPath, $config);
-        }
-
-        // Update info in logging configuration
-        $loggingPath = $base.'/mysite/_config/logging.yml';
-        if (file_exists($loggingPath)) {
-            self::updateLoggingConfig($loggingPath, $config);
         }
     }
 
@@ -162,75 +157,42 @@ class Install
     protected static function updateYamlConfig($filePath, array $config)
     {
         $contents = file_get_contents($filePath);
-        $blocks = preg_split('/^---$/m', $contents, -1, PREG_SPLIT_NO_EMPTY);
+        $documents = preg_split('/^---$/m', $contents, -1, PREG_SPLIT_NO_EMPTY);
 
-        $mainBlock = false;
-        $parsedBlocks = array();
-        for ($i = 0; $i < count($blocks); $i++) {
-            $yamlConfig = Spyc::YAMLLoad($blocks[$i]);
+        $mainDocument = false;
+        $parsedDocuments = array();
+        for ($i = 0; $i < count($documents); $i++) {
+            $parser = new Parser();
+            $yamlConfig = $parser->parse($documents[$i]);
 
-            // Flag that we've hit the "main" block we want to perform renaming on
+            // Flag that we've hit the "main" document we want to update
             if (isset($yamlConfig['Name']) && $yamlConfig['Name'] === 'default') {
                 $yamlConfig['Name'] = $config['theme'];
-                $mainBlock = true;
-            } elseif ($mainBlock) {
+                $mainDocument = true;
+            } elseif ($mainDocument) {
                 // Update YAML config
-                $yamlConfig['SSViewer']['theme'] = $config['theme'];
+                $yamlConfig['SilverStripe\View\SSViewer']['theme'] = $config['theme'];
 
                 if (isset($config['sql-host']) || isset($config['sql-name'])) {
                     $yamlConfig['Database']['host'] = $config['sql-host'];
                     $yamlConfig['Database']['name'] = $config['sql-name'];
                 }
 
-                $mainBlock = false;
+                $mainDocument = false;
             }
 
-            $parsedBlocks[] = $yamlConfig;
+            $parsedDocuments[] = $yamlConfig;
         }
 
         // Write our updated config file
-        $config = implode('', array_map(function($block) {
-            return Spyc::YAMLDump($block);
-        }, $parsedBlocks));
+        $dumper = new Dumper();
+        $dumper->setIndentation(2);
 
-        file_put_contents($filePath, $config);
-    }
-
-    /**
-     * Update logging.yml with relevant information in provided config.
-     *
-     * @param string $filePath
-     * @param array $config
-     * @return void
-     */
-    protected static function updateLoggingConfig($filePath, array $config)
-    {
-        $contents = file_get_contents($filePath);
-        $blocks = preg_split('/^---$/m', $contents, -1, PREG_SPLIT_NO_EMPTY);
-
-        $mainBlock = false;
-        $parsedBlocks = array();
-        for ($i = 0; $i < count($blocks); $i++) {
-            $yamlConfig = Spyc::YAMLLoad($blocks[$i]);
-
-            // Flag that we've hit the "main" block we want to perform renaming on
-            if (isset($yamlConfig['Name']) && $yamlConfig['Name'] === 'logging') {
-                $mainBlock = true;
-            } elseif ($mainBlock) {
-                // Update YAML config
-                $name = $config['theme'];
-                $yamlConfig['Injector']['Monolog']['constructor'][0] = "'{$name}'";
-
-                $mainBlock = false;
-            }
-
-            $parsedBlocks[] = $yamlConfig;
-        }
-
-        // Write our updated config file
-        $config = implode('', array_map(function($block) {
-            return Spyc::YAMLDump($block);
-        }, $parsedBlocks));
+        // Symfony YAML strips document markers, so we have to re-add them
+        $config = "---\n";
+        $config .= implode("---\n", array_map(function($document) use ($dumper) {
+            return $dumper->dump($document, 5);
+        }, $parsedDocuments));
 
         file_put_contents($filePath, $config);
     }
