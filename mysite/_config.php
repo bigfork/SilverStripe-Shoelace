@@ -1,7 +1,7 @@
 <?php
 
 use SilverStripe\Core\Config\Config;
-use SilverStripe\Forms\HTMLEditor\HtmlEditorConfig;
+use SilverStripe\Forms\HTMLEditor\TinyMCEConfig;
 use SilverStripe\i18n\i18n;
 
 $config = Config::inst();
@@ -27,17 +27,11 @@ require_once 'conf/ConfigureFromEnv.php';
 i18n::set_locale('en_GB');
 
 // TinyMCE Config
-$config = HtmlEditorConfig::get('cms');
-$config->disablePlugins('emotions', 'fullscreen');
-$config->setButtonsForLine(1, 'formatselect,separator,bullist,numlist,
-    separator,bold,italic,sup,sub,separator,sslink,unlink,anchor,separator,ssmedia,pasteword,
-    separator,spellchecker,undo,redo,code');
-$config->setButtonsForLine(2, 'tablecontrols');
-$config->setButtonsForLine(3, '');
+$config = TinyMCEConfig::get('cms');
+$config->enablePlugins(['anchor']);
+$config->setButtonsForLine(1, 'formatselect | bullist numlist | bold italic subscript superscript
+    | sslink unlink anchor ssmedia');
+$config->setButtonsForLine(2, 'table | pastetext undo redo | code');
 $config->setOptions([
-    'theme_advanced_blockformats' => 'p,h2,h3',
-    'paste_auto_cleanup_on_paste' => 'true',
-    'paste_remove_styles' => 'true',
-    'paste_strip_class_attributes' => 'all',
-    'paste_remove_spans' => 'true'
+    'block_formats' => 'Paragraph=p;Heading 2=h2;Heading 3=h3'
 ]);
