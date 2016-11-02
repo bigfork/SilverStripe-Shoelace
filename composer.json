@@ -1,5 +1,6 @@
 {
     "require": {
+        "kinglozzer/bfgoogleanalytics": "^2.0",
         "kinglozzer/metatitle": "^2.0",
         "silverstripe/cms": "dev-master",
         "silverstripe/framework": "dev-master",
