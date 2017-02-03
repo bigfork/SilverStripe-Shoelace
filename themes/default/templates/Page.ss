@@ -19,7 +19,6 @@
 	</script>
 </head>
 <body class="{$ClassName.LowerCase}">
-{$BetterNavigator}
 
 <div class="viewport">
 
