@@ -64,6 +64,10 @@ gulp.task('css', ['scss-lint'], function() {
 		.pipe(cmq())
 		.pipe(cssnano({
 			autoprefixer: false,
+			mergeRules: true,
+			reduceIdents: {
+				keyframes: false
+			},
 			zindex: false
 		}))
 		.pipe(handle.notify('CSS compiled - <%= file.relative %>'))
