@@ -88,7 +88,9 @@ gulp.task('js', function() {
 				.pipe(jshint({
 					esnext: true
 				}))
-				.pipe(babel())
+				.pipe(babel({
+					presets: ['es2015']
+				}))
 				.pipe(uglify())
 				.pipe(handle.notify('JS compiled - <%= file.relative %>'))
 				.pipe(handle.pipeLog('compiled'))
