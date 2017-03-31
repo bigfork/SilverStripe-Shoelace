@@ -4,6 +4,8 @@ Name: 'default'
 Database:
   host: 'default'
   name: 'default'
+Email:
+  admin_email: ''
 SSViewer:
   theme: 'default'
 LeftAndMain:
