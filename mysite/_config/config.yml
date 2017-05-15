@@ -10,6 +10,9 @@ SSViewer:
   theme: 'default'
 LeftAndMain:
   help_link: 'http://silverstripe.bigfork.co.uk/v3/'
+SiteConfig:
+  extensions:
+    - SiteConfigExtension
 Page:
   extensions:
     - ShareCareFields
