@@ -12,7 +12,6 @@
 	<link href="//www.google-analytics.com" rel="dns-prefetch" />
     <link href="//ajax.googleapis.com" rel="dns-prefetch" />
 	<link rel="shortcut icon" href="{$BaseURL}favicon.ico" />
-	<link rel="stylesheet" type="text/css" href="{$ThemeDir}/css/style.css" />
 
 	<script type="text/javascript">
 	(function(H){H.className=H.className.replace(/\\bnojs\\b/,'')})(document.documentElement)
