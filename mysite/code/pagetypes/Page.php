@@ -43,7 +43,11 @@ class Page_Controller extends ContentController
 
         $themeDir = 'themes/' . Config::inst()->get('SSViewer', 'theme');
         Requirements::set_force_js_to_bottom(true);
-        Requirements::css($themeDir . '/css/style.css');
+
+        if($this->URLSegment !== 'Security') {
+            Requirements::css($themeDir . '/css/style.css');
+        }
+
         Requirements::combine_files('application.js', [$themeDir . '/js/app.min.js']);
     }
 }
