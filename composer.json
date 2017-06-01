@@ -1,6 +1,7 @@
 {
     "require": {
         "bigfork/htmleditorsrcset": "^1.0",
+        "bigfork/simpleseo": "^1.0",
         "camspiers/silverstripe-loggerbridge": "^1.0",
         "feejin/silverstripe-securitytemplates": "^1.0",
         "heyday/silverstripe-responsive-images": "^1.0",
