@@ -16,6 +16,8 @@ Options -Indexes
 # Hidden files/folders (.git, .gitignore, .svn etc)
 
 <IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{REQUEST_URI} "!(^|/)\.well-known/([^./]+./?)+$" [NC]
     RewriteCond %{SCRIPT_FILENAME} -d [OR]
     RewriteCond %{SCRIPT_FILENAME} -f
     RewriteRule "(^|/)\." - [F]
