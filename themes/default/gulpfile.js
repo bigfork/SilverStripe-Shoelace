@@ -106,7 +106,7 @@ gulp.task('png', function() {
 		.pipe(tinypng({
 			key: bigfork.tinypng,
 			checkSigs: true,
-			sigFile: '/images/.tinypng-sigs'
+			sigFile: 'images/.tinypng-sigs'
 		}))
 		.pipe(handle.pipeLog('compressed'))
 		.pipe(handle.notify('Images compressed'))
