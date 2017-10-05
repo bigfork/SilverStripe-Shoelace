@@ -133,7 +133,7 @@ class Install
     protected static function applyConfiguration(array $config)
     {
         $base = self::getBasepath();
-        include $base.'/framework/thirdparty/spyc/spyc.php';
+        include $base.'/vendor/mustangostang/spyc/spyc.php';
 
         // Rename theme directory
         $themeBase = $base.'/themes/';
