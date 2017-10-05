@@ -3,6 +3,7 @@ namespace Bigfork\Installer;
 
 use Composer\Script\Event;
 use Spyc;
+require 'vendor/autoload.php';
 
 /**
  * Our magic installererererer.
@@ -133,7 +134,6 @@ class Install
     protected static function applyConfiguration(array $config)
     {
         $base = self::getBasepath();
-        include $base.'/framework/thirdparty/spyc/spyc.php';
 
         // Rename theme directory
         $themeBase = $base.'/themes/';
