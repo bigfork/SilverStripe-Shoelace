@@ -3,15 +3,14 @@
 <!--[if IE 9]>			<html lang="{$ContentLocale}" class="nojs lte-ie9"> <![endif]-->
 <!--[if gt IE 9]><!-->	<html lang="{$ContentLocale}" class="nojs"> <!--<![endif]-->
 <head>
-	<% base_tag %>
-	<title><% if MetaTitle %>{$MetaTitle.XML}<% else %>{$Title.XML} | {$SiteConfig.Title}<% end_if %></title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	{$MetaTags(false)}
-
 	<link href="//www.google-analytics.com" rel="dns-prefetch" />
-    <link href="//ajax.googleapis.com" rel="dns-prefetch" />
-	<link rel="shortcut icon" href="{$BaseURL}favicon.ico" />
+	<link href="//ajax.googleapis.com" rel="dns-prefetch" />
+
+	<title><% if MetaTitle %>{$MetaTitle.XML}<% else %>{$Title.XML} | {$SiteConfig.Title}<% end_if %></title>
+	<% base_tag %>
+	{$MetaTags(false)}
 
 	<% require themedCSS('style') %>
 
