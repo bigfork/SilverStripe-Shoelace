@@ -124,7 +124,7 @@ gulp.task('watch', function() {
 
 	if(parent == 'Devsites') {
 		browsersync.init({
-			proxy: 'http://' + path.basename(sitepath) + '.dev'
+			proxy: 'http://' + path.basename(sitepath) + '.test'
 		});
 	} else {
 		handle.log('Not in Devsites - skipping BrowserSync', {type: 'bad'});
