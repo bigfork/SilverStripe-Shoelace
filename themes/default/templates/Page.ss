@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<!--[if lte IE 8]>		<html lang="{$ContentLocale}" class="nojs lte-ie9 lte-ie8"> <![endif]-->
-<!--[if IE 9]>			<html lang="{$ContentLocale}" class="nojs lte-ie9"> <![endif]-->
-<!--[if gt IE 9]><!-->	<html lang="{$ContentLocale}" class="nojs"> <!--<![endif]-->
+<html lang="{$ContentLocale}" class="nojs">
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -30,8 +28,7 @@
 
 </div>
 
-<!--[if lt IE 9]><script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script><![endif]-->
-<!--[if gte IE 9]><!--><script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script><!--<![endif]-->
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 
 </body>
 </html>
