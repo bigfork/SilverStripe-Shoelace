@@ -6,6 +6,7 @@ _resampled
 *.map
 /*.log
 /.site
+/.idea/
 /.well-known/
 /assets/_combinedfiles/
 /betterbuttons/
