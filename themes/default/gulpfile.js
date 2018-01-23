@@ -8,7 +8,9 @@ const browsersync = require('browser-sync').create();
 const scsslint = require('gulp-scss-lint');
 const sass = require('gulp-sass');
 const autoprefix = require('gulp-autoprefixer');
-const cmq = require('gulp-combine-mq');
+const postcss = require('gulp-postcss');
+const mqpacker = require('css-mqpacker');
+const sortCSSmq = require('sort-css-media-queries');
 const cssglob = require('gulp-css-globbing');
 const cssnano = require('gulp-cssnano');
 const jshint  = require('gulp-jshint');
@@ -52,15 +54,19 @@ gulp.task('scss-lint', function() {
 
 // compile scss into css
 gulp.task('css', ['scss-lint'], function() {
+	const mediaQueryPacker = mqpacker({
+		sort: sortCSSmq
+	});
+
 	return gulp.src(opt.css.src)
 		.pipe(cssglob({
 			extensions: ['.scss']
 		}))
 		.pipe(sass().on('error', handle.sassReporter))
+		.pipe(postcss([mediaQueryPacker]))
 		.pipe(autoprefix({
 			browsers: ['ie >= 8', 'safari >= 8', '> 1%']
 		}))
-		.pipe(cmq())
 		.pipe(cssnano({
 			autoprefixer: false,
 			mergeRules: true,
@@ -84,10 +90,10 @@ gulp.task('js', function() {
 	glob(opt.js.src, function(err, files) {
 		files.map(function(entry) {
 			return browserify({
-				entries: entry,
-				debug: true,
-				transform: [babelifyTransform]
-			}).bundle()
+					entries: entry,
+					debug: true,
+					transform: [babelifyTransform]
+				}).bundle()
 				.on('error', handle.genericReporter)
 				.pipe(plumber({errorHandler: handle.genericReporter}))
 				.pipe(source(path.basename(entry).replace(/\.js$/, '.min.js')))
