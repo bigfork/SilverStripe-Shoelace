@@ -3,7 +3,6 @@ const bigfork = require(process.env.HOME + '/bigfork.json');
 const path = require('path');
 const handle = require('./handlers');
 const plumber = require('gulp-plumber');
-const concat = require('gulp-concat');
 const watch = require('gulp-watch');
 const browsersync = require('browser-sync').create();
 const scsslint = require('gulp-scss-lint');
@@ -14,8 +13,8 @@ const cssglob = require('gulp-css-globbing');
 const cssnano = require('gulp-cssnano');
 const jshint  = require('gulp-jshint');
 const uglify = require('gulp-uglify');
-const babel = require('gulp-babel');
 const browserify = require('browserify');
+const babelify = require('babelify');
 const source = require('vinyl-source-stream');
 const buffer = require('vinyl-buffer');
 const glob = require('glob');
@@ -76,20 +75,25 @@ gulp.task('css', ['scss-lint'], function() {
 		.pipe(browsersync.stream());
 });
 
-// lint, concat and uglify javascript
+// lint and uglify javascript
 gulp.task('js', function() {
+	const babelifyTransform = babelify.configure({
+		presets: ['env']
+	});
+
 	glob(opt.js.src, function(err, files) {
 		files.map(function(entry) {
-			return browserify(entry).bundle()
+			return browserify({
+				entries: entry,
+				debug: true,
+				transform: [babelifyTransform]
+			}).bundle()
 				.on('error', handle.genericReporter)
 				.pipe(plumber({errorHandler: handle.genericReporter}))
 				.pipe(source(path.basename(entry).replace(/\.js$/, '.min.js')))
 				.pipe(buffer())
 				.pipe(jshint({
 					esnext: true
-				}))
-				.pipe(babel({
-					presets: ['es2015']
 				}))
 				.pipe(uglify())
 				.pipe(handle.notify('JS compiled - <%= file.relative %>'))
