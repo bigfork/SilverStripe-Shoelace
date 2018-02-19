@@ -20,14 +20,14 @@
 		// action is destination file or url, value is current page url
 		$.each({'event': 'Link Clicked', 'action': (pathname.replace(/(.*\/)+/,'') || this.innerHTML), 'value': window.location.pathname}, function(attr, val) {
 			$(self).attr('data-track', 'link').attr('data-' + attr, val);
-		}); 
+		});
 	});
 
 	// track email links separately
-	$('a[href^=mailto]').each(function(){ 
- 
+	$('a[href^=mailto]').each(function(){
+
 		var $self = $(this),
-			trk = $self.attr('data-track'); 
+			trk = $self.attr('data-track');
 
 		// override default link click behaviour unless a custom data-track value was assigned
 		if ( ! trk || trk == 'link') {
@@ -42,6 +42,21 @@
 
 	$(d).on('click', 'a[data-track]', function() {
 		var $this = $(this);
-		ga('send', 'event', $this.data('event'), $this.data('action'), $this.data('value'), 1);
+		if ($this.data('event') == 'Email Link') {
+			ga('send', 'event', {
+				eventCategory: $this.data('event'),
+				eventAction: $this.data('action'),
+				eventLabel: $this.data('value'),
+				eventValue: 1
+			});
+		} else {
+			ga('send', 'event', {
+			    eventCategory: $this.data('event'),
+			    eventAction: $this.data('action'),
+			    eventLabel: $this.data('value'),
+			    eventValue: 1,
+			    transport: 'beacon'
+			});
+		}
 	});
 })(document);
