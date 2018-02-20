@@ -10,6 +10,9 @@
 	<% base_tag %>
 	{$MetaTags(false)}
 
+	<% if $PaginationAbsoluteNextLink %><link rel="next" href="{$PaginationAbsoluteNextLink}" /><% end_if %>
+	<% if $PaginationAbsolutePrevLink %><link rel="prev" href="{$PaginationAbsolutePrevLink}" /><% end_if %>
+
 	<% require themedCSS('style') %>
 
 	<script type="text/javascript">
