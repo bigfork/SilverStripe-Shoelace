@@ -18,10 +18,10 @@ const jshint  = require('gulp-jshint');
 const uglify = require('gulp-uglify');
 const babelify = require('babelify');
 const browserify = require('browserify');
-const source = require('vinyl-source-stream');
 const buffer = require('vinyl-buffer');
-const glob = require('glob');
 const tinypng = require('gulp-tinypng-compress');
+const tap = require('gulp-tap');
+const rename = require('gulp-rename');
 
 const opt = {
 	scsslint: {
@@ -92,26 +92,24 @@ gulp.task('js', function() {
 		presets: ['env']
 	});
 
-	glob(opt.js.src, function(err, files) {
-		files.map(function(entry) {
-			return browserify({
-				entries: entry,
+	return gulp.src(opt.js.src, {read: false})
+		.on('error', handle.genericReporter)
+		.pipe(plumber({errorHandler: handle.genericReporter}))
+		.pipe(tap(function (file) {
+			file.contents = browserify(file.path, {
 				debug: true,
 				transform: [babelifyTransform]
-			}).bundle()
-				.on('error', handle.genericReporter)
-				.pipe(plumber({errorHandler: handle.genericReporter}))
-				.pipe(source(path.basename(entry).replace(/\.js$/, '.min.js')))
-				.pipe(buffer())
-				.pipe(jshint({
-					esnext: true
-				}))
-				.pipe(uglify())
-				.pipe(handle.notify('JS compiled - <%= file.relative %>'))
-				.pipe(handle.pipeLog('compiled'))
-				.pipe(gulp.dest(opt.js.dest));
-		})
-	});
+			}).bundle();
+		}))
+		.pipe(buffer())
+		.pipe(jshint({
+			esnext: true
+		}))
+		.pipe(uglify())
+		.pipe(handle.notify('JS compiled - <%= file.relative %>'))
+		.pipe(handle.pipeLog('compiled'))
+		.pipe(rename({suffix: '.min'}))
+		.pipe(gulp.dest(opt.js.dest));
 });
 
 // compress pngs
