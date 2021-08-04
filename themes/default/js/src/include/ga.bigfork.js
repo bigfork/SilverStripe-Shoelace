@@ -1,11 +1,7 @@
 /**
- * GA link handler
+ * GA link handler for analytics.js
  */
 (function(d) {
-	if (!window.ga) {
-		return;
-	}
-
 	// regex
 	var extensions = ['pdf', 'docx?', 'xlsx?', 'pp(t|s)x?', 'csv', 'rtf'];
 
@@ -41,7 +37,12 @@
 	});
 
 	$(d).on('click', 'a[data-track]', function() {
+		if (!window.ga) {
+			return;
+		}
+
 		var $this = $(this);
+
 		if ($this.data('event') == 'Email Link') {
 			ga('send', 'event', {
 				eventCategory: $this.data('event'),
